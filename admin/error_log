@@ -1,0 +1,12 @@
+[31-Jan-2014 11:24:29 America/Chicago] PHP Warning:  require_once(/home/toomanyd/public_html/admin/Settings.php): failed to open stream: No such file or directory in /home/toomanyd/public_html/admin/index.php on line 8
+[31-Jan-2014 11:24:29 America/Chicago] PHP Fatal error:  require_once(): Failed opening required '/home/toomanyd/public_html/admin/Settings.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/toomanyd/public_html/admin/index.php on line 8
+[31-Jan-2014 15:27:01 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'toomanyd'@'localhost' (using password: NO) in /home/toomanyd/public_html/admin/index.php on line 80
+[31-Jan-2014 15:27:01 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/toomanyd/public_html/admin/index.php on line 80
+[31-Jan-2014 15:27:02 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'toomanyd'@'localhost' (using password: NO) in /home/toomanyd/public_html/admin/index.php on line 80
+[31-Jan-2014 15:27:02 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/toomanyd/public_html/admin/index.php on line 80
+[31-Jan-2014 15:27:03 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'toomanyd'@'localhost' (using password: NO) in /home/toomanyd/public_html/admin/index.php on line 80
+[31-Jan-2014 15:27:03 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/toomanyd/public_html/admin/index.php on line 80
+[31-Jan-2014 15:29:19 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'toomanyd'@'localhost' (using password: NO) in /home/toomanyd/public_html/admin/index.php on line 84
+[31-Jan-2014 15:29:19 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/toomanyd/public_html/admin/index.php on line 84
+[31-Jan-2014 15:32:55 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'toomanyd'@'localhost' (using password: NO) in /home/toomanyd/public_html/admin/index.php on line 84
+[31-Jan-2014 15:32:55 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/toomanyd/public_html/admin/index.php on line 84
