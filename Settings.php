@@ -3,7 +3,7 @@
 //Connection Values
 $localhost = 'localhost';
 $dbuser =  'toomanyd_ikill';
-$dbpass = '23333300FF';
+$dbpass = '';
 $dbname = 'toomanyd_database';
 
 //User System values
