@@ -2,15 +2,13 @@
 
 require_once('paginator.class.php');
 
-session_start();
-
 if(isset($_SESSION)) {
-	$search_errors = $_SESSION['search_errors'];
+	$search_errors = @$_SESSION['search_errors'];
 }
 
 $pages = new Paginator;
-$cat = $_GET['cat'];
-$lan = $_GET['lan'];
+$cat = @$_GET['cat'];
+$lan = @$_GET['lan'];
 
 $colaboratepoints = 2000;
 
@@ -198,7 +196,7 @@ Buscador
 </div>
 </div>';
 
-if($_POST['jdownloader'] == "notrunning") 
+if(@$_POST['jdownloader'] == "notrunning")
 {
 	echo '<div class="union">
 <div class="box_title">
@@ -215,12 +213,12 @@ Recomendaciones
 </div>';
 }
 
-$orderby = $_GET['orderby'];
+$orderby = @$_GET['orderby'];
 
 if(empty($orderby)) {$orderby = 'points';}
 
 $query = "SELECT * FROM users ORDER BY $orderby DESC LIMIT 0,3";
-$result = mysqli_query($db, $query) or die(mysqli_error());
+$result = mysqli_query($db, $query) or die(mysqli_error($db));
 
 echo '<div class="union">
 <div class="box_title">

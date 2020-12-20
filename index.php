@@ -1,5 +1,7 @@
 <?php
 
+if(session_status() == PHP_SESSION_NONE) session_start();
+
 require_once(__DIR__ . '/jdownloader.php');
 include('motor.php');
 timequery();
@@ -10,7 +12,10 @@ if (empty($_COOKIE["TMDCookie"])) {
     setcookie("TMDCookie", '', time() + 365 * 86400);
 }
 
-$TMDCookie = unserialize(perdec($_COOKIE['TMDCookie']));
+// echo "<pre><code>", print_r(perdec(@$_COOKIE['TMDCookie']), true), "</pre></code>";
+
+$TMDCookie = // !isset($_COOKIE['TMDCookie']) ? null :
+    @unserialize(perdec(@$_COOKIE['TMDCookie']));
 
 (int)$id = getmyreferid();
 (int)$mylvl = getlvlbyid($id);

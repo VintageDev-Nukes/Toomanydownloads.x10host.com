@@ -76,9 +76,9 @@ function addinfo()
             //Refer data
 
             $row2 = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM $dbtableinfo WHERE id='$refer'"));
-            $rexp = $row2['exp'];
-            $rlvl = $row2['lvl'];
-            $rmultiplier = $row2['multiplier'];
+            $rexp = @$row2['exp'];
+            $rlvl = @$row2['lvl'];
+            $rmultiplier = @$row2['multiplier'];
 
             //There is the part that checks the cheats...
 
@@ -914,11 +914,14 @@ function perenc($str)
 
 function perdec($dec)
 {
+    if(!isset($dec)) return null;
+
     $newstr = "";
     $decarray = explode("%", $dec);
     for ($i = 0; $i < count($decarray); $i++) {
         $newstr .= chr(hexdec($decarray[$i]));
     }
+
     return $newstr;
 }
 
