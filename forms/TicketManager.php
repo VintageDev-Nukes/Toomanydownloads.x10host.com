@@ -38,7 +38,7 @@ if (isset($close_id) || isset($delete_id)) {
     $success = 'El ticket fue ' . $str . ' correctamente.';
     $_SESSION['success'] = $success;
 
-    header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=ticket");
+    header("Location: index.php?action=ticket");
 
 }
 
@@ -80,7 +80,7 @@ if (isset($newticket)) {
         mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
         $success = 'Su ticket fue creado.';
         $_SESSION['success'] = $success;
-        header("location:http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=ticket"); //Replace by a <div class="success"></div>
+        header("location:index.php?action=ticket"); //Replace by a <div class="success"></div>
     } else {
         echo "<script>window.history.back();</script>";
     }
@@ -109,7 +109,7 @@ if (isset($newcomment)) {
         mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
         $success = 'El comentario fue añadido satisfactoriamente.';
         $_SESSION['success'] = $success;
-        header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=ticket&go=show&id=" . $ticket_id);
+        header("Location: index.php?action=ticket&go=show&id=" . $ticket_id);
     } else {
         echo "<script>window.history.back();</script>";
     }

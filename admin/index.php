@@ -96,9 +96,9 @@ echo "<div id='adminmenu'>
       <ul>
          <li class='has-sub'><a href='#'><span>Gestor de items</span></a>
             <ul>
-               <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items&new=item'><span>Añadir</span></a></li>
-               <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items'><span>Editar y eliminar</span></a></li>
-               <li class='last'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items#approved'><span>Administrar peticiones</span></a></li>
+               <li><a href='index.php?action=admin&go=items&new=item'><span>Añadir</span></a></li>
+               <li><a href='index.php?action=admin&go=items'><span>Editar y eliminar</span></a></li>
+               <li class='last'><a href='index.php?action=admin&go=items#approved'><span>Administrar peticiones</span></a></li>
             </ul>
          </li>
          <li class='has-sub'><a href='#'><span>Gestor de tickets</span></a>
@@ -114,8 +114,8 @@ echo "<div id='adminmenu'>
          </li>
          <li class='has-sub'><a href='#'><span>Gestor de feedback</span></a>
             <ul>
-               <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=feedback#approved'><span>Revisar</span></a></li>
-               <li class='last'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=feedback#deleted'><span>Papelera</span></a></li>
+               <li><a href='index.php?action=admin&go=feedback#approved'><span>Revisar</span></a></li>
+               <li class='last'><a href='index.php?action=admin&go=feedback#deleted'><span>Papelera</span></a></li>
             </ul>
          </li>
       </ul>

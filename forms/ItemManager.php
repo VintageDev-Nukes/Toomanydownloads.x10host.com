@@ -79,7 +79,7 @@ if (isset($newitemadmin) || isset($newitem)) {
         mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
         $success = 'El item fue creado satisfactoriamente.';
         $_SESSION['success'] = $success;
-        header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
+        header("Location: index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
     } else {
         echo "<script>window.history.back();</script>";
     }
@@ -98,7 +98,7 @@ if (isset($_POST['delete'])) {
     mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
     $success = 'El comentario fue borrado.';
     $_SESSION['success'] = $success;
-    header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items");
+    header("Location: index.php?action=admin&go=items");
 }
 
 if (isset($_POST['approve'])) {
@@ -107,7 +107,7 @@ if (isset($_POST['approve'])) {
     mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
     $success = 'El comentario fue aprobado.';
     $_SESSION['success'] = $success;
-    header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items");
+    header("Location: index.php?action=admin&go=items");
 }
 
 if (isset($_POST['editdata'])) {
@@ -211,7 +211,7 @@ if (isset($_POST['editdata'])) {
             if ($continue) {
                 $success = 'La ficha técnica de este juego fue editada correctamente.';
                 $_SESSION['success'] = $success;
-                header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
+                header("Location: index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
             } else {
                 echo "<script>window.history.back();</script>";
             }
@@ -311,7 +311,7 @@ if (isset($_POST['editdata'])) {
                 mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
                 $success = 'La ficha técnica de este juego fue añadida correctamente.';
                 $_SESSION['success'] = $success;
-                header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
+                header("Location: index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
             } else {
                 echo "<script>window.history.back();</script>";
             }
@@ -368,7 +368,7 @@ if (isset($_POST['edititem'])) {
     if ($continue) {
         $success = 'El item fue editado satisfactoriamente.';
         $_SESSION['success'] = $success;
-        header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
+        header("Location: index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
     } else {
         echo "<script>window.history.back();</script>";
     }

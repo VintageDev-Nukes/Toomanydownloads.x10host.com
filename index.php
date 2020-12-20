@@ -242,7 +242,7 @@ echo "<div id='cssmenu'>
 <ul>
    <li><a href='index.php'><span>Inicio</span></a></li>
    <li><a href='index.php?action=account'><span>Mi cuenta</span></a></li>
-   <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=feedback'><span>Tablón</span></a></li>
+   <li><a href='index.php?action=feedback'><span>Tablón</span></a></li>
    <li class='has-sub'><a href='#'><span>Tienda</span></a>
       <ul>
          <li><a href='#'><span>Donaciones</span></a></li>
@@ -257,25 +257,25 @@ echo "<div id='cssmenu'>
    <li><a href='index.php?action=faq'><span>FAQ</span></a></li>
    <li class='has-sub last'><a href='#'><span>Soporte</span></a>
       <ul>
-         <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=ticket&go=create'><span>Crear ticket</span></a></li>
-         <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=ticket'><span>Ver mis tickets</span></a></li>
-         <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=report'><span>Reportar usuario</span></a></li>
-         <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=share'><span>Compartir contenido</span></a></li>
-         <li class='last'><a href='http://" . $_SERVER['SERVER_NAME'] . "/forum/'><span>Ir al foro</span></a></li>
+         <li><a href='index.php?action=ticket&go=create'><span>Crear ticket</span></a></li>
+         <li><a href='index.php?action=ticket'><span>Ver mis tickets</span></a></li>
+         <li><a href='index.php?action=report'><span>Reportar usuario</span></a></li>
+         <li><a href='index.php?action=share'><span>Compartir contenido</span></a></li>
+         <li class='last'><a href='forum/'><span>Ir al foro</span></a></li>
       </ul>
    </li>";
 
 if ($acc_prior >= getprior("admin")) {
-    echo "<li class='adminlist'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin-login'><span>Admin</span></a></li>";
+    echo "<li class='adminlist'><a href='index.php?action=admin-login'><span>Admin</span></a></li>";
 }
 
 if ($acc_prior >= getprior("moderator")) {
-    echo "<li class='modlist'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin-login&go=mod'><span>Moderación</span></a></li>";
+    echo "<li class='modlist'><a href='index.php?action=admin-login&go=mod'><span>Moderación</span></a></li>";
 }
 
 if ($acc_prior <= getprior('free')) {
-    echo "<li class='loginlist'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=login'><span>Login</span></a></li>
-            <li class='activatelist'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=activate'><span>Activar</span></a></li>";
+    echo "<li class='loginlist'><a href='index.php?action=login'><span>Login</span></a></li>
+            <li class='activatelist'><a href='index.php?action=activate'><span>Activar</span></a></li>";
 }
 
 echo "</ul>

@@ -27,7 +27,7 @@ if (isset($newfb)) {
         mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
         $success = 'Su comentario fue enviado. Su mensaje está pendiente de moderación.';
         $_SESSION['success'] = $success;
-        header("location:http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=feedback"); //Replace by a <div class="success"></div>
+        header("location:index.php?action=feedback"); //Replace by a <div class="success"></div>
     } else {
         echo "<script>window.history.back();</script>";
     }
@@ -40,7 +40,7 @@ if (isset($_POST['delete'])) {
     mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
     $success = 'El comentario fue borrado.';
     $_SESSION['success'] = $success;
-    header("location:http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=feedback");
+    header("location:index.php?action=admin&go=feedback");
 }
 
 if (isset($_POST['approve'])) {
@@ -49,7 +49,7 @@ if (isset($_POST['approve'])) {
     mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
     $success = 'El comentario fue aprobado.';
     $_SESSION['success'] = $success;
-    header("location:http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=feedback");
+    header("location:index.php?action=admin&go=feedback");
 }
 
 

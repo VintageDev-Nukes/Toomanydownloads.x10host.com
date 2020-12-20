@@ -50,7 +50,7 @@ if (isset($newreport)) {
         mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
         $success = 'Su reporte fue enviado. En breve, un administrador del equipo revisará su reporte. Gracias.';
         $_SESSION['success'] = $success;
-        header("location:http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=report"); //Replace by a <div class="success"></div>
+        header("location:index.php?action=report"); //Replace by a <div class="success"></div>
     } else {
         echo "<script>window.history.back();</script>";
     }

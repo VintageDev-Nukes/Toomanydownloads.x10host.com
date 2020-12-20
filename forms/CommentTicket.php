@@ -25,7 +25,7 @@ if ($continue) {
     mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
     $success['comment_created'] = 'El comentario fue añadido satisfactoriamente.';
     $_SESSION['success'] = $success;
-    header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=ticket&go=show&id=" . $ticket_id);
+    header("Location: index.php?action=ticket&go=show&id=" . $ticket_id);
 } else {
     echo "<script>window.history.back();</script>";
 }

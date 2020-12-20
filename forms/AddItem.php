@@ -17,7 +17,7 @@ window.history.back();</script>";
     mysqli_query($db, "SET NAMES 'utf8'");
     $query = "INSERT INTO items (name, description, url, thumb, points) VALUES ('$name', '$description', '$url', '$thumb', '$points')";
     mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
-    header("location:http://" . $_SERVER['SERVER_NAME'] . "/okay.html");
+    header("location:okay.html");
 }
 
 ?>
