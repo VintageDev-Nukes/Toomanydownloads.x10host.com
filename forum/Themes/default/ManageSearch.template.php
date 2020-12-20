@@ -12,9 +12,9 @@
 
 function template_modify_weights()
 {
-	global $context, $settings, $options, $scripturl, $txt, $modSettings;
+    global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
-	echo '
+    echo '
 	<div id="admincenter">
 		<form action="', $scripturl, '?action=admin;area=managesearch;sa=weights" method="post" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -107,9 +107,9 @@ function template_modify_weights()
 
 function template_select_search_method()
 {
-	global $context, $settings, $options, $scripturl, $txt, $modSettings;
+    global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
-	echo '
+    echo '
 	<div id="admincenter">
 		<form action="', $scripturl, '?action=admin;area=managesearch;sa=method" method="post" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -124,8 +124,8 @@ function template_select_search_method()
 					<dl class="settings">
 
 			';
-	if (!empty($context['table_info']))
-		echo '
+    if (!empty($context['table_info']))
+        echo '
 						<dt>
 							<strong>', $txt['search_method_messages_table_space'], ':</strong>
 						</dt>
@@ -138,7 +138,7 @@ function template_select_search_method()
 						<dd>
 							', $context['table_info']['index_length'], '
 						</dd>';
-	echo '
+    echo '
 					</dl>
 					', $context['double_index'] ? '<div class="information">
 					' . $txt['search_double_index'] . '</div>' : '', '
@@ -149,72 +149,70 @@ function template_select_search_method()
 							', $txt['search_index_none'], '
 							</dt>';
 
-	if ($context['supports_fulltext'])
-	{
-		echo '
+    if ($context['supports_fulltext']) {
+        echo '
 							<dt>
-								<input type="radio" name="search_index" value="fulltext"', !empty($modSettings['search_index']) && $modSettings['search_index'] == 'fulltext' ? ' checked="checked"' : '', empty($context['fulltext_index']) ? ' onclick="alert(\'' . $txt['search_method_fulltext_warning'] . '\'); selectRadioByName(this.form.search_index, \'fulltext\');"': '', ' class="input_radio" />
+								<input type="radio" name="search_index" value="fulltext"', !empty($modSettings['search_index']) && $modSettings['search_index'] == 'fulltext' ? ' checked="checked"' : '', empty($context['fulltext_index']) ? ' onclick="alert(\'' . $txt['search_method_fulltext_warning'] . '\'); selectRadioByName(this.form.search_index, \'fulltext\');"' : '', ' class="input_radio" />
 								', $txt['search_method_fulltext_index'], '
 							</dt>
 							<dd>
 
 								<span class="smalltext">';
-	if (empty($context['fulltext_index']) && empty($context['cannot_create_fulltext']))
-		echo '
+        if (empty($context['fulltext_index']) && empty($context['cannot_create_fulltext']))
+            echo '
 									<strong>', $txt['search_index_label'], ':</strong> ', $txt['search_method_no_index_exists'], ' [<a href="', $scripturl, '?action=admin;area=managesearch;sa=createfulltext;', $context['session_var'], '=', $context['session_id'], '">', $txt['search_method_fulltext_create'], '</a>]';
-	elseif (empty($context['fulltext_index']) && !empty($context['cannot_create_fulltext']))
-		echo '
+        elseif (empty($context['fulltext_index']) && !empty($context['cannot_create_fulltext']))
+            echo '
 									<strong>', $txt['search_index_label'], ':</strong> ', $txt['search_method_fulltext_cannot_create'];
-	else
-		echo '
+        else
+            echo '
 									<strong>', $txt['search_index_label'], ':</strong> ', $txt['search_method_index_already_exists'], ' [<a href="', $scripturl, '?action=admin;area=managesearch;sa=removefulltext;', $context['session_var'], '=', $context['session_id'], '">', $txt['search_method_fulltext_remove'], '</a>]<br />
 									<strong>', $txt['search_index_size'], ':</strong> ', $context['table_info']['fulltext_length'];
-	echo '
+        echo '
 									</span>
 							</dd>';
-	}
+    }
 
-	echo '
+    echo '
 							<dt>
 								<input type="radio" name="search_index" value="custom"', !empty($modSettings['search_index']) && $modSettings['search_index'] == 'custom' ? ' checked="checked"' : '', $context['custom_index'] ? '' : ' onclick="alert(\'' . $txt['search_index_custom_warning'] . '\'); selectRadioByName(this.form.search_method, \'1\');"', ' class="input_radio" />
 								', $txt['search_index_custom'], '
 							</dt>
 							<dd>
 								<span class="smalltext">';
-	if ($context['custom_index'])
-		echo '
+    if ($context['custom_index'])
+        echo '
 									<strong>', $txt['search_index_label'], ':</strong> ', $txt['search_method_index_already_exists'], ' [<a href="', $scripturl, '?action=admin;area=managesearch;sa=removecustom;', $context['session_var'], '=', $context['session_id'], '">', $txt['search_index_custom_remove'], '</a>]<br />
 									<strong>', $txt['search_index_size'], ':</strong> ', $context['table_info']['custom_index_length'];
-	elseif ($context['partial_custom_index'])
-		echo '
+    elseif ($context['partial_custom_index'])
+        echo '
 									<strong>', $txt['search_index_label'], ':</strong> ', $txt['search_method_index_partial'], ' [<a href="', $scripturl, '?action=admin;area=managesearch;sa=removecustom;', $context['session_var'], '=', $context['session_id'], '">', $txt['search_index_custom_remove'], '</a>] [<a href="', $scripturl, '?action=admin;area=managesearch;sa=createmsgindex;resume;', $context['session_var'], '=', $context['session_id'], '">', $txt['search_index_custom_resume'], '</a>]<br />
 									<strong>', $txt['search_index_size'], ':</strong> ', $context['table_info']['custom_index_length'];
-	else
-		echo '
+    else
+        echo '
 									<strong>', $txt['search_index_label'], ':</strong> ', $txt['search_method_no_index_exists'], ' [<a href="', $scripturl, '?action=admin;area=managesearch;sa=createmsgindex">', $txt['search_index_create_custom'], '</a>]';
-	echo '
+    echo '
 								</span>
 							</dd>';
 
-	foreach ($context['search_apis'] as $api)
-	{
-		if (empty($api['label']) || $api['has_template'])
-			continue;
+    foreach ($context['search_apis'] as $api) {
+        if (empty($api['label']) || $api['has_template'])
+            continue;
 
-		echo '
+        echo '
 							<dt>
 								<input type="radio" name="search_index" value="', $api['setting_index'], '"', !empty($modSettings['search_index']) && $modSettings['search_index'] == $api['setting_index'] ? ' checked="checked"' : '', ' class="input_radio" />
-								', $api['label'] ,'
+								', $api['label'], '
 							</dt>';
 
-	if ($api['desc'])
-		echo '
+        if ($api['desc'])
+            echo '
 							<dd>
 								<span class="smalltext">', $api['desc'], '</span>
 							</dd>';
-	}
+    }
 
-	echo '
+    echo '
 						</dl>
 					</fieldset>
 					<fieldset class="search_settings floatright">
@@ -236,9 +234,9 @@ function template_select_search_method()
 
 function template_create_index()
 {
-	global $context, $settings, $options, $scripturl, $txt;
+    global $context, $settings, $options, $scripturl, $txt;
 
-	echo '
+    echo '
 	<div id="admincenter">
 		<form action="', $scripturl, '?action=admin;area=managesearch;sa=createmsgindex;step=1" method="post" accept-charset="', $context['character_set'], '" name="create_index">
 			<div class="cat_bar">
@@ -272,8 +270,8 @@ function template_create_index()
 
 function template_create_index_progress()
 {
-	global $context, $settings, $options, $scripturl, $txt;
-	echo '
+    global $context, $settings, $options, $scripturl, $txt;
+    echo '
 	<div id="admincenter">
 		<form action="', $scripturl, '?action=admin;area=managesearch;sa=createmsgindex;step=1" name="autoSubmit" method="post" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -321,8 +319,8 @@ function template_create_index_progress()
 
 function template_create_index_done()
 {
-	global $context, $settings, $options, $scripturl, $txt;
-	echo '
+    global $context, $settings, $options, $scripturl, $txt;
+    echo '
 	<div id="admincenter">
 		<div class="cat_bar">
 			<h3 class="catbg">', $txt['search_create_index'], '</h3>
@@ -344,8 +342,8 @@ function template_create_index_done()
 // Add or edit a search engine spider.
 function template_spider_edit()
 {
-	global $context, $settings, $options, $scripturl, $txt;
-	echo '
+    global $context, $settings, $options, $scripturl, $txt;
+    echo '
 	<div id="admincenter">
 		<form action="', $scripturl, '?action=admin;area=sengines;sa=editspiders;sid=', $context['spider']['id'], '" method="post" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -393,15 +391,15 @@ function template_spider_edit()
 // Show... spider... logs...
 function template_show_spider_logs()
 {
-	global $context, $txt, $settings, $scripturl;
+    global $context, $txt, $settings, $scripturl;
 
-	echo '
+    echo '
 	<div id="admincenter">';
 
-	// Standard fields.
-	template_show_list('spider_logs');
+    // Standard fields.
+    template_show_list('spider_logs');
 
-	echo '
+    echo '
 		<br />
 		<div class="cat_bar">
 			<h3 class="catbg">', $txt['spider_logs_delete'], '</h3>

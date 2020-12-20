@@ -12,9 +12,9 @@
 
 function template_main()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 	<br />
 	<form action="', $scripturl, '?action=reminder;sa=picktype" method="post" accept-charset="', $context['character_set'], '">
 		<div class="tborder login">
@@ -38,9 +38,9 @@ function template_main()
 
 function template_reminder_pick()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 	<br />
 	<form action="', $scripturl, '?action=reminder;sa=picktype" method="post" accept-charset="', $context['character_set'], '">
 		<div class="tborder login">
@@ -69,9 +69,9 @@ function template_reminder_pick()
 
 function template_sent()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 		<br />
 		<div class="tborder login" id="reminder_sent">
 			<div class="cat_bar">
@@ -83,9 +83,9 @@ function template_sent()
 
 function template_set_password()
 {
-	global $context, $settings, $options, $txt, $scripturl, $modSettings;
+    global $context, $settings, $options, $txt, $scripturl, $modSettings;
 
-	echo '
+    echo '
 	<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/register.js"></script>
 	<br />
 	<form action="', $scripturl, '?action=reminder;sa=setpassword2" name="reminder_form" id="reminder_form" method="post" accept-charset="', $context['character_set'], '">
@@ -133,9 +133,9 @@ function template_set_password()
 
 function template_ask()
 {
-	global $context, $settings, $options, $txt, $scripturl, $modSettings;
+    global $context, $settings, $options, $txt, $scripturl, $modSettings;
 
-	echo '
+    echo '
 	<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/register.js"></script>
 	<br />
 	<form action="', $scripturl, '?action=reminder;sa=secret2" method="post" accept-charset="', $context['character_set'], '" name="creator" id="creator">
@@ -152,8 +152,8 @@ function template_ask()
 					<dt>', $txt['secret_answer'], ':</dt>
 					<dd><input type="text" name="secret_answer" size="22" class="input_text" /></dd>';
 
-	if ($context['account_type'] == 'password')
-		echo '
+    if ($context['account_type'] == 'password')
+        echo '
 					<dt>', $txt['choose_pass'], ': </dt>
 					<dd>
 						<input type="password" name="passwrd1" id="smf_autov_pwmain" size="22" class="input_password" />
@@ -169,7 +169,7 @@ function template_ask()
 						</span>
 					</dd>';
 
-	echo '
+    echo '
 				</dl>
 				<p class="align_center"><input type="submit" value="', $txt['save'], '" class="button_submit" /></p>
 			</div>
@@ -179,8 +179,8 @@ function template_ask()
 		<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 	</form>';
 
-	if ($context['account_type'] == 'password')
-		echo '
+    if ($context['account_type'] == 'password')
+        echo '
 <script type="text/javascript"><!-- // --><![CDATA[
 	var regTextStrings = {
 		"password_short": "', $txt['registration_password_short'], '",

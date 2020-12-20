@@ -12,9 +12,9 @@
 
 function template_main()
 {
-	global $context, $settings, $options, $txt, $scripturl, $modSettings;
+    global $context, $settings, $options, $txt, $scripturl, $modSettings;
 
-	echo '
+    echo '
 		<table border="0" width="100%" cellspacing="1" cellpadding="4" class="bordercolor">
 			<tr class="titlebg">
 				<td align="center" colspan="4">', $context['page_title'], '</td>
@@ -46,12 +46,12 @@ function template_main()
 						</tr><tr>
 							<td nowrap="nowrap">', $txt['users_online_today'], ':</td>
 							<td align="right">', $context['online_today'], '</td>';
-	if (!empty($modSettings['hitStats']))
-		echo '
+    if (!empty($modSettings['hitStats']))
+        echo '
 						</tr><tr>
 							<td nowrap="nowrap">', $txt['num_hits'], ':</td>
 							<td align="right">', $context['num_hits'], '</td>';
-	echo '
+    echo '
 						</tr>
 					</table>
 				</td>
@@ -79,12 +79,12 @@ function template_main()
 						</tr><tr>
 							<td nowrap="nowrap">', $txt['gender_ratio'], ':</td>
 							<td align="right">', $context['gender']['ratio'], '</td>';
-	if (!empty($modSettings['hitStats']))
-		echo '
+    if (!empty($modSettings['hitStats']))
+        echo '
 						</tr><tr>
 							<td nowrap="nowrap">', $txt['average_hits'], ':</td>
 							<td align="right">', $context['average_hits'], '</td>';
-	echo '
+    echo '
 						</tr>
 					</table>
 				</td>
@@ -95,27 +95,27 @@ function template_main()
 				<td class="windowbg" width="20" valign="middle" align="center"><img src="', $settings['images_url'], '/stats_posters.gif" width="20" height="20" alt="" /></td>
 				<td class="windowbg2" width="50%" valign="top">
 					<table border="0" cellpadding="1" cellspacing="0" width="100%">';
-	foreach ($context['top_posters'] as $poster)
-		echo '
+    foreach ($context['top_posters'] as $poster)
+        echo '
 						<tr>
 							<td width="60%" valign="top">', $poster['link'], '</td>
 							<td width="20%" align="', $context['right_to_left'] ? 'right' : 'left', '" valign="top">', $poster['num_posts'] > 0 ? '<img src="' . $settings['images_url'] . '/bar.gif" width="' . $poster['post_percent'] . '" height="15" alt="" />' : '&nbsp;', '</td>
 							<td width="20%" align="right" valign="top">', $poster['num_posts'], '</td>
 						</tr>';
-	echo '
+    echo '
 					</table>
 				</td>
 				<td class="windowbg" width="20" valign="middle" align="center"><img src="', $settings['images_url'], '/stats_board.gif" width="20" height="20" alt="" /></td>
 				<td class="windowbg2" width="50%" valign="top">
 					<table border="0" cellpadding="1" cellspacing="0" width="100%">';
-	foreach ($context['top_boards'] as $board)
-		echo '
+    foreach ($context['top_boards'] as $board)
+        echo '
 						<tr>
 							<td width="60%" valign="top">', $board['link'], '</td>
 							<td width="20%" align="', $context['right_to_left'] ? 'right' : 'left', '" valign="top">', $board['num_posts'] > 0 ? '<img src="' . $settings['images_url'] . '/bar.gif" width="' . $board['post_percent'] . '" height="15" alt="" />' : '&nbsp;', '</td>
 							<td width="20%" align="right" valign="top">', $board['num_posts'], '</td>
 						</tr>';
-	echo '
+    echo '
 					</table>
 				</td>
 			</tr><tr>
@@ -125,27 +125,27 @@ function template_main()
 				<td class="windowbg" width="20" valign="middle" align="center"><img src="', $settings['images_url'], '/stats_replies.gif" width="20" height="20" alt="" /></td>
 				<td class="windowbg2" width="50%" valign="top">
 					<table border="0" cellpadding="1" cellspacing="0" width="100%">';
-	foreach ($context['top_topics_replies'] as $topic)
-		echo '
+    foreach ($context['top_topics_replies'] as $topic)
+        echo '
 						<tr>
 							<td width="60%" valign="top">', $topic['link'], '</td>
 							<td width="20%" align="', $context['right_to_left'] ? 'right' : 'left', '" valign="top">', $topic['num_replies'] > 0 ? '<img src="' . $settings['images_url'] . '/bar.gif" width="' . $topic['post_percent'] . '" height="15" alt="" />' : '&nbsp;', '</td>
 							<td width="20%" align="right" valign="top">', $topic['num_replies'], '</td>
 						</tr>';
-	echo '
+    echo '
 					</table>
 				</td>
 				<td class="windowbg" width="20" valign="middle" align="center"><img src="', $settings['images_url'], '/stats_views.gif" width="20" height="20" alt="" /></td>
 				<td class="windowbg2" width="50%" valign="top">
 					<table border="0" cellpadding="1" cellspacing="0" width="100%">';
-	foreach ($context['top_topics_views'] as $topic)
-		echo '
+    foreach ($context['top_topics_views'] as $topic)
+        echo '
 						<tr>
 							<td width="60%" valign="top">', $topic['link'], '</td>
 							<td width="20%" align="', $context['right_to_left'] ? 'right' : 'left', '" valign="top">', $topic['num_views'] > 0 ? '<img src="' . $settings['images_url'] . '/bar.gif" width="' . $topic['post_percent'] . '" height="15" alt="" />' : '&nbsp;', '</td>
 							<td width="20%" align="right" valign="top">', $topic['num_views'], '</td>
 						</tr>';
-	echo '
+    echo '
 					</table>
 				</td>
 			</tr><tr>
@@ -155,27 +155,27 @@ function template_main()
 				<td class="windowbg" width="20" valign="middle" align="center"><img src="', $settings['images_url'], '/stats_replies.gif" width="20" height="20" alt="" /></td>
 				<td class="windowbg2" width="50%" valign="top">
 					<table border="0" cellpadding="1" cellspacing="0" width="100%">';
-	foreach ($context['top_starters'] as $poster)
-		echo '
+    foreach ($context['top_starters'] as $poster)
+        echo '
 						<tr>
 							<td width="60%" valign="top">', $poster['link'], '</td>
 							<td width="20%" align="', $context['right_to_left'] ? 'right' : 'left', '" valign="top">', $poster['num_topics'] > 0 ? '<img src="' . $settings['images_url'] . '/bar.gif" width="' . $poster['post_percent'] . '" height="15" alt="" />' : '&nbsp;', '</td>
 							<td width="20%" align="right" valign="top">', $poster['num_topics'], '</td>
 						</tr>';
-	echo '
+    echo '
 					</table>
 				</td>
 				<td class="windowbg" width="20" valign="middle" align="center" nowrap="nowrap"><img src="', $settings['images_url'], '/stats_views.gif" width="20" height="20" alt="" /></td>
 				<td class="windowbg2" width="50%" valign="top">
 					<table border="0" cellpadding="1" cellspacing="0" width="100%">';
-	foreach ($context['top_time_online'] as $poster)
-		echo '
+    foreach ($context['top_time_online'] as $poster)
+        echo '
 						<tr>
 							<td width="60%" valign="top">', $poster['link'], '</td>
 							<td width="20%" align="', $context['right_to_left'] ? 'right' : 'left', '" valign="top">', $poster['time_online'] > 0 ? '<img src="' . $settings['images_url'] . '/bar.gif" width="' . $poster['time_percent'] . '" height="15" alt="" />' : '&nbsp;', '</td>
 							<td width="20%" align="right" valign="top" nowrap="nowrap">', $poster['time_online'], '</td>
 						</tr>';
-	echo '
+    echo '
 					</table>
 				</td>
 			</tr><tr>
@@ -184,9 +184,8 @@ function template_main()
 				<td class="windowbg" width="20" valign="middle" align="center"><img src="', $settings['images_url'], '/stats_history.gif" width="20" height="20" alt="" /></td>
 				<td class="windowbg2" colspan="4">';
 
-	if (!empty($context['yearly']))
-	{
-			echo '
+    if (!empty($context['yearly'])) {
+        echo '
 					<table border="0" width="100%" cellspacing="1" cellpadding="4" class="tborder" style="margin-bottom: 1ex;" id="stats">
 						<tr class="titlebg" valign="middle" align="center">
 							<td width="25%">', $txt['yearly_summary'], '</td>
@@ -195,15 +194,14 @@ function template_main()
 							<td width="15%">', $txt['stats_new_members'], '</td>
 							<td width="15%">', $txt['smf_stats_14'], '</td>';
 
-		if (!empty($modSettings['hitStats']))
-			echo '
+        if (!empty($modSettings['hitStats']))
+            echo '
 							<td>', $txt['page_views'], '</td>';
-		echo '
+        echo '
 						</tr>';
 
-		foreach ($context['yearly'] as $id => $year)
-		{
-			echo '
+        foreach ($context['yearly'] as $id => $year) {
+            echo '
 						<tr class="windowbg2" valign="middle" id="year_', $id, '">
 							<th class="lefttext" width="25%">
 								<img id="year_img_', $id, '" src="', $settings['images_url'], '/collapse.gif" alt="*" /> <a href="#year_', $id, '" id="year_link_', $id, '">', $year['year'], '</a>
@@ -212,15 +210,14 @@ function template_main()
 							<th align="center" width="15%">', $year['new_posts'], '</th>
 							<th align="center" width="15%">', $year['new_members'], '</th>
 							<th align="center" width="15%">', $year['most_members_online'], '</th>';
-			if (!empty($modSettings['hitStats']))
-				echo '
+            if (!empty($modSettings['hitStats']))
+                echo '
 							<th align="center">', $year['hits'], '</th>';
-			echo '
+            echo '
 						</tr>';
 
-			foreach ($year['months'] as $month)
-			{
-				echo '
+            foreach ($year['months'] as $month) {
+                echo '
 							<tr class="windowbg2" valign="middle" id="tr_month_', $month['id'], '">
 								<th class="lefttext" width="25%" style="padding-', ($context['right_to_left'] ? 'right' : 'left'), ': 3ex;">
 									<img src="', $settings['images_url'], '/', $month['expanded'] ? 'collapse.gif' : 'expand.gif', '" alt="" id="img_', $month['id'], '" /> <a id="m', $month['id'], '" href="', $month['href'], '" onclick="return doingExpandCollapse;">', $month['month'], ' ', $month['year'], '</a>
@@ -229,34 +226,32 @@ function template_main()
 								<th align="center" width="15%">', $month['new_posts'], '</th>
 								<th align="center" width="15%">', $month['new_members'], '</th>
 								<th align="center" width="15%">', $month['most_members_online'], '</th>';
-				if (!empty($modSettings['hitStats']))
-					echo '
+                if (!empty($modSettings['hitStats']))
+                    echo '
 								<th align="center">', $month['hits'], '</th>';
-				echo '
+                echo '
 							</tr>';
 
-				if ($month['expanded'])
-				{
-					foreach ($month['days'] as $day)
-					{
-						echo '
+                if ($month['expanded']) {
+                    foreach ($month['days'] as $day) {
+                        echo '
 							<tr class="windowbg2" valign="middle" align="left" id="tr_day_', $day['year'], '-', $day['month'], '-', $day['day'], '">
 								<td class="lefttext" style="padding-', ($context['right_to_left'] ? 'right' : 'left'), ': 6ex;">', $day['year'], '-', $day['month'], '-', $day['day'], '</td>
 								<td align="center">', $day['new_topics'], '</td>
 								<td align="center">', $day['new_posts'], '</td>
 								<td align="center">', $day['new_members'], '</td>
 								<td align="center">', $day['most_members_online'], '</td>';
-						if (!empty($modSettings['hitStats']))
-							echo '
+                        if (!empty($modSettings['hitStats']))
+                            echo '
 								<td align="center">', $day['hits'], '</td>';
-						echo '
+                        echo '
 							</tr>';
-					}
-				}
-			}
-		}
+                    }
+                }
+            }
+        }
 
-		echo '
+        echo '
 					</table>
 				</td></tr>
 			</table>
@@ -283,13 +278,12 @@ function template_main()
 
 			aCollapsedYears: [';
 
-		foreach ($context['collapsed_years'] as $id => $year)
-		{
-			echo '
+        foreach ($context['collapsed_years'] as $id => $year) {
+            echo '
 				\'', $year, '\'', $id != count($context['collapsed_years']) - 1 ? ',' : '';
-		}
+        }
 
-		echo '
+        echo '
 			],
 
 			aDataCells: [
@@ -297,12 +291,12 @@ function template_main()
 				\'new_topics\',
 				\'new_posts\',
 				\'new_members\',
-				\'most_members_online\'', empty($modSettings['hitStats']) ? '' :',
+				\'most_members_online\'', empty($modSettings['hitStats']) ? '' : ',
 				\'hits\'', '
 			]
 		});
 	// ]]></script>';
-	}
+    }
 }
 
 ?>

@@ -12,9 +12,9 @@
 
 function template_print_above()
 {
-	global $context, $settings, $options, $txt;
+    global $context, $settings, $options, $txt;
 
-	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"', $context['right_to_left'] ? ' dir="rtl"' : '', '>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=', $context['character_set'], '" />
@@ -108,10 +108,10 @@ function template_print_above()
 
 function template_main()
 {
-	global $context, $settings, $options, $txt;
+    global $context, $settings, $options, $txt;
 
-	foreach ($context['posts'] as $post)
-		echo '
+    foreach ($context['posts'] as $post)
+        echo '
 			<dt class="postheader">
 				', $txt['title'], ': <strong>', $post['subject'], '</strong><br />
 				', $txt['post_by'], ': <strong>', $post['member'], '</strong> ', $txt['search_on'], ' <strong>', $post['time'], '</strong>
@@ -123,9 +123,9 @@ function template_main()
 
 function template_print_below()
 {
-	global $context, $settings, $options;
+    global $context, $settings, $options;
 
-	echo '
+    echo '
 		</dl>
 		<div id="footer" class="smalltext">
 			', theme_copyright(), '

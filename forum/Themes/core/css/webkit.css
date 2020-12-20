@@ -2,7 +2,6 @@
 Webkit needs this otherwise the post goes off to the right.
 Causes issues in IE browsers in (and cached search engines pages it breaks them).
 */
-.postarea .post
-{
-	float: left;
+.postarea .post {
+    float: left;
 }

@@ -17,7 +17,7 @@ function template_avatar_settings_above()
 
 function template_avatar_settings_below()
 {
-	echo '
+    echo '
 	<script type="text/javascript"><!-- // --><![CDATA[
 	var fUpdateStatus = function ()
 	{
@@ -35,9 +35,9 @@ function template_avatar_settings_below()
 
 function template_browse()
 {
-	global $context, $settings, $options, $scripturl, $txt;
+    global $context, $settings, $options, $scripturl, $txt;
 
-	echo '
+    echo '
 	<div id="manage_attachments">
 		<div class="cat_bar">
 			<h3 class="catbg">', $txt['attachment_manager_browse_files'], '</h3>
@@ -53,17 +53,17 @@ function template_browse()
 		</div>
 	</div>';
 
-	template_show_list('file_list');
-	echo '
+    template_show_list('file_list');
+    echo '
 	<br class="clear" />';
 
 }
 
 function template_maintenance()
 {
-	global $context, $settings, $options, $scripturl, $txt;
+    global $context, $settings, $options, $scripturl, $txt;
 
-	echo '
+    echo '
 	<div id="manage_attachments">
 		<div class="cat_bar">
 			<h3 class="catbg">', $txt['attachment_stats'], '</h3>
@@ -133,12 +133,11 @@ function template_maintenance()
 
 function template_attachment_repair()
 {
-	global $context, $txt, $scripturl, $settings;
+    global $context, $txt, $scripturl, $settings;
 
-	// If we've completed just let them know!
-	if ($context['completed'])
-	{
-		echo '
+    // If we've completed just let them know!
+    if ($context['completed']) {
+        echo '
 	<div id="manage_attachments">
 		<div class="cat_bar">
 			<h3 class="catbg">', $txt['repair_attachments_complete'], '</h3>
@@ -152,12 +151,9 @@ function template_attachment_repair()
 		</div>
 	</div>
 	<br class="clear" />';
-	}
-
-	// What about if no errors were even found?
-	elseif (!$context['errors_found'])
-	{
-		echo '
+    } // What about if no errors were even found?
+    elseif (!$context['errors_found']) {
+        echo '
 	<div id="manage_attachments">
 		<div class="cat_bar">
 			<h3 class="catbg">', $txt['repair_attachments_complete'], '</h3>
@@ -171,11 +167,9 @@ function template_attachment_repair()
 		</div>
 	</div>
 	<br class="clear" />';
-	}
-	// Otherwise, I'm sad to say, we have a problem!
-	else
-	{
-		echo '
+    } // Otherwise, I'm sad to say, we have a problem!
+    else {
+        echo '
 	<div id="manage_attachments">
 		<form action="', $scripturl, '?action=admin;area=manageattachments;sa=repair;fixErrors=1;step=0;substep=0;', $context['session_var'], '=', $context['session_id'], '" method="post" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -186,16 +180,15 @@ function template_attachment_repair()
 				<div class="content">
 					<p>', $txt['repair_attachments_error_desc'], '</p>';
 
-		// Loop through each error reporting the status
-		foreach ($context['repair_errors'] as $error => $number)
-		{
-			if (!empty($number))
-			echo '
+        // Loop through each error reporting the status
+        foreach ($context['repair_errors'] as $error => $number) {
+            if (!empty($number))
+                echo '
 					<input type="checkbox" name="to_fix[]" id="', $error, '" value="', $error, '" class="input_check" />
 					<label for="', $error, '">', sprintf($txt['attach_repair_' . $error], $number), '</label><br />';
-		}
+        }
 
-		echo '		<br />
+        echo '		<br />
 					<input type="submit" value="', $txt['repair_attachments_continue'], '" class="button_submit" />
 					<input type="submit" name="cancel" value="', $txt['repair_attachments_cancel'], '" class="button_submit" />
 				</div>
@@ -204,12 +197,12 @@ function template_attachment_repair()
 		</form>
 	</div>
 	<br class="clear" />';
-	}
+    }
 }
 
 function template_attachment_paths()
 {
-	template_show_list('attach_paths');
+    template_show_list('attach_paths');
 }
 
 ?>

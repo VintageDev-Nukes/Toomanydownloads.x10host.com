@@ -12,9 +12,9 @@
 
 function template_search_members()
 {
-	global $context, $settings, $options, $scripturl, $txt;
+    global $context, $settings, $options, $scripturl, $txt;
 
-	echo '
+    echo '
 	<div id="admincenter">
 		<form action="', $scripturl, '?action=admin;area=viewmembers" method="post" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -173,8 +173,8 @@ function template_search_members()
 					</thead>
 					<tbody>';
 
-			foreach ($context['membergroups'] as $membergroup)
-				echo '
+    foreach ($context['membergroups'] as $membergroup)
+        echo '
 						<tr class="windowbg2">
 							<td>', $membergroup['name'], '</td>
 							<td align="center">
@@ -185,7 +185,7 @@ function template_search_members()
 							</td>
 						</tr>';
 
-			echo '
+    echo '
 						<tr class="windowbg2">
 							<td>
 								<em>', $txt['check_all'], '</em>
@@ -211,8 +211,8 @@ function template_search_members()
 					</thead>
 					</tbody>';
 
-			foreach ($context['postgroups'] as $postgroup)
-				echo '
+    foreach ($context['postgroups'] as $postgroup)
+        echo '
 						<tr class="windowbg2">
 							<td>
 								', $postgroup['name'], '
@@ -222,7 +222,7 @@ function template_search_members()
 							</td>
 						</tr>';
 
-			echo '
+    echo '
 						<tr class="windowbg2">
 							<td>
 								<em>', $txt['check_all'], '</em>
@@ -244,17 +244,16 @@ function template_search_members()
 
 function template_admin_browse()
 {
-	global $context, $settings, $options, $scripturl, $txt, $modSettings;
+    global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
-	echo '
+    echo '
 	<div id="admincenter">';
 
-	template_show_list('approve_list');
+    template_show_list('approve_list');
 
-	// If we have lots of outstanding members try and make the admin's life easier.
-	if ($context['approve_list']['total_num_items'] > 20)
-	{
-		echo '
+    // If we have lots of outstanding members try and make the admin's life easier.
+    if ($context['approve_list']['total_num_items'] > 20) {
+        echo '
 		<br />
 		<form action="', $scripturl, '?action=admin;area=viewmembers" method="post" accept-charset="', $context['character_set'], '" name="postFormOutstanding" id="postFormOutstanding" onsubmit="return onOutstandingSubmit();">
 			<div class="cat_bar">
@@ -322,9 +321,9 @@ function template_admin_browse()
 			</div>
 			<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 		</form>';
-	}
+    }
 
-	echo '
+    echo '
 	</div>
 	<br class="clear" />';
 }

@@ -13,9 +13,9 @@
 // Show an interface for selecting which board to move a post to.
 function template_main()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 	<div id="move_topic" class="lower_padding">
 		<form action="', $scripturl, '?action=movetopic2;topic=', $context['current_topic'], '.0" method="post" accept-charset="', $context['character_set'], '" onsubmit="submitonce(this);">
 			<div class="cat_bar">
@@ -32,24 +32,23 @@ function template_main()
 							<dd>
 								<select name="toboard">';
 
-	foreach ($context['categories'] as $category)
-	{
-		echo '
+    foreach ($context['categories'] as $category) {
+        echo '
 									<optgroup label="', $category['name'], '">';
 
-		foreach ($category['boards'] as $board)
-			echo '
-										<option value="', $board['id'], '"', $board['selected'] ? ' selected="selected"' : '', $board['id'] == $context['current_board'] ? ' disabled="disabled"' : '', '>', $board['child_level'] > 0 ? str_repeat('==', $board['child_level']-1) . '=&gt; ' : '', $board['name'], '</option>';
-		echo '
+        foreach ($category['boards'] as $board)
+            echo '
+										<option value="', $board['id'], '"', $board['selected'] ? ' selected="selected"' : '', $board['id'] == $context['current_board'] ? ' disabled="disabled"' : '', '>', $board['child_level'] > 0 ? str_repeat('==', $board['child_level'] - 1) . '=&gt; ' : '', $board['name'], '</option>';
+        echo '
 									</optgroup>';
-	}
+    }
 
-	echo '
+    echo '
 								</select>
 							</dd>';
 
-	// Disable the reason textarea when the postRedirect checkbox is unchecked...
-	echo '
+    // Disable the reason textarea when the postRedirect checkbox is unchecked...
+    echo '
 						</dl>
 						<label for="reset_subject"><input type="checkbox" name="reset_subject" id="reset_subject" onclick="document.getElementById(\'subjectArea\').style.display = this.checked ? \'block\' : \'none\';" class="input_check" /> ', $txt['moveTopic2'], '.</label><br />
 						<fieldset id="subjectArea" style="display: none;">
@@ -78,11 +77,11 @@ function template_main()
 				<span class="botslice"><span></span></span>
 			</div>';
 
-	if ($context['back_to_topic'])
-		echo '
+    if ($context['back_to_topic'])
+        echo '
 			<input type="hidden" name="goback" value="1" />';
 
-	echo '
+    echo '
 			<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 			<input type="hidden" name="seqnum" value="', $context['form_sequence_number'], '" />
 		</form>

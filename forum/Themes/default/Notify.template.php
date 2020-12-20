@@ -12,9 +12,9 @@
 
 function template_main()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 		<div class="cat_bar">
 			<h3 class="catbg">
 				<span class="ie6_header floatleft"><img src="', $settings['images_url'], '/email_sm.gif" alt="" class="icon" />', $txt['notify'], '</span>
@@ -32,9 +32,9 @@ function template_main()
 
 function template_notify_board()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 		<div class="cat_bar">
 			<h3 class="catbg">
 				<span class="ie6_header floatleft"><img src="', $settings['images_url'], '/email_sm.gif" alt="" class="icon" />', $txt['notify'], '</span>

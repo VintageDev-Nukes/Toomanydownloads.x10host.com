@@ -12,9 +12,9 @@
 
 function template_main()
 {
-	global $context, $settings, $options, $txt, $scripturl, $modSettings;
+    global $context, $settings, $options, $txt, $scripturl, $modSettings;
 
-	echo '
+    echo '
 	<div id="statistics" class="main_section">
 		<div class="cat_bar">
 			<h3 class="catbg">', $context['page_title'], '</h3>
@@ -47,12 +47,12 @@ function template_main()
 							<dt>', $txt['users_online_today'], ':</dt>
 							<dd>', $context['online_today'], '</dd>';
 
-	if (!empty($modSettings['hitStats']))
-		echo '
+    if (!empty($modSettings['hitStats']))
+        echo '
 							<dt>', $txt['num_hits'], ':</dt>
 							<dd>', $context['num_hits'], '</dd>';
 
-	echo '
+    echo '
 						</dl>
 						<div class="clear"></div>
 					</div>
@@ -79,12 +79,12 @@ function template_main()
 							<dt>', $txt['gender_ratio'], ':</dt>
 							<dd>', $context['gender']['ratio'], '</dd>';
 
-	if (!empty($modSettings['hitStats']))
-		echo '
+    if (!empty($modSettings['hitStats']))
+        echo '
 							<dt>', $txt['average_hits'], ':</dt>
 							<dd>', $context['average_hits'], '</dd>';
 
-	echo '
+    echo '
 						</dl>
 						<div class="clear"></div>
 					</div>
@@ -106,26 +106,25 @@ function template_main()
 						<div class="content">
 							<dl class="stats">';
 
-	foreach ($context['top_posters'] as $poster)
-	{
-		echo '
+    foreach ($context['top_posters'] as $poster) {
+        echo '
 								<dt>
 									', $poster['link'], '
 								</dt>
 								<dd class="statsbar">';
 
-		if (!empty($poster['post_percent']))
-			echo '
+        if (!empty($poster['post_percent']))
+            echo '
 									<div class="bar" style="width: ', $poster['post_percent'] + 4, 'px;">
 										<div style="width: ', $poster['post_percent'], 'px;"></div>
 									</div>';
 
-		echo '
+        echo '
 									<span class="righttext">', $poster['num_posts'], '</span>
 								</dd>';
-	}
+    }
 
-	echo '
+    echo '
 							</dl>
 							<div class="clear"></div>
 						</div>
@@ -145,25 +144,24 @@ function template_main()
 						<div class="content">
 							<dl class="stats">';
 
-	foreach ($context['top_boards'] as $board)
-	{
-		echo '
+    foreach ($context['top_boards'] as $board) {
+        echo '
 								<dt>
 									', $board['link'], '
 								</dt>
 								<dd class="statsbar">';
 
-		if (!empty($board['post_percent']))
-			echo '
+        if (!empty($board['post_percent']))
+            echo '
 									<div class="bar" style="width: ', $board['post_percent'] + 4, 'px;">
 										<div style="width: ', $board['post_percent'], 'px;"></div>
 									</div>';
-		echo '
+        echo '
 									<span class="righttext">', $board['num_posts'], '</span>
 								</dd>';
-	}
+    }
 
-	echo '
+    echo '
 							</dl>
 							<div class="clear"></div>
 						</div>
@@ -185,24 +183,23 @@ function template_main()
 						<div class="content">
 							<dl class="stats">';
 
-	foreach ($context['top_topics_replies'] as $topic)
-	{
-		echo '
+    foreach ($context['top_topics_replies'] as $topic) {
+        echo '
 								<dt>
 									', $topic['link'], '
 								</dt>
 								<dd class="statsbar">';
-		if (!empty($topic['post_percent']))
-			echo '
+        if (!empty($topic['post_percent']))
+            echo '
 									<div class="bar" style="width: ', $topic['post_percent'] + 4, 'px;">
 										<div style="width: ', $topic['post_percent'], 'px;"></div>
 									</div>';
 
-		echo '
+        echo '
 									<span class="righttext">' . $topic['num_replies'] . '</span>
 								</dd>';
-	}
-	echo '
+    }
+    echo '
 							</dl>
 							<div class="clear"></div>
 						</div>
@@ -223,24 +220,23 @@ function template_main()
 					<div class="content">
 						<dl class="stats">';
 
-	foreach ($context['top_topics_views'] as $topic)
-	{
-		echo '
+    foreach ($context['top_topics_views'] as $topic) {
+        echo '
 							<dt>', $topic['link'], '</dt>
 							<dd class="statsbar">';
 
-		if (!empty($topic['post_percent']))
-			echo '
+        if (!empty($topic['post_percent']))
+            echo '
 								<div class="bar" style="width: ', $topic['post_percent'] + 4, 'px;">
 									<div style="width: ', $topic['post_percent'], 'px;"></div>
 								</div>';
 
-		echo '
+        echo '
 								<span class="righttext">' . $topic['num_views'] . '</span>
 							</dd>';
-	}
+    }
 
-	echo '
+    echo '
 						</dl>
 						<div class="clear"></div>
 					</div>
@@ -262,26 +258,25 @@ function template_main()
 					<div class="content">
 						<dl class="stats">';
 
-	foreach ($context['top_starters'] as $poster)
-	{
-		echo '
+    foreach ($context['top_starters'] as $poster) {
+        echo '
 							<dt>
 								', $poster['link'], '
 							</dt>
 							<dd class="statsbar">';
 
-		if (!empty($poster['post_percent']))
-			echo '
+        if (!empty($poster['post_percent']))
+            echo '
 								<div class="bar" style="width: ', $poster['post_percent'] + 4, 'px;">
 									<div style="width: ', $poster['post_percent'], 'px;"></div>
 								</div>';
 
-		echo '
+        echo '
 								<span class="righttext">', $poster['num_topics'], '</span>
 							</dd>';
-	}
+    }
 
-	echo '
+    echo '
 						</dl>
 						<div class="clear"></div>
 					</div>
@@ -301,26 +296,25 @@ function template_main()
 					<div class="content">
 						<dl class="stats">';
 
-	foreach ($context['top_time_online'] as $poster)
-	{
-		echo '
+    foreach ($context['top_time_online'] as $poster) {
+        echo '
 							<dt>
 								', $poster['link'], '
 							</dt>
 							<dd class="statsbar">';
 
-		if (!empty($poster['time_percent']))
-			echo '
+        if (!empty($poster['time_percent']))
+            echo '
 								<div class="bar" style="width: ', $poster['time_percent'] + 4, 'px;">
 									<div style="width: ', $poster['time_percent'], 'px;"></div>
 								</div>';
 
-		echo '
+        echo '
 								<span>', $poster['time_online'], '</span>
 							</dd>';
-	}
+    }
 
-	echo '
+    echo '
 						</dl>
 						<div class="clear"></div>
 					</div>
@@ -338,9 +332,8 @@ function template_main()
 				</h3>
 			</div>';
 
-	if (!empty($context['yearly']))
-	{
-		echo '
+    if (!empty($context['yearly'])) {
+        echo '
 		<table border="0" width="100%" cellspacing="1" cellpadding="4" class="table_grid" id="stats">
 			<thead>
 				<tr class="titlebg" valign="middle" align="center">
@@ -350,18 +343,17 @@ function template_main()
 					<th width="15%">', $txt['stats_new_members'], '</th>
 					<th', empty($modSettings['hitStats']) ? ' class="last_th"' : '', ' width="15%">', $txt['smf_stats_14'], '</th>';
 
-		if (!empty($modSettings['hitStats']))
-			echo '
+        if (!empty($modSettings['hitStats']))
+            echo '
 					<th class="last_th">', $txt['page_views'], '</th>';
 
-		echo '
+        echo '
 				</tr>
 			</thead>
 			<tbody>';
 
-		foreach ($context['yearly'] as $id => $year)
-		{
-			echo '
+        foreach ($context['yearly'] as $id => $year) {
+            echo '
 				<tr class="windowbg2" valign="middle" align="center" id="year_', $id, '">
 					<th class="lefttext" width="25%">
 						<img id="year_img_', $id, '" src="', $settings['images_url'], '/collapse.gif" alt="*" /> <a href="#year_', $id, '" id="year_link_', $id, '">', $year['year'], '</a>
@@ -371,16 +363,15 @@ function template_main()
 					<th width="15%">', $year['new_members'], '</th>
 					<th width="15%">', $year['most_members_online'], '</th>';
 
-			if (!empty($modSettings['hitStats']))
-				echo '
+            if (!empty($modSettings['hitStats']))
+                echo '
 					<th>', $year['hits'], '</th>';
 
-			echo '
+            echo '
 				</tr>';
 
-			foreach ($year['months'] as $month)
-			{
-				echo '
+            foreach ($year['months'] as $month) {
+                echo '
 				<tr class="windowbg2" valign="middle" align="center" id="tr_month_', $month['id'], '">
 					<th class="stats_month">
 						<img src="', $settings['images_url'], '/', $month['expanded'] ? 'collapse.gif' : 'expand.gif', '" alt="" id="img_', $month['id'], '" /> <a id="m', $month['id'], '" href="', $month['href'], '" onclick="return doingExpandCollapse;">', $month['month'], ' ', $month['year'], '</a>
@@ -390,18 +381,16 @@ function template_main()
 					<th width="15%">', $month['new_members'], '</th>
 					<th width="15%">', $month['most_members_online'], '</th>';
 
-				if (!empty($modSettings['hitStats']))
-					echo '
+                if (!empty($modSettings['hitStats']))
+                    echo '
 					<th>', $month['hits'], '</th>';
 
-				echo '
+                echo '
 				</tr>';
 
-				if ($month['expanded'])
-				{
-					foreach ($month['days'] as $day)
-					{
-						echo '
+                if ($month['expanded']) {
+                    foreach ($month['days'] as $day) {
+                        echo '
 				<tr class="windowbg2" valign="middle" align="center" id="tr_day_', $day['year'], '-', $day['month'], '-', $day['day'], '">
 					<td class="stats_day">', $day['year'], '-', $day['month'], '-', $day['day'], '</td>
 					<td>', $day['new_topics'], '</td>
@@ -409,18 +398,18 @@ function template_main()
 					<td>', $day['new_members'], '</td>
 					<td>', $day['most_members_online'], '</td>';
 
-						if (!empty($modSettings['hitStats']))
-							echo '
+                        if (!empty($modSettings['hitStats']))
+                            echo '
 					<td>', $day['hits'], '</td>';
 
-						echo '
+                        echo '
 				</tr>';
-					}
-				}
-			}
-		}
+                    }
+                }
+            }
+        }
 
-		echo '
+        echo '
 			</tbody>
 		</table>
 		</div>
@@ -448,13 +437,12 @@ function template_main()
 
 			aCollapsedYears: [';
 
-		foreach ($context['collapsed_years'] as $id => $year)
-		{
-			echo '
+        foreach ($context['collapsed_years'] as $id => $year) {
+            echo '
 				\'', $year, '\'', $id != count($context['collapsed_years']) - 1 ? ',' : '';
-		}
+        }
 
-		echo '
+        echo '
 			],
 
 			aDataCells: [
@@ -467,7 +455,7 @@ function template_main()
 			]
 		});
 	// ]]></script>';
-	}
+    }
 }
 
 ?>

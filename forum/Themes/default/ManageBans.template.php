@@ -12,9 +12,9 @@
 
 function template_ban_edit()
 {
-	global $context, $settings, $options, $scripturl, $txt, $modSettings;
+    global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
-	echo '
+    echo '
 	<div id="manage_bans">
 
 		<div class="cat_bar">
@@ -23,11 +23,11 @@ function template_ban_edit()
 			</h3>
 		</div>';
 
-	if ($context['ban']['is_new'])
-		echo '
+    if ($context['ban']['is_new'])
+        echo '
 		<div class="information">', $txt['ban_add_notes'], '</div>';
 
-	echo '
+    echo '
 		<div class="windowbg">
 			<span class="topslice"><span></span></span>
 			<div class="content">
@@ -74,9 +74,8 @@ function template_ban_edit()
 					</fieldset>
 					<br class="clear_right" />';
 
-	if (!empty($context['ban_suggestions']))
-	{
-		echo '
+    if (!empty($context['ban_suggestions'])) {
+        echo '
 					<fieldset>
 						<legend>
 							', $txt['ban_triggers'], '
@@ -90,8 +89,8 @@ function template_ban_edit()
 								<input type="text" name="main_ip" value="', $context['ban_suggestions']['main_ip'], '" size="44" onfocus="document.getElementById(\'main_ip_check\').checked = true;" class="input_text" />
 							</dd>';
 
-		if (empty($modSettings['disableHostnameLookup']))
-			echo '
+        if (empty($modSettings['disableHostnameLookup']))
+            echo '
 							<dt>
 								<input type="checkbox" name="ban_suggestion[]" id="hostname_check" value="hostname" class="input_check" />
 								<label for="hostname_check">', $txt['ban_on_hostname'], '</label>
@@ -100,7 +99,7 @@ function template_ban_edit()
 								<input type="text" name="hostname" value="', $context['ban_suggestions']['hostname'], '" size="44" onfocus="document.getElementById(\'hostname_check\').checked = true;" class="input_text" />
 							</dd>';
 
-		echo '
+        echo '
 							<dt>
 								<input type="checkbox" name="ban_suggestion[]" id="email_check" value="email" class="input_check" checked="checked" />
 								<label for="email_check">', $txt['ban_on_email'], '</label>
@@ -114,56 +113,54 @@ function template_ban_edit()
 							</dt>
 							<dd>';
 
-		if (empty($context['ban_suggestions']['member']['id']))
-			echo '
+        if (empty($context['ban_suggestions']['member']['id']))
+            echo '
 								<input type="text" name="user" id="user" value="" size="44" class="input_text" />';
-		else
-			echo '
+        else
+            echo '
 								', $context['ban_suggestions']['member']['link'], '
 								<input type="hidden" name="bannedUser" value="', $context['ban_suggestions']['member']['id'], '" />';
-		echo '
+        echo '
 							</dd>';
 
-		if (!empty($context['ban_suggestions']['message_ips']))
-		{
-			echo '
+        if (!empty($context['ban_suggestions']['message_ips'])) {
+            echo '
 						</dl>
 						<div>', $txt['ips_in_messages'], ':</div>
 						<dl class="settings">';
 
-			foreach ($context['ban_suggestions']['message_ips'] as $ip)
-				echo '
+            foreach ($context['ban_suggestions']['message_ips'] as $ip)
+                echo '
 							<dt>
 								<input type="checkbox" name="ban_suggestion[ips][]" value="', $ip, '" class="input_check" />
 							</dt>
 							<dd>
 								', $ip, '
 							</dd>';
-		}
+        }
 
-		if (!empty($context['ban_suggestions']['error_ips']))
-		{
-			echo '
+        if (!empty($context['ban_suggestions']['error_ips'])) {
+            echo '
 						</dl>
 						<div>', $txt['ips_in_errors'], '</div>
 						<dl class="settings">';
 
-			foreach ($context['ban_suggestions']['error_ips'] as $ip)
-				echo '
+            foreach ($context['ban_suggestions']['error_ips'] as $ip)
+                echo '
 							<dt>
 								<input type="checkbox" name="ban_suggestion[ips][]" value="', $ip, '" class="input_check" />
 							</dt>
 							<dd>
 								', $ip, '
 							</dd>';
-		}
+        }
 
-		echo '
+        echo '
 							</dl>
 						</fieldset>';
-	}
+    }
 
-	echo '
+    echo '
 						<div class="righttext">
 							<input type="submit" name="', $context['ban']['is_new'] ? 'add_ban' : 'modify_ban', '" value="', $context['ban']['is_new'] ? $txt['ban_add'] : $txt['ban_modify'], '" class="button_submit" />
 							<input type="hidden" name="old_expire" value="', $context['ban']['expiration']['days'], '" />
@@ -175,9 +172,8 @@ function template_ban_edit()
 				<span class="botslice"><span></span></span>
 			</div>';
 
-	if (!$context['ban']['is_new'] && empty($context['ban_suggestions']))
-	{
-		echo '
+    if (!$context['ban']['is_new'] && empty($context['ban_suggestions'])) {
+        echo '
 			<br />
 			<form action="', $scripturl, '?action=admin;area=ban;sa=edit" method="post" accept-charset="', $context['character_set'], '" style="padding: 0px;margin: 0px;" onsubmit="return confirm(\'', $txt['ban_remove_selected_triggers_confirm'], '\');">
 				<table class="table_grid" width="100%">
@@ -190,36 +186,34 @@ function template_ban_edit()
 						</tr>
 					</thead>
 					<tbody>';
-		if (empty($context['ban_items']))
-			echo '
+        if (empty($context['ban_items']))
+            echo '
 						<tr class="windowbg2">
 							<td colspan="4">(', $txt['ban_no_triggers'], ')</td>
 						</tr>';
-		else
-		{
-			foreach ($context['ban_items'] as $ban_item)
-			{
-				echo '
+        else {
+            foreach ($context['ban_items'] as $ban_item) {
+                echo '
 						<tr class="windowbg2" align="left">
 							<td>';
-				if ($ban_item['type'] == 'ip')
-					echo '		<strong>', $txt['ip'], ':</strong>&nbsp;', $ban_item['ip'];
-				elseif ($ban_item['type'] == 'hostname')
-					echo '		<strong>', $txt['hostname'], ':</strong>&nbsp;', $ban_item['hostname'];
-				elseif ($ban_item['type'] == 'email')
-					echo '		<strong>', $txt['email'], ':</strong>&nbsp;', $ban_item['email'];
-				elseif ($ban_item['type'] == 'user')
-					echo '		<strong>', $txt['username'], ':</strong>&nbsp;', $ban_item['user']['link'];
-				echo '
+                if ($ban_item['type'] == 'ip')
+                    echo '		<strong>', $txt['ip'], ':</strong>&nbsp;', $ban_item['ip'];
+                elseif ($ban_item['type'] == 'hostname')
+                    echo '		<strong>', $txt['hostname'], ':</strong>&nbsp;', $ban_item['hostname'];
+                elseif ($ban_item['type'] == 'email')
+                    echo '		<strong>', $txt['email'], ':</strong>&nbsp;', $ban_item['email'];
+                elseif ($ban_item['type'] == 'user')
+                    echo '		<strong>', $txt['username'], ':</strong>&nbsp;', $ban_item['user']['link'];
+                echo '
 							</td>
 							<td class="windowbg" align="center">', $ban_item['hits'], '</td>
 							<td class="windowbg" align="center"><a href="', $scripturl, '?action=admin;area=ban;sa=edittrigger;bg=', $context['ban']['id'], ';bi=', $ban_item['id'], '">', $txt['ban_edit_trigger'], '</a></td>
 							<td align="center" class="windowbg2"><input type="checkbox" name="ban_items[]" value="', $ban_item['id'], '" class="input_check" /></td>
 						</tr>';
-			}
-		}
+            }
+        }
 
-		echo '
+        echo '
 					</tbody>
 				</table>
 				<div class="additional_rows">
@@ -235,9 +229,9 @@ function template_ban_edit()
 				<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 			</form>';
 
-	}
+    }
 
-	echo '
+    echo '
 	</div>
 	<br class="clear" />
 	<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/suggest.js?fin20"></script>
@@ -251,9 +245,9 @@ function template_ban_edit()
 		}
 		addLoadEvent(fUpdateStatus);';
 
-	// Auto suggest only needed for adding new bans, not editing
-	if ($context['ban']['is_new'] && empty($_REQUEST['u']))
-		echo '
+    // Auto suggest only needed for adding new bans, not editing
+    if ($context['ban']['is_new'] && empty($_REQUEST['u']))
+        echo '
 			var oAddMemberSuggest = new smc_AutoSuggest({
 			sSelf: \'oAddMemberSuggest\',
 			sSessionId: \'', $context['session_id'], '\',
@@ -272,14 +266,14 @@ function template_ban_edit()
 		}
 		oAddMemberSuggest.registerCallback(\'onBeforeUpdate\', \'onUpdateName\');';
 
-	echo '// ]]></script>';
+    echo '// ]]></script>';
 }
 
 function template_ban_edit_trigger()
 {
-	global $context, $settings, $options, $scripturl, $txt, $modSettings;
+    global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
-	echo '
+    echo '
 	<div id="manage_bans">
 		<form action="', $scripturl, '?action=admin;area=ban;sa=edit" method="post" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -302,8 +296,8 @@ function template_ban_edit_trigger()
 							<dd>
 								<input type="text" name="ip" value="', $context['ban_trigger']['ip']['value'], '" size="50" onfocus="selectRadioByName(this.form.bantype, \'ip_ban\');" class="input_text" />
 							</dd>';
-				if (empty($modSettings['disableHostnameLookup']))
-				echo '
+    if (empty($modSettings['disableHostnameLookup']))
+        echo '
 							<dt>
 								<input type="radio" name="bantype" value="hostname_ban"', $context['ban_trigger']['hostname']['selected'] ? ' checked="checked"' : '', ' class="input_radio" />
 								', $txt['ban_on_hostname'], '
@@ -311,7 +305,7 @@ function template_ban_edit_trigger()
 							<dd>
 								<input type="text" name="hostname" value="', $context['ban_trigger']['hostname']['value'], '" size="50" onfocus="selectRadioByName(this.form.bantype, \'hostname_ban\');" class="input_text" />
 							</dd>';
-				echo '
+    echo '
 							<dt>
 								<input type="radio" name="bantype" value="email_ban"', $context['ban_trigger']['email']['selected'] ? ' checked="checked"' : '', ' class="input_radio" />
 								', $txt['ban_on_email'], '

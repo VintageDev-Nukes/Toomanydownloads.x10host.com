@@ -39,9 +39,9 @@
 // This is where we get information about who they want to send the topic to, etc.
 function template_main()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 	<div id="send_topic">
 		<form action="', $scripturl, '?action=emailuser;sa=sendtopic;topic=', $context['current_topic'], '.', $context['start'], '" method="post" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -105,9 +105,9 @@ function template_main()
 // Send an email to a user!
 function template_custom_email()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 	<div id="send_topic">
 		<form action="', $scripturl, '?action=emailuser;sa=email" method="post" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -126,9 +126,9 @@ function template_custom_email()
 							', $context['recipient']['link'], '
 						</dd>';
 
-	// Can the user see the persons email?
-	if ($context['can_view_receipient_email'])
-		echo '
+    // Can the user see the persons email?
+    if ($context['can_view_receipient_email'])
+        echo '
 						<dt>
 							<strong>', $txt['sendtopic_receiver_email'], ':</strong>
 						</dt>
@@ -139,9 +139,9 @@ function template_custom_email()
 					<hr />
 					<dl class="settings send_mail">';
 
-	// If it's a guest we need their details.
-	if ($context['user']['is_guest'])
-		echo '
+    // If it's a guest we need their details.
+    if ($context['user']['is_guest'])
+        echo '
 						<dt>
 							<label for="y_name"><strong>', $txt['sendtopic_sender_name'], ':</strong></label>
 						</dt>
@@ -155,9 +155,9 @@ function template_custom_email()
 						<dd>
 							<input type="text" id="y_mail" name="y_email" size="24" maxlength="50" value="', $context['user']['email'], '" class="input_text" />
 						</dt>';
-	// Otherwise show the user that we know their email.
-	else
-		echo '
+    // Otherwise show the user that we know their email.
+    else
+        echo '
 						<dt>
 							<strong>', $txt['sendtopic_sender_email'], ':</strong><br />
 							<span class="smalltext">', $txt['send_email_disclosed'], '</span>
@@ -166,7 +166,7 @@ function template_custom_email()
 							<em>', $context['user']['email'], '</em>
 						</dd>';
 
-	echo '
+    echo '
 						<dt>
 							<label for="email_subject"><strong>', $txt['send_email_subject'], ':</strong></label>
 						</dt>
@@ -187,11 +187,11 @@ function template_custom_email()
 				<span class="botslice"><span></span></span>
 			</div>';
 
-	foreach ($context['form_hidden_vars'] as $key => $value)
-		echo '
+    foreach ($context['form_hidden_vars'] as $key => $value)
+        echo '
 			<input type="hidden" name="', $key, '" value="', $value, '" />';
 
-	echo '
+    echo '
 			<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 		</form>
 	</div>
@@ -200,9 +200,9 @@ function template_custom_email()
 
 function template_report()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 	<div id="report_topic">
 		<form action="', $scripturl, '?action=reporttm;topic=', $context['current_topic'], '.', $context['start'], '" method="post" accept-charset="', $context['character_set'], '">
 			<input type="hidden" name="msg" value="' . $context['message_id'] . '" />
@@ -213,38 +213,36 @@ function template_report()
 					<span class="topslice"><span></span></span>
 					<div class="content">';
 
-	if (!empty($context['post_errors']))
-	{
-		echo '
+    if (!empty($context['post_errors'])) {
+        echo '
 				<div class="errorbox">
 					<ul>';
 
-		foreach ($context['post_errors'] as $error)
-			echo '
+        foreach ($context['post_errors'] as $error)
+            echo '
 						<li class="error">', $error, '</li>';
 
-		echo '
+        echo '
 					</ul>
 				</div>';
-	}
+    }
 
-	echo '
+    echo '
 						<p>', $txt['report_to_mod_func'], '</p>
 						<br />
 						<dl class="settings" id="report_post">';
 
-	if ($context['user']['is_guest'])
-	{
-		echo '
+    if ($context['user']['is_guest']) {
+        echo '
 							<dt>
 								<label for="email_address">', $txt['email'], '</label>:
 							</dt>
 							<dd>
 								<input type="text" id="email_address" name="email" value="', $context['email_address'], '" size="25" maxlength="255" />
 							</dd>';
-	}
+    }
 
-	echo '
+    echo '
 							<dt>
 								<label for="report_comment">', $txt['enter_comment'], '</label>:
 							</dt>
@@ -252,18 +250,17 @@ function template_report()
 								<input type="text" id="report_comment" name="comment" size="50" value="', $context['comment_body'], '" maxlength="255" />
 							</dd>';
 
-	if ($context['require_verification'])
-	{
-		echo '
+    if ($context['require_verification']) {
+        echo '
 							<dt>
 								', $txt['verification'], ':
 							</dt>
 							<dd>
 								', template_control_verification($context['visual_verification_id'], 'all'), '
 							</dd>';
-	}
+    }
 
-	echo '
+    echo '
 						</dl>
 						<div class="righttext">
 							<input type="submit" name="submit" value="', $txt['rtm10'], '" style="margin-left: 1ex;" class="button_submit" />

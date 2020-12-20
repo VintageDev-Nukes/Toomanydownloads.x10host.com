@@ -1,16 +1,16 @@
-<?php 
+<?php
 
 //All the tinglao... xD
 
-if(!session_id() == 'listo') //Comprueba si se ha establecido la conexión en el login.php, si no, vuelve a login.php (mirar check.php)
+if (!session_id() == 'listo') //Comprueba si se ha establecido la conexión en el login.php, si no, vuelve a login.php (mirar check.php)
 {
-session_start(); 
+    session_start();
 }
-require 'check.php'; 
+require 'check.php';
 //continua en el siguiente bloque
 
-if($_REQUEST['action'] != 'admin') {
-  header('location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=admin');
+if ($_REQUEST['action'] != 'admin') {
+    header('location: http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=admin');
 }
 
 // CONEXIÓN A LA BASE DE DATOS
@@ -96,9 +96,9 @@ echo "<div id='adminmenu'>
       <ul>
          <li class='has-sub'><a href='#'><span>Gestor de items</span></a>
             <ul>
-               <li><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=admin&go=items&new=item'><span>Añadir</span></a></li>
-               <li><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=admin&go=items'><span>Editar y eliminar</span></a></li>
-               <li class='last'><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=admin&go=items#approved'><span>Administrar peticiones</span></a></li>
+               <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items&new=item'><span>Añadir</span></a></li>
+               <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items'><span>Editar y eliminar</span></a></li>
+               <li class='last'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items#approved'><span>Administrar peticiones</span></a></li>
             </ul>
          </li>
          <li class='has-sub'><a href='#'><span>Gestor de tickets</span></a>
@@ -114,8 +114,8 @@ echo "<div id='adminmenu'>
          </li>
          <li class='has-sub'><a href='#'><span>Gestor de feedback</span></a>
             <ul>
-               <li><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=admin&go=feedback#approved'><span>Revisar</span></a></li>
-               <li class='last'><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=admin&go=feedback#deleted'><span>Papelera</span></a></li>
+               <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=feedback#approved'><span>Revisar</span></a></li>
+               <li class='last'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=feedback#deleted'><span>Papelera</span></a></li>
             </ul>
          </li>
       </ul>
@@ -136,66 +136,68 @@ echo "<div id='adminmenu'>
 <br><br>";
 
 $action = @$_GET['go'];
-if(empty($action)){$action='index';}
- 
-switch($action){
-
-  //Index (hecho)
-  case 'index':
-    include_once('includes/main.php');
-    break;
-
-  case 'ticket':
-    include_once('includes/tickets.php');
-    break;
-
-  case 'who':
-    include_once('includes/who.php');
-    break;
-
-  case 'report':
-    include_once('includes/reports.php');
-    break;
- 
-  case 'feedback':
-    include_once('includes/feedback.php');
-    break;
-
-  case 'items':
-    include_once('includes/items.php');
-    break;
-
- //Not found (hecho: 10%)
-  default:
-    include_once('404.php');
-    break;
+if (empty($action)) {
+    $action = 'index';
 }
 
-    /*<a href="logout.php" style="float:right;font-size:12px;" class="linka">Cerrar sesión</a>
-      <?php <h3>
-        <a href="#" onclick='show("content")+restart("http://<?php echo $_SERVER['SERVER_NAME']; ?>/admin/itemAdder.php")' class="linka" onlick="document.getElementById('frame').src = 'formulario.php';">+ Añadir item</a>
-        <br>
-        <a href="#" style="color:#fff;text-decoration:none;" onclick="switchview('options')">- Editar items</a>
-      </h3>
+switch ($action) {
 
-      <div id="options" style="display:none;color:#fff;">
+    //Index (hecho)
+    case 'index':
+        include_once('includes/main.php');
+        break;
 
-  <?
+    case 'ticket':
+        include_once('includes/tickets.php');
+        break;
 
-  $query = "SELECT * FROM items ORDER BY id ASC"; //aquí se lee * (todo) de demo
-  $result = mysqli_query($query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
+    case 'who':
+        include_once('includes/who.php');
+        break;
 
-  if(mysqli_num_rows($result)) {
-    while($rs=mysqli_fetch_array($result))  {
-      echo $rs['id'].'.- '.$rs['name'].' [Editar] [<form id="delete" style="display:inline;" action="http://'.$_SERVER['SERVER_NAME'].'/forms/ItemManager.php"><a href="#" onclick="javascript:deleteConfirm();">Quitar</a><input type="hidden" name="delete_id" value="'.$rs['id'].'" /></form>]<br>';
-    }
-  } else {
-    echo 'No hay ningún resultado disponible, añade un nuevo item para que esta lista no esté vacía.';
-  }
+    case 'report':
+        include_once('includes/reports.php');
+        break;
 
-  ?>
+    case 'feedback':
+        include_once('includes/feedback.php');
+        break;
 
-      </div>*/
+    case 'items':
+        include_once('includes/items.php');
+        break;
+
+    //Not found (hecho: 10%)
+    default:
+        include_once('404.php');
+        break;
+}
+
+/*<a href="logout.php" style="float:right;font-size:12px;" class="linka">Cerrar sesión</a>
+  <?php <h3>
+    <a href="#" onclick='show("content")+restart("http://<?php echo $_SERVER['SERVER_NAME']; ?>/admin/itemAdder.php")' class="linka" onlick="document.getElementById('frame').src = 'formulario.php';">+ Añadir item</a>
+    <br>
+    <a href="#" style="color:#fff;text-decoration:none;" onclick="switchview('options')">- Editar items</a>
+  </h3>
+
+  <div id="options" style="display:none;color:#fff;">
+
+<?
+
+$query = "SELECT * FROM items ORDER BY id ASC"; //aquí se lee * (todo) de demo
+$result = mysqli_query($query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
+
+if(mysqli_num_rows($result)) {
+while($rs=mysqli_fetch_array($result))  {
+  echo $rs['id'].'.- '.$rs['name'].' [Editar] [<form id="delete" style="display:inline;" action="http://'.$_SERVER['SERVER_NAME'].'/forms/ItemManager.php"><a href="#" onclick="javascript:deleteConfirm();">Quitar</a><input type="hidden" name="delete_id" value="'.$rs['id'].'" /></form>]<br>';
+}
+} else {
+echo 'No hay ningún resultado disponible, añade un nuevo item para que esta lista no esté vacía.';
+}
+
+?>
+
+  </div>*/
 
 echo '</div>
 </div>';

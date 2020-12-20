@@ -12,10 +12,10 @@
 
 function template_popup()
 {
-	global $context, $settings, $options, $txt;
+    global $context, $settings, $options, $txt;
 
-	// Since this is a popup of its own we need to start the html, etc.
-	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    // Since this is a popup of its own we need to start the html, etc.
+    echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"', $context['right_to_left'] ? ' dir="rtl"' : '', '>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=', $context['character_set'], '" />
@@ -36,9 +36,9 @@ function template_popup()
 
 function template_find_members()
 {
-	global $context, $settings, $options, $scripturl, $modSettings, $txt;
+    global $context, $settings, $options, $scripturl, $modSettings, $txt;
 
-	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"', $context['right_to_left'] ? ' dir="rtl"' : '', '>
 	<head>
 		<title>', $txt['find_members'], '</title>
@@ -81,12 +81,12 @@ function template_find_members()
 						<input type="text" name="search" id="search" value="', isset($context['last_search']) ? $context['last_search'] : '', '" style="margin-top: 4px; width: 96%;" class="input_text" /><br />
 						<span class="smalltext"><em>', $txt['find_wildcards'], '</em></span><br />';
 
-	// Only offer to search for buddies if we have some!
-	if (!empty($context['show_buddies']))
-		echo '
+    // Only offer to search for buddies if we have some!
+    if (!empty($context['show_buddies']))
+        echo '
 						<span class="smalltext"><label for="buddies"><input type="checkbox" class="input_check" name="buddies" id="buddies"', !empty($context['buddy_search']) ? ' checked="checked"' : '', ' /> ', $txt['find_buddies'], '</label></span><br />';
 
-	echo '
+    echo '
 						<div class="padding righttext">
 							<input type="submit" value="', $txt['search'], '" class="button_submit" />
 							<input type="button" value="', $txt['find_close'], '" onclick="window.close();" class="button_submit" />
@@ -103,34 +103,32 @@ function template_find_members()
 						<h3 class="catbg">', $txt['find_results'], '</h3>
 					</div>';
 
-	if (empty($context['results']))
-		echo '
+    if (empty($context['results']))
+        echo '
 					<p class="error">', $txt['find_no_results'], '</p>';
-	else
-	{
-		echo '
+    else {
+        echo '
 					<ul class="reset padding">';
 
-		$alternate = true;
-		foreach ($context['results'] as $result)
-		{
-			echo '
+        $alternate = true;
+        foreach ($context['results'] as $result) {
+            echo '
 						<li class="', $alternate ? 'windowbg2' : 'windowbg', '">
 							<a href="', $result['href'], '" target="_blank" class="new_win"><img src="', $settings['images_url'], '/icons/profile_sm.gif" alt="', $txt['view_profile'], '" title="', $txt['view_profile'], '" /></a>
 							<a href="javascript:void(0);" onclick="addMember(this.innerHTML); return false;">', $result['name'], '</a>
 						</li>';
 
-			$alternate = !$alternate;
-		}
+            $alternate = !$alternate;
+        }
 
-		echo '
+        echo '
 					</ul>
 					<div class="pagesection">
 						', $txt['pages'], ': ', $context['page_index'], '
 					</div>';
-	}
+    }
 
-	echo '
+    echo '
 				</div>
 			</div>
 			<span class="lowerframe"><span></span></span>
@@ -139,13 +137,13 @@ function template_find_members()
 			<input type="hidden" name="quote" value="', $context['quote_results'] ? '1' : '0', '" />
 		</form>';
 
-	if (empty($context['results']))
-		echo '
+    if (empty($context['results']))
+        echo '
 		<script type="text/javascript"><!-- // --><![CDATA[
 			document.getElementById("search").focus();
 		// ]]></script>';
 
-	echo '
+    echo '
 	</body>
 </html>';
 }
@@ -153,9 +151,9 @@ function template_find_members()
 // The main help page.
 function template_manual()
 {
-	global $context, $scripturl, $txt;
+    global $context, $scripturl, $txt;
 
-	echo '
+    echo '
 			<div class="cat_bar">
 				<h3 class="catbg">', $txt['manual_smf_user_help'], '</h3>
 			</div>
@@ -167,13 +165,12 @@ function template_manual()
 						<p>', $txt['manual_introduction'], '</p>
 						<ul>';
 
-	foreach ($context['manual_sections'] as $section_id => $wiki_id)
-	{
-		echo '
+    foreach ($context['manual_sections'] as $section_id => $wiki_id) {
+        echo '
 							<li><a href="', $context['wiki_url'], '/', $wiki_id, ($txt['lang_dictionary'] != 'en' && $txt['lang_dictionary'] != 'english' ? '/' . $txt['lang_dictionary'] : ''), '" target="_blank" class="new_win">', $txt['manual_section_' . $section_id . '_title'], '</a> - ', $txt['manual_section_' . $section_id . '_desc'], '</li>';
-	}
+    }
 
-	echo '
+    echo '
 						</ul>
 						<p>', sprintf($txt['manual_docs_and_credits'], $context['wiki_url'], $scripturl . '?action=credits'), '</p>
 					</div>

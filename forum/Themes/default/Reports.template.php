@@ -13,9 +13,9 @@
 // Choose which type of report to run?
 function template_report_type()
 {
-	global $context, $settings, $options, $scripturl, $txt, $modSettings;
+    global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
-	echo '
+    echo '
 	<div id="admincenter">
 		<form action="', $scripturl, '?action=admin;area=reports" method="post" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -32,19 +32,18 @@ function template_report_type()
 				<div class="content">
 					<dl class="generate_report">';
 
-	// Go through each type of report they can run.
-	foreach ($context['report_types'] as $type)
-	{
-		echo '
+    // Go through each type of report they can run.
+    foreach ($context['report_types'] as $type) {
+        echo '
 						<dt>
 							<input type="radio" id="rt_', $type['id'], '" name="rt" value="', $type['id'], '"', $type['is_first'] ? ' checked="checked"' : '', ' class="input_radio" />
 							<strong><label for="rt_', $type['id'], '">', $type['title'], '</label></strong>
 						</dt>';
-		if (isset($type['description']))
-			echo '
+        if (isset($type['description']))
+            echo '
 						<dd>', $type['description'], '</dd>';
-	}
-		echo '
+    }
+    echo '
 					</dl>
 					<div class="righttext">
 						<input type="submit" name="continue" value="', $txt['generate_reports_continue'], '" class="button_submit" />
@@ -61,35 +60,34 @@ function template_report_type()
 // This is the standard template for showing reports in.
 function template_main()
 {
-	global $context, $settings, $options, $scripturl, $txt, $modSettings;
+    global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
-	// Build the reports button array.
-	$report_buttons = array(
-			'generate_reports' => array('text' => 'generate_reports', 'image' => 'print.gif', 'lang' => true, 'url' => $scripturl . '?action=admin;area=reports', 'active' => true),
-			'print' => array('text' => 'print', 'image' => 'print.gif', 'lang' => true, 'url' => $scripturl . '?action=admin;area=reports;rt=' . $context['report_type']. ';st=print', 'custom' => 'target="_blank"'),
-		);
+    // Build the reports button array.
+    $report_buttons = array(
+        'generate_reports' => array('text' => 'generate_reports', 'image' => 'print.gif', 'lang' => true, 'url' => $scripturl . '?action=admin;area=reports', 'active' => true),
+        'print' => array('text' => 'print', 'image' => 'print.gif', 'lang' => true, 'url' => $scripturl . '?action=admin;area=reports;rt=' . $context['report_type'] . ';st=print', 'custom' => 'target="_blank"'),
+    );
 
-	echo '
+    echo '
 	<div id="admincenter">
 		<div class="title_bar">
 			<h3 class="titlebg">', $txt['results'], '</h3>
 		</div>
 		<div id="report_buttons">';
 
-	if (!empty($report_buttons) && !empty($settings['use_tabs']))
-		template_button_strip($report_buttons, 'right');
+    if (!empty($report_buttons) && !empty($settings['use_tabs']))
+        template_button_strip($report_buttons, 'right');
 
-	echo '
+    echo '
 		</div>';
 
-	// Go through each table!
-	foreach ($context['tables'] as $table)
-	{
-		echo '
+    // Go through each table!
+    foreach ($context['tables'] as $table) {
+        echo '
 		<table class="table_grid" width="100%">';
 
-		if (!empty($table['title']))
-			echo '
+        if (!empty($table['title']))
+            echo '
 			<thead>
 				<tr class="catbg">
 					<th scope="col" colspan="', $table['column_count'], '">', $table['title'], '</th>
@@ -97,59 +95,56 @@ function template_main()
 			</thead>
 			<tbody>';
 
-		// Now do each row!
-		$row_number = 0;
-		$alternate = false;
-		foreach ($table['data'] as $row)
-		{
-			if ($row_number == 0 && !empty($table['shading']['top']))
-				echo '
+        // Now do each row!
+        $row_number = 0;
+        $alternate = false;
+        foreach ($table['data'] as $row) {
+            if ($row_number == 0 && !empty($table['shading']['top']))
+                echo '
 				<tr class="windowbg table_caption">';
-			else
-				echo '
+            else
+                echo '
 				<tr class="', !empty($row[0]['separator']) ? 'catbg' : ($alternate ? 'windowbg' : 'windowbg2'), '" valign="top">';
 
-			// Now do each column.
-			$column_number = 0;
+            // Now do each column.
+            $column_number = 0;
 
-			foreach ($row as $key => $data)
-			{
-				// If this is a special separator, skip over!
-				if (!empty($data['separator']) && $column_number == 0)
-				{
-					echo '
+            foreach ($row as $key => $data) {
+                // If this is a special separator, skip over!
+                if (!empty($data['separator']) && $column_number == 0) {
+                    echo '
 					<td colspan="', $table['column_count'], '" class="smalltext">
 						', $data['v'], ':
 					</td>';
-					break;
-				}
+                    break;
+                }
 
-				// Shaded?
-				if ($column_number == 0 && !empty($table['shading']['left']))
-					echo '
+                // Shaded?
+                if ($column_number == 0 && !empty($table['shading']['left']))
+                    echo '
 					<td align="', $table['align']['shaded'], '" class="table_caption"', $table['width']['shaded'] != 'auto' ? ' width="' . $table['width']['shaded'] . '"' : '', '>
 						', $data['v'] == $table['default_value'] ? '' : ($data['v'] . (empty($data['v']) ? '' : ':')), '
 					</td>';
-				else
-					echo '
+                else
+                    echo '
 					<td class="smalltext" align="', $table['align']['normal'], '"', $table['width']['normal'] != 'auto' ? ' width="' . $table['width']['normal'] . '"' : '', !empty($data['style']) ? ' style="' . $data['style'] . '"' : '', '>
 						', $data['v'], '
 					</td>';
 
-				$column_number++;
-			}
+                $column_number++;
+            }
 
-			echo '
+            echo '
 				</tr>';
 
-			$row_number++;
-			$alternate = !$alternate;
-		}
-		echo '
+            $row_number++;
+            $alternate = !$alternate;
+        }
+        echo '
 			</tbody>
 		</table>';
-	}
-	echo '
+    }
+    echo '
 	</div>
 	<br class="clear" />';
 }
@@ -157,9 +152,9 @@ function template_main()
 // Header of the print page!
 function template_print_above()
 {
-	global $context, $settings, $options, $txt;
+    global $context, $settings, $options, $txt;
 
-	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"', $context['right_to_left'] ? ' dir="rtl"' : '', '>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=', $context['character_set'], '" />
@@ -171,82 +166,78 @@ function template_print_above()
 
 function template_print()
 {
-	global $context, $settings, $options, $scripturl, $txt, $modSettings;
+    global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
-	// Go through each table!
-	foreach ($context['tables'] as $table)
-	{
-		echo '
+    // Go through each table!
+    foreach ($context['tables'] as $table) {
+        echo '
 		<div style="overflow: visible;', $table['max_width'] != 'auto' ? ' width: ' . $table['max_width'] . 'px;' : '', '">
 			<table border="0" cellspacing="1" cellpadding="4" width="100%" class="bordercolor">';
 
-		if (!empty($table['title']))
-			echo '
+        if (!empty($table['title']))
+            echo '
 				<tr class="catbg">
 					<td colspan="', $table['column_count'], '">
 						', $table['title'], '
 					</td>
 				</tr>';
 
-		// Now do each row!
-		$alternate = false;
-		$row_number = 0;
-		foreach ($table['data'] as $row)
-		{
-			if ($row_number == 0 && !empty($table['shading']['top']))
-				echo '
+        // Now do each row!
+        $alternate = false;
+        $row_number = 0;
+        foreach ($table['data'] as $row) {
+            if ($row_number == 0 && !empty($table['shading']['top']))
+                echo '
 				<tr class="titlebg" valign="top">';
-			else
-				echo '
+            else
+                echo '
 				<tr class="', $alternate ? 'windowbg' : 'windowbg2', '" valign="top">';
 
-			// Now do each column!!
-			$column_number = 0;
-			foreach ($row as $key => $data)
-			{
-				// If this is a special separator, skip over!
-				if (!empty($data['separator']) && $column_number == 0)
-				{
-					echo '
+            // Now do each column!!
+            $column_number = 0;
+            foreach ($row as $key => $data) {
+                // If this is a special separator, skip over!
+                if (!empty($data['separator']) && $column_number == 0) {
+                    echo '
 					<td colspan="', $table['column_count'], '" class="catbg">
 						<strong>', $data['v'], ':</strong>
 					</td>';
-					break;
-				}
+                    break;
+                }
 
-				// Shaded?
-				if ($column_number == 0 && !empty($table['shading']['left']))
-					echo '
+                // Shaded?
+                if ($column_number == 0 && !empty($table['shading']['left']))
+                    echo '
 					<td align="', $table['align']['shaded'], '" class="titlebg"', $table['width']['shaded'] != 'auto' ? ' width="' . $table['width']['shaded'] . '"' : '', '>
 						', $data['v'] == $table['default_value'] ? '' : ($data['v'] . (empty($data['v']) ? '' : ':')), '
 					</td>';
-				else
-					echo '
+                else
+                    echo '
 					<td align="', $table['align']['normal'], '"', $table['width']['normal'] != 'auto' ? ' width="' . $table['width']['normal'] . '"' : '', !empty($data['style']) ? ' style="' . $data['style'] . '"' : '', '>
 						', $data['v'], '
 					</td>';
 
-				$column_number++;
-			}
+                $column_number++;
+            }
 
-			echo '
+            echo '
 				</tr>';
 
-			$row_number++;
-			$alternate = !$alternate;
-		}
-		echo '
+            $row_number++;
+            $alternate = !$alternate;
+        }
+        echo '
 			</table>
 		</div><br />';
-	}
+    }
 }
 
 // Footer of the print page.
 function template_print_below()
 {
-	global $context, $settings, $options;
+    global $context, $settings, $options;
 
-	echo '
+    echo '
 		<div class="copyright">', theme_copyright(), '</div>
 	</body>
 </html>';

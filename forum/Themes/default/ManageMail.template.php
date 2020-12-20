@@ -12,9 +12,9 @@
 
 function template_browse()
 {
-	global $context, $settings, $options, $scripturl, $txt;
+    global $context, $settings, $options, $scripturl, $txt;
 
-	echo '
+    echo '
 	<div id="manage_mail">
 		<div class="cat_bar">
 			<h3 class="catbg">', $txt['mailqueue_stats'], '</h3>
@@ -32,9 +32,9 @@ function template_browse()
 			<span class="botslice"><span></span></span>
 		</div>';
 
-	template_show_list('mail_queue');
+    template_show_list('mail_queue');
 
-	echo '
+    echo '
 	</div>
 	<br class="clear" />';
 }

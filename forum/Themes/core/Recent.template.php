@@ -12,29 +12,28 @@
 
 function template_main()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 	<div id="recent" class="main_section">
 		<div class="pagesection">
 			<div>', $txt['pages'], ': ', $context['page_index'], '</div>
 		</div>';
 
-	foreach ($context['posts'] as $post)
-	{
-		// This is far from ideal, but oh well - create buttons for the post.
-		$button_set = array();
+    foreach ($context['posts'] as $post) {
+        // This is far from ideal, but oh well - create buttons for the post.
+        $button_set = array();
 
-		if ($post['can_delete'])
-			$button_set['delete'] = array('text' => 'remove', 'image' => 'delete.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . $txt['remove_message'] . '?\');"', 'url' => $scripturl . '?action=deletemsg;msg=' . $post['id'] . ';topic=' . $post['topic'] . ';recent;' . $context['session_var'] . '=' . $context['session_id']);
-		if ($post['can_reply'])
-			$button_set['reply'] = array('text' => 'reply', 'image' => 'reply_sm.gif', 'lang' => true, 'url' => $scripturl . '?action=post;topic=' . $post['topic'] . '.' . $post['start']);
-		if ($post['can_quote'])
-			$button_set['quote'] = array('text' => 'reply_quote', 'image' => 'quote.gif', 'lang' => true, 'url' => $scripturl . '?action=post;topic=' . $post['topic'] . '.' . $post['start'] . ';quote=' . $post['id']);
-		if ($post['can_mark_notify'])
-			$button_set['notify'] = array('text' => 'notify_replies', 'image' => 'notify_sm.gif', 'lang' => true, 'url' => $scripturl . '?action=notify;topic=' . $post['topic'] . '.' . $post['start']);
+        if ($post['can_delete'])
+            $button_set['delete'] = array('text' => 'remove', 'image' => 'delete.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . $txt['remove_message'] . '?\');"', 'url' => $scripturl . '?action=deletemsg;msg=' . $post['id'] . ';topic=' . $post['topic'] . ';recent;' . $context['session_var'] . '=' . $context['session_id']);
+        if ($post['can_reply'])
+            $button_set['reply'] = array('text' => 'reply', 'image' => 'reply_sm.gif', 'lang' => true, 'url' => $scripturl . '?action=post;topic=' . $post['topic'] . '.' . $post['start']);
+        if ($post['can_quote'])
+            $button_set['quote'] = array('text' => 'reply_quote', 'image' => 'quote.gif', 'lang' => true, 'url' => $scripturl . '?action=post;topic=' . $post['topic'] . '.' . $post['start'] . ';quote=' . $post['id']);
+        if ($post['can_mark_notify'])
+            $button_set['notify'] = array('text' => 'notify_replies', 'image' => 'notify_sm.gif', 'lang' => true, 'url' => $scripturl . '?action=notify;topic=' . $post['topic'] . '.' . $post['start']);
 
-		echo '
+        echo '
 			<table width="100%" cellpadding="4" cellspacing="1" border="0" class="bordercolor">
 				<tr class="titlebg2">
 					<td class="middletext">
@@ -54,22 +53,19 @@ function template_main()
 					</td>
 				</tr>';
 
-		// Are we using tabs?
-		if (!empty($settings['use_tabs']))
-		{
-			echo '
+        // Are we using tabs?
+        if (!empty($settings['use_tabs'])) {
+            echo '
 			</table>';
 
-			if (!empty($button_set))
-				echo '
+            if (!empty($button_set))
+                echo '
 			<div class="readbuttons clearfix marginbottom">
 				', template_button_strip($button_set, 'top'), '
 			</div>';
-		}
-		else
-		{
-			if (!empty($button_set))
-				echo '
+        } else {
+            if (!empty($button_set))
+                echo '
 				<tr>
 					<td class="catbg" colspan="3" align="right">
 						<table><tr><td>
@@ -78,15 +74,15 @@ function template_main()
 					</td>
 				</tr>';
 
-			echo '
+            echo '
 			</table>';
-		}
+        }
 
-		echo '
+        echo '
 			<br />';
-	}
+    }
 
-	echo '
+    echo '
 		<div class="pagesection">
 			<div class="floatleft">', $txt['pages'], ': ', $context['page_index'], '</div>
 		</div>
@@ -95,52 +91,50 @@ function template_main()
 
 function template_unread()
 {
-	global $context, $settings, $options, $txt, $scripturl, $modSettings;
+    global $context, $settings, $options, $txt, $scripturl, $modSettings;
 
-	$showCheckboxes = !empty($options['display_quick_mod']) && $options['display_quick_mod'] == 1 && $settings['show_mark_read'];
+    $showCheckboxes = !empty($options['display_quick_mod']) && $options['display_quick_mod'] == 1 && $settings['show_mark_read'];
 
-	if ($showCheckboxes)
-		echo '
+    if ($showCheckboxes)
+        echo '
 	<div id="recent" class="main_content">
 		<form action="', $scripturl, '?action=quickmod" method="post" accept-charset="', $context['character_set'], '" name="quickModForm" id="quickModForm" style="margin: 0;">
 			<input type="hidden" name="' . $context['session_var'] . '" value="' . $context['session_id'] . '" />
 			<input type="hidden" name="qaction" value="markread" />
 			<input type="hidden" name="redirect_url" value="action=unread', (!empty($context['showing_all_topics']) ? ';all' : ''), $context['querystring_board_limits'], '" />';
 
-	if ($settings['show_mark_read'])
-	{
-		// Generate the button strip.
-		$mark_read = array(
-			'markread' => array('text' => !empty($context['no_board_limits']) ? 'mark_as_read' : 'mark_read_short', 'image' => 'markread.gif', 'lang' => true, 'url' => $scripturl . '?action=markasread;sa=' . (!empty($context['no_board_limits']) ? 'all' : 'board' . $context['querystring_board_limits']) . ';' . $context['session_var'] . '=' . $context['session_id']),
-		);
+    if ($settings['show_mark_read']) {
+        // Generate the button strip.
+        $mark_read = array(
+            'markread' => array('text' => !empty($context['no_board_limits']) ? 'mark_as_read' : 'mark_read_short', 'image' => 'markread.gif', 'lang' => true, 'url' => $scripturl . '?action=markasread;sa=' . (!empty($context['no_board_limits']) ? 'all' : 'board' . $context['querystring_board_limits']) . ';' . $context['session_var'] . '=' . $context['session_id']),
+        );
 
-		if ($showCheckboxes)
-			$mark_read['markselectread'] = array(
-				'text' => 'quick_mod_markread',
-				'image' => 'markselectedread.gif',
-				'lang' => true,
-				'url' => 'javascript:document.quickModForm.submit();',
-			);
-	}
+        if ($showCheckboxes)
+            $mark_read['markselectread'] = array(
+                'text' => 'quick_mod_markread',
+                'image' => 'markselectedread.gif',
+                'lang' => true,
+                'url' => 'javascript:document.quickModForm.submit();',
+            );
+    }
 
-	echo '
+    echo '
 	<div id="readbuttons_top" class="readbuttons clearfix margintop">
 		<div class="floatleft middletext">', $txt['pages'], ': ', $context['page_index'], '</div>';
 
-	if (!empty($mark_read) && !empty($settings['use_tabs']))
-		template_button_strip($mark_read, 'bottom');
+    if (!empty($mark_read) && !empty($settings['use_tabs']))
+        template_button_strip($mark_read, 'bottom');
 
-	echo '
+    echo '
 	</div>';
 
-	echo '
+    echo '
 	<table border="0" width="100%" cellspacing="0" cellpadding="0" class="bordercolor">
 		<tr><td>
 			<table border="0" width="100%" cellspacing="1" cellpadding="4" class="bordercolor">
 				<tr class="titlebg">';
-	if (!empty($context['topics']))
-	{
-		echo '
+    if (!empty($context['topics'])) {
+        echo '
 					<td width="10%" colspan="2">&nbsp;</td>
 					<td>
 						<a href="', $scripturl, '?action=unread', $context['showing_all_topics'] ? ';all' : '', $context['querystring_board_limits'], ';sort=subject', $context['sort_by'] == 'subject' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['subject'], $context['sort_by'] == 'subject' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" border="0" />' : '', '</a>
@@ -153,27 +147,25 @@ function template_unread()
 					</td><td width="24%">
 						<a href="', $scripturl, '?action=unread', $context['showing_all_topics'] ? ';all' : '', $context['querystring_board_limits'], ';sort=last_post', $context['sort_by'] == 'last_post' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['last_post'], $context['sort_by'] == 'last_post' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" border="0" />' : '', '</a>
 					</td>';
-		if ($showCheckboxes)
-			echo '
+        if ($showCheckboxes)
+            echo '
 					<td>
 						<input type="checkbox" onclick="invertAll(this, this.form, \'topics[]\');" class="input_check" />
 					</td>';
-	}
-	else
-		echo '
+    } else
+        echo '
 					<td width="100%" colspan="7">', $context['showing_all_topics'] ? $txt['msg_alert_none'] : $txt['unread_topics_visit_none'], '</td>';
-	echo '
+    echo '
 				</tr>';
 
-	foreach ($context['topics'] as $topic)
-	{
-		// Do we want to separate the sticky and lock status out?
-		if (!empty($settings['separate_sticky_lock']) && strpos($topic['class'], 'sticky') !== false)
-			$topic['class'] = substr($topic['class'], 0, strrpos($topic['class'], '_sticky'));
-		if (!empty($settings['separate_sticky_lock']) && strpos($topic['class'], 'locked') !== false)
-			$topic['class'] = substr($topic['class'], 0, strrpos($topic['class'], '_locked'));
+    foreach ($context['topics'] as $topic) {
+        // Do we want to separate the sticky and lock status out?
+        if (!empty($settings['separate_sticky_lock']) && strpos($topic['class'], 'sticky') !== false)
+            $topic['class'] = substr($topic['class'], 0, strrpos($topic['class'], '_sticky'));
+        if (!empty($settings['separate_sticky_lock']) && strpos($topic['class'], 'locked') !== false)
+            $topic['class'] = substr($topic['class'], 0, strrpos($topic['class'], '_locked'));
 
-		echo '
+        echo '
 				<tr>
 					<td class="windowbg2" valign="middle" align="center" width="6%">
 						<img src="' . $settings['images_url'] . '/topic/' . $topic['class'] . '.gif" alt="" />
@@ -195,24 +187,24 @@ function template_unread()
 							', $txt['by'], ' ', $topic['last_post']['member']['link'], '
 						</span>
 					</td>';
-			if ($showCheckboxes)
-				echo '
+        if ($showCheckboxes)
+            echo '
 					<td class="windowbg2" valign="middle" align="center">
 						<input type="checkbox" name="topics[]" value="', $topic['id'], '" class="input_check" />
 					</td>';
 
-			echo '
+        echo '
 				</tr>';
-	}
+    }
 
-	if (!empty($context['topics']) && !$context['showing_all_topics'])
-		echo '
+    if (!empty($context['topics']) && !$context['showing_all_topics'])
+        echo '
 				<tr class="titlebg">
 					<td colspan="', $showCheckboxes ? '8' : '7', '" align="right" class="middletext"><a href="', $scripturl, '?action=unread;all', $context['querystring_board_limits'], '">', $txt['unread_topics_all'], '</a></td>
 				</tr>';
 
-	if (empty($settings['use_tabs']) && !empty($mark_read))
-		echo '
+    if (empty($settings['use_tabs']) && !empty($mark_read))
+        echo '
 				<tr>
 					<td class="catbg" colspan="', $showCheckboxes ? '8' : '7', '" align="right">
 						<table><tr><td>
@@ -221,25 +213,25 @@ function template_unread()
 					</td>
 				</tr>';
 
-	echo '
+    echo '
 			</table>
 		</td></tr>
 	</table>
 	<div class="readbuttons clearfix marginbottom">
 		<div class="floatleft middletext">', $txt['pages'], ': ', $context['page_index'], '</div>';
 
-	if (!empty($settings['use_tabs']) && !empty($mark_read))
-		template_button_strip($mark_read, 'top');
+    if (!empty($settings['use_tabs']) && !empty($mark_read))
+        template_button_strip($mark_read, 'top');
 
-	echo '
+    echo '
 	</div>
 	<br />';
 
-	if ($showCheckboxes)
-		echo '
+    if ($showCheckboxes)
+        echo '
 		</form>';
 
-	echo '
+    echo '
 		<div class="tborder clearfix" id="topic_icons">
 			<div class="titlebg2 clearfix">
 				<div class="floatleft smalltext">
@@ -264,80 +256,75 @@ function template_unread()
 
 function template_replies()
 {
-	global $context, $settings, $options, $txt, $scripturl, $modSettings;
+    global $context, $settings, $options, $txt, $scripturl, $modSettings;
 
-	$showCheckboxes = !empty($options['display_quick_mod']) && $options['display_quick_mod'] == 1 && $settings['show_mark_read'];
+    $showCheckboxes = !empty($options['display_quick_mod']) && $options['display_quick_mod'] == 1 && $settings['show_mark_read'];
 
-	if ($showCheckboxes)
-		echo '
+    if ($showCheckboxes)
+        echo '
 	<div id="recent">
 		<form action="', $scripturl, '?action=quickmod" method="post" accept-charset="', $context['character_set'], '" name="quickModForm" id="quickModForm" style="margin: 0;">
 			<input type="hidden" name="' . $context['session_var'] . '" value="' . $context['session_id'] . '" />
 			<input type="hidden" name="qaction" value="markread" />
 			<input type="hidden" name="redirect_url" value="action=unreadreplies', (!empty($context['showing_all_topics']) ? ';all' : ''), $context['querystring_board_limits'], '" />';
 
-	if (isset($context['topics_to_mark']) && !empty($settings['show_mark_read']))
-	{
-		// Generate the button strip.
-		$mark_read = array(
-			'markread' => array('text' => 'mark_as_read', 'image' => 'markread.gif', 'lang' => true, 'url' => $scripturl . '?action=markasread;sa=unreadreplies;topics=' . $context['topics_to_mark'] . ';' . $context['session_var'] . '=' . $context['session_id']),
-		);
+    if (isset($context['topics_to_mark']) && !empty($settings['show_mark_read'])) {
+        // Generate the button strip.
+        $mark_read = array(
+            'markread' => array('text' => 'mark_as_read', 'image' => 'markread.gif', 'lang' => true, 'url' => $scripturl . '?action=markasread;sa=unreadreplies;topics=' . $context['topics_to_mark'] . ';' . $context['session_var'] . '=' . $context['session_id']),
+        );
 
-		if ($showCheckboxes)
-			$mark_read['markselectread'] = array(
-				'text' => 'quick_mod_markread',
-				'image' => 'markselectedread.gif',
-				'lang' => true,
-				'url' => 'javascript:document.quickModForm.submit();',
-			);
-	}
-	if (!empty($settings['use_tabs']))
-	{
-		echo '
+        if ($showCheckboxes)
+            $mark_read['markselectread'] = array(
+                'text' => 'quick_mod_markread',
+                'image' => 'markselectedread.gif',
+                'lang' => true,
+                'url' => 'javascript:document.quickModForm.submit();',
+            );
+    }
+    if (!empty($settings['use_tabs'])) {
+        echo '
 	<div id="readbuttons_top" class="readbuttons clearfix margintop">
 		<div class="floatleft middletext">', $txt['pages'], ': ', $context['page_index'], '</div>';
-		if (!empty($mark_read))
-			template_button_strip($mark_read, 'bottom');
+        if (!empty($mark_read))
+            template_button_strip($mark_read, 'bottom');
 
-		echo '
+        echo '
 	</div>';
-	}
+    }
 
-	echo '
+    echo '
 	<table border="0" width="100%" cellspacing="0" cellpadding="0" class="bordercolor">
 		<tr><td>
 			<table border="0" width="100%" cellspacing="1" cellpadding="4" class="bordercolor">
 				<tr class="titlebg">';
-	if (!empty($context['topics']))
-	{
-			echo '
+    if (!empty($context['topics'])) {
+        echo '
 					<td width="10%" colspan="2">&nbsp;</td>
 					<td><a href="', $scripturl, '?action=unreadreplies', $context['querystring_board_limits'], ';sort=subject', $context['sort_by'] == 'subject' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['subject'], $context['sort_by'] == 'subject' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" border="0" />' : '', '</a></td>
 					<td width="14%"><a href="', $scripturl, '?action=unreadreplies', $context['querystring_board_limits'], ';sort=starter', $context['sort_by'] == 'starter' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['started_by'], $context['sort_by'] == 'starter' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" border="0" />' : '', '</a></td>
 					<td width="4%" align="center"><a href="', $scripturl, '?action=unreadreplies', $context['querystring_board_limits'], ';sort=replies', $context['sort_by'] == 'replies' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['replies'], $context['sort_by'] == 'replies' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" border="0" />' : '', '</a></td>
 					<td width="4%" align="center"><a href="', $scripturl, '?action=unreadreplies', $context['querystring_board_limits'], ';sort=views', $context['sort_by'] == 'views' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['views'], $context['sort_by'] == 'views' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" border="0" />' : '', '</a></td>
 					<td width="24%"><a href="', $scripturl, '?action=unreadreplies', $context['querystring_board_limits'], ';sort=last_post', $context['sort_by'] == 'last_post' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['last_post'], $context['sort_by'] == 'last_post' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" border="0" />' : '', '</a></td>';
-		if ($showCheckboxes)
-			echo '
+        if ($showCheckboxes)
+            echo '
 					<td>
 						<input type="checkbox" onclick="invertAll(this, this.form, \'topics[]\');" class="input_check" />
 					</td>';
-	}
-	else
-		echo '
+    } else
+        echo '
 					<td width="100%" colspan="7">' . $txt['msg_alert_none'] . '</td>';
-	echo '
+    echo '
 				</tr>';
 
-	foreach ($context['topics'] as $topic)
-	{
-		// separate lock and sticky again?
-		if (!empty($settings['separate_sticky_lock']) && strpos($topic['class'], 'sticky') !== false)
-			$topic['class'] = substr($topic['class'], 0, strrpos($topic['class'], '_sticky'));
-		if (!empty($settings['separate_sticky_lock']) && strpos($topic['class'], 'locked') !== false)
-			$topic['class'] = substr($topic['class'], 0, strrpos($topic['class'], '_locked'));
+    foreach ($context['topics'] as $topic) {
+        // separate lock and sticky again?
+        if (!empty($settings['separate_sticky_lock']) && strpos($topic['class'], 'sticky') !== false)
+            $topic['class'] = substr($topic['class'], 0, strrpos($topic['class'], '_sticky'));
+        if (!empty($settings['separate_sticky_lock']) && strpos($topic['class'], 'locked') !== false)
+            $topic['class'] = substr($topic['class'], 0, strrpos($topic['class'], '_locked'));
 
-		echo '
+        echo '
 				<tr>
 					<td class="windowbg2" valign="middle" align="center" width="6%">
 						<img src="', $settings['images_url'], '/topic/', $topic['class'], '.gif" alt="" /></td>
@@ -360,17 +347,17 @@ function template_replies()
 								', $txt['by'], ' ', $topic['last_post']['member']['link'], '
 						</span>
 					</td>';
-		if ($showCheckboxes)
-			echo '
+        if ($showCheckboxes)
+            echo '
 					<td class="windowbg2" valign="middle" align="center">
 						<input type="checkbox" name="topics[]" value="', $topic['id'], '" class="input_check" />
 					</td>';
 
-		echo '
+        echo '
 				</tr>';
-	}
-	if (empty($settings['use_tabs']) && !empty($mark_read))
-		echo '
+    }
+    if (empty($settings['use_tabs']) && !empty($mark_read))
+        echo '
 				<tr>
 					<td class="catbg" colspan="', $showCheckboxes ? '8' : '7', '" align="right">
 						<table><tr><td>
@@ -379,25 +366,25 @@ function template_replies()
 					</td>
 				</tr>';
 
-	echo '
+    echo '
 			</table>
 		</td></tr>
 	</table>
 	<div class="readbuttons clearfix marginbottom">
 		<div class="floatleft middletext">', $txt['pages'], ': ', $context['page_index'], '</div>';
 
-	if (!empty($settings['use_tabs']) && !empty($mark_read))
-		template_button_strip($mark_read, 'top');
+    if (!empty($settings['use_tabs']) && !empty($mark_read))
+        template_button_strip($mark_read, 'top');
 
-	echo '
+    echo '
 	</div>
 	<br />';
 
-	if ($showCheckboxes)
-		echo '
+    if ($showCheckboxes)
+        echo '
 		</form>';
 
-	echo '
+    echo '
 		<div class="tborder clearfix" id="topic_icons">
 			<div class="titlebg2 clearfix">
 				<div class="floatleft smalltext">

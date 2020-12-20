@@ -12,10 +12,10 @@
 
 function template_main()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	// Some javascript for adding more options.
-	echo '
+    // Some javascript for adding more options.
+    echo '
 		<script type="text/javascript"><!-- // --><![CDATA[
 			var pollOptionNum = 0;
 
@@ -33,16 +33,16 @@ function template_main()
 			}
 		// ]]></script>';
 
-	// Start the main poll form.
-	echo '
+    // Start the main poll form.
+    echo '
 	<div id="edit_poll">
 		<form action="' . $scripturl . '?action=editpoll2', $context['is_edit'] ? '' : ';add', ';topic=' . $context['current_topic'] . '.' . $context['start'] . '" method="post" accept-charset="', $context['character_set'], '" onsubmit="submitonce(this); smc_saveEntities(\'postmodify\', [\'question\'], \'options-\');" name="postmodify" id="postmodify">
 			<div class="cat_bar">
 				<h3 class="catbg">', $context['page_title'], '</h3>
 			</div>';
 
-	if (!empty($context['poll_error']['messages']))
-		echo '
+    if (!empty($context['poll_error']['messages']))
+        echo '
 			<div class="errorbox">
 				<dl class="poll_error">
 					<dt>
@@ -54,7 +54,7 @@ function template_main()
 				</dl>
 			</div>';
 
-	echo '
+    echo '
 			<div>
 			<span class="upperframe"><span></span></span>
 				<div class="roundframe">
@@ -64,22 +64,21 @@ function template_main()
 						<input type="text" name="question" size="80" value="', $context['poll']['question'], '" class="input_text" />
 						<ul class="poll_main">';
 
-	foreach ($context['choices'] as $choice)
-	{
-		echo '
+    foreach ($context['choices'] as $choice) {
+        echo '
 							<li>
 								<label for="options-', $choice['id'], '" ', (isset($context['poll_error']['poll_few']) ? ' class="error"' : ''), '>', $txt['option'], ' ', $choice['number'], '</label>:
 								<input type="text" name="options[', $choice['id'], ']" id="options-', $choice['id'], '" value="', $choice['label'], '" class="input_text" size="80" maxlength="255" />';
 
-		// Does this option have a vote count yet, or is it new?
-		if ($choice['votes'] != -1)
-			echo ' (', $choice['votes'], ' ', $txt['votes'], ')';
+        // Does this option have a vote count yet, or is it new?
+        if ($choice['votes'] != -1)
+            echo ' (', $choice['votes'], ' ', $txt['votes'], ')';
 
-		echo '
+        echo '
 							</li>';
-	}
+    }
 
-	echo '
+    echo '
 							<li id="pollMoreOptions"></li>
 						</ul>
 						<strong><a href="javascript:addPollOption(); void(0);">(', $txt['poll_add_option'], ')</a></strong>
@@ -88,9 +87,8 @@ function template_main()
 						<legend>', $txt['poll_options'], ':</legend>
 						<dl class="settings poll_options">';
 
-	if ($context['can_moderate_poll'])
-	{
-		echo '
+    if ($context['can_moderate_poll']) {
+        echo '
 							<dt>
 								<label for="poll_max_votes">', $txt['poll_max_votes'], ':</label>
 							</dt>
@@ -111,17 +109,17 @@ function template_main()
 								<input type="checkbox" id="poll_change_vote" name="poll_change_vote"', !empty($context['poll']['change_vote']) ? ' checked="checked"' : '', ' class="input_check" />
 							</dd>';
 
-		if ($context['poll']['guest_vote_allowed'])
-			echo '
+        if ($context['poll']['guest_vote_allowed'])
+            echo '
 							<dt>
 								<label for="poll_guest_vote">', $txt['poll_guest_vote'], ':</label>
 							</dt>
 							<dd>
 								<input type="checkbox" id="poll_guest_vote" name="poll_guest_vote"', !empty($context['poll']['guest_vote']) ? ' checked="checked"' : '', ' class="input_check" />
 							</dd>';
-	}
+    }
 
-	echo '
+    echo '
 							<dt>
 								', $txt['poll_results_visibility'], ':
 							</dt>
@@ -132,14 +130,14 @@ function template_main()
 							</dd>
 						</dl>
 					</fieldset>';
-	// If this is an edit, we can allow them to reset the vote counts.
-	if ($context['is_edit'])
-		echo '
+    // If this is an edit, we can allow them to reset the vote counts.
+    if ($context['is_edit'])
+        echo '
 					<fieldset id="poll_reset">
 						<legend>', $txt['reset_votes'], '</legend>
 						<input type="checkbox" name="resetVoteCount" value="on" class="input_check" /> ' . $txt['reset_votes_check'] . '
 					</fieldset>';
-	echo '
+    echo '
 					<div class="righttext padding">
 						<input type="submit" name="post" value="', $txt['save'], '" onclick="return submitThisOnce(this);" accesskey="s" class="button_submit" />
 					</div>

@@ -1,5 +1,1 @@
-<?php
-// Version: 2.0; Modifications
-
-
-?>
+<?php// Version: 2.0; Modifications?>

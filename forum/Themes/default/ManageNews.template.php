@@ -13,9 +13,9 @@
 // Form for editing current news on the site.
 function template_edit_news()
 {
-	global $context, $settings, $options, $scripturl, $txt;
+    global $context, $settings, $options, $scripturl, $txt;
 
-	echo '
+    echo '
 	<div id="admincenter">
 		<form action="', $scripturl, '?action=admin;area=news;sa=editnews" method="post" accept-charset="', $context['character_set'], '" name="postmodify" id="postmodify">
 			<table class="table_grid" width="100%">
@@ -28,9 +28,9 @@ function template_edit_news()
 				</thead>
 				<tbody>';
 
-	// Loop through all the current news items so you can edit/remove them.
-	foreach ($context['admin_current_news'] as $admin_news)
-		echo '
+    // Loop through all the current news items so you can edit/remove them.
+    foreach ($context['admin_current_news'] as $admin_news)
+        echo '
 					<tr class="windowbg2">
 						<td align="center">
 
@@ -42,8 +42,8 @@ function template_edit_news()
 						</td>
 					</tr>';
 
-	// This provides an empty text box to add a news item to the site.
-	echo '
+    // This provides an empty text box to add a news item to the site.
+    echo '
 					<tr id="moreNews" class="windowbg2" style="display: none;">
 						<td align="center">
 							<div id="moreNewsItems"></div>
@@ -80,10 +80,10 @@ function template_edit_news()
 
 function template_email_members()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	// This is some javascript for the simple/advanced toggling stuff.
-	echo '
+    // This is some javascript for the simple/advanced toggling stuff.
+    echo '
 	<script type="text/javascript"><!-- // --><![CDATA[
 		function toggleAdvanced(mode)
 		{
@@ -96,7 +96,7 @@ function template_email_members()
 		}
 	// ]]></script>';
 
-	echo '
+    echo '
 	<div id="admincenter">
 		<form action="', $scripturl, '?action=admin;area=news;sa=mailingcompose" method="post" class="flow_hidden" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -115,15 +115,15 @@ function template_email_members()
 						</dt>
 						<dd>';
 
-	foreach ($context['groups'] as $group)
-				echo '
+    foreach ($context['groups'] as $group)
+        echo '
 							<label for="groups_', $group['id'], '"><input type="checkbox" name="groups[', $group['id'], ']" id="groups_', $group['id'], '" value="', $group['id'], '" checked="checked" class="input_check" /> ', $group['name'], '</label> <em>(', $group['member_count'], ')</em><br />';
 
-	echo '
+    echo '
 							<br />
 							<label for="checkAllGroups"><input type="checkbox" id="checkAllGroups" checked="checked" onclick="invertAll(this, this.form, \'groups\');" class="input_check" /> <em>', $txt['check_all'], '</em></label>';
 
-	echo '
+    echo '
 						</dd>
 					</dl><br class="clear" />
 				</div>
@@ -168,11 +168,11 @@ function template_email_members()
 						</dt>
 						<dd>';
 
-	foreach ($context['groups'] as $group)
-				echo '
+    foreach ($context['groups'] as $group)
+        echo '
 							<label for="exclude_groups_', $group['id'], '"><input type="checkbox" name="exclude_groups[', $group['id'], ']" id="exclude_groups_', $group['id'], '" value="', $group['id'], '" class="input_check" /> ', $group['name'], '</label> <em>(', $group['member_count'], ')</em><br />';
 
-	echo '
+    echo '
 							<br />
 							<label for="checkAllGroupsExclude"><input type="checkbox" id="checkAllGroupsExclude" onclick="invertAll(this, this.form, \'exclude_groups\');" class="input_check" /> <em>', $txt['check_all'], '</em></label><br />
 						</dd>
@@ -206,8 +206,8 @@ function template_email_members()
 	</div>
 	<br class="clear" />';
 
-	// Make the javascript stuff visible.
-	echo '
+    // Make the javascript stuff visible.
+    echo '
 	<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/suggest.js?fin20"></script>
 	<script type="text/javascript"><!-- // --><![CDATA[
 		document.getElementById("advanced_select_div").style.display = "";
@@ -244,9 +244,9 @@ function template_email_members()
 
 function template_email_members_compose()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 	<div id="admincenter">
 		<form action="', $scripturl, '?action=admin;area=news;sa=mailingsend" method="post" accept-charset="', $context['character_set'], '">
 			<div class="cat_bar">
@@ -282,11 +282,11 @@ function template_email_members_compose()
 			<input type="hidden" name="total_emails" value="', $context['total_emails'], '" />
 			<input type="hidden" name="max_id_member" value="', $context['max_id_member'], '" />';
 
-	foreach ($context['recipients'] as $key => $values)
-		echo '
+    foreach ($context['recipients'] as $key => $values)
+        echo '
 			<input type="hidden" name="', $key, '" value="', implode(($key == 'emails' ? ';' : ','), $values), '" />';
 
-	echo '
+    echo '
 		</form>
 	</div>
 	<br class="clear" />';
@@ -294,9 +294,9 @@ function template_email_members_compose()
 
 function template_email_members_send()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+    global $context, $settings, $options, $txt, $scripturl;
 
-	echo '
+    echo '
 	<div id="admincenter">
 		<form action="', $scripturl, '?action=admin;area=news;sa=mailingsend" method="post" accept-charset="', $context['character_set'], '" name="autoSubmit" id="autoSubmit">
 			<div class="cat_bar">
@@ -321,12 +321,12 @@ function template_email_members_send()
 					<input type="hidden" name="send_html" value="', $context['send_html'], '" />
 					<input type="hidden" name="parse_html" value="', $context['parse_html'], '" />';
 
-	// All the things we must remember!
-	foreach ($context['recipients'] as $key => $values)
-		echo '
+    // All the things we must remember!
+    foreach ($context['recipients'] as $key => $values)
+        echo '
 					<input type="hidden" name="', $key, '" value="', implode(($key == 'emails' ? ';' : ','), $values), '" />';
 
-	echo '
+    echo '
 				</div>
 				<span class="botslice"><span></span></span>
 			</div>

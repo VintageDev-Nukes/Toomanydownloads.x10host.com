@@ -1,14 +1,13 @@
 <?
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/jdownloader.php');
-include ('motor.php');
+include('motor.php');
 timequery();
 connect();
 addinfo();
 
-if(empty($_COOKIE["TMDCookie"])) 
-{
-  setcookie("TMDCookie", '', time()+365*86400);
+if (empty($_COOKIE["TMDCookie"])) {
+    setcookie("TMDCookie", '', time() + 365 * 86400);
 }
 
 $TMDCookie = unserialize(perdec($_COOKIE['TMDCookie']));
@@ -26,7 +25,7 @@ $web_creation = 1392734684;
 
 $row = mysqli_fetch_assoc(mysqli_query("SELECT * FROM users WHERE id='$id'"));
 
-$refernum =  mysqli_num_rows(mysqli_query("SELECT * FROM users WHERE refer_id='$id'"));
+$refernum = mysqli_num_rows(mysqli_query("SELECT * FROM users WHERE refer_id='$id'"));
 $nickname = $row['nickname'];
 $ip = $row['ip_address'];
 $code = $row['password'];
@@ -43,25 +42,23 @@ $acc_type = $row['acc_type'];
 (int)$lastclaim = $row['lastclaim'];
 (int)$reg_days = round((time() - $row['datetime']) / 86400);
 
-$visitstodo = ceil(pow(3*$mult, 1/1.1))-2; 
-$minvisits = ceil(pow($remainingvisits, 1/1.1))-2;
-$dailybonus = 120*$mult;
+$visitstodo = ceil(pow(3 * $mult, 1 / 1.1)) - 2;
+$minvisits = ceil(pow($remainingvisits, 1 / 1.1)) - 2;
+$dailybonus = 120 * $mult;
 
-if($acc_type == null) {
-  $acc_type = "free";
+if ($acc_type == null) {
+    $acc_type = "free";
 }
 
 $nick = '';
 
-if($nickname != null) 
-{
-  $nick = $nickname;
-} else 
-{
-  $nick = '#user'.$id;
+if ($nickname != null) {
+    $nick = $nickname;
+} else {
+    $nick = '#user' . $id;
 }
 
-setcookie("jdownloader", "", time()-3600);
+setcookie("jdownloader", "", time() - 3600);
 
 //$row = mysqli_fetch_assoc(mysqli_query("SELECT visitarray FROM users WHERE id='1'"));
 
@@ -141,33 +138,31 @@ $weirdway = 'style="margin-top:30px;"';
 //Avisos
 
 //Claim daily points bonus
-if(!stilltoday($lastclaim) && $minvisits == 0) 
-{
-  echo '<div class="success" style="margin-top:10px;"><a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=dbonus"><u>Ya puedes reclamar tus puntos diarios.</u></a></div>';
-  $weirdway = '';
+if (!stilltoday($lastclaim) && $minvisits == 0) {
+    echo '<div class="success" style="margin-top:10px;"><a href="http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=dbonus"><u>Ya puedes reclamar tus puntos diarios.</u></a></div>';
+    $weirdway = '';
 }
 
-if((empty($email) || empty($code)) && $points > 10) 
-{
-  echo '<div class="error" style="margin-top:10px;">Te recomendamos vigorosamente que <a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=account" title="Se requiere que pongas un email y una contraseña."><u>protejas tu cuenta</u></a>, por que en caso de que tu IP se reseteé perderas tus <b title="'.getmypoints().'">'.getmypoints(true).'</b>.</div>';
-  $weirdway = '';
+if ((empty($email) || empty($code)) && $points > 10) {
+    echo '<div class="error" style="margin-top:10px;">Te recomendamos vigorosamente que <a href="http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=account" title="Se requiere que pongas un email y una contraseña."><u>protejas tu cuenta</u></a>, por que en caso de que tu IP se reseteé perderas tus <b title="' . getmypoints() . '">' . getmypoints(true) . '</b>.</div>';
+    $weirdway = '';
 }
 
-$percentage = (calculateexpfromlvl($mylvl) - (calculateexpfromlvl($mylvl, true) - $myexp))/calculateexpfromlvl($mylvl)*100;
+$percentage = (calculateexpfromlvl($mylvl) - (calculateexpfromlvl($mylvl, true) - $myexp)) / calculateexpfromlvl($mylvl) * 100;
 
-echo '<div class="contenido" '.$weirdway.'>
+echo '<div class="contenido" ' . $weirdway . '>
   <div class="inside">
 		<div class="boxinside">
 			<div style="width:50%;margin:auto;padding-bottom: 5px;" onmouseover="show(\'lvl\')" onmouseout="hide(\'lvl\')">
 				<!--- <div class="circle" style="position: relative;top: 38px;left: -35px;"></div> -->
 				<div id="progressbar" style="height: 20px;">
-					<div style="width:'.$percentage.'%;height:20px;">
+					<div style="width:' . $percentage . '%;height:20px;">
       					<div></div>
       					<div style="background-image:url(imgs/stripe_background.png)!important;margin-top: -20px;opacity: 0.5;"></div>
       				</div>
-      				<div style="position: relative; top: -22px;left: -35px;" class="levels">'.specialnumformat($mylvl).'</div>
-      				<span style="position: relative; top: -44px;display: block;width: 40px;left: 50%;margin-left: -20px;">'.round($percentage, 1).'%</span>
-      				<div style="position: relative; top: -63px;left: 100%;margin-left: 10px;" class="levels">'.specialnumformat($mylvl+1).'</div>
+      				<div style="position: relative; top: -22px;left: -35px;" class="levels">' . specialnumformat($mylvl) . '</div>
+      				<span style="position: relative; top: -44px;display: block;width: 40px;left: 50%;margin-left: -20px;">' . round($percentage, 1) . '%</span>
+      				<div style="position: relative; top: -63px;left: 100%;margin-left: 10px;" class="levels">' . specialnumformat($mylvl + 1) . '</div>
     			</div>
     		<div class="bubble" id="lvl" style="position:absolute;width:50%!important;margin-top:15px;z-index:1;display:none;padding:5px;">
 				<div class="pointer"></div>
@@ -175,15 +170,15 @@ echo '<div class="contenido" '.$weirdway.'>
 				<table>
 				<tr style="color:#BA9700;">
 					<td style="width:100%;"><b>Experiencia:</b></td>
-					<td>'.(calculateexpfromlvl($mylvl) - (calculateexpfromlvl($mylvl, true) - $myexp)).'/'.calculateexpfromlvl($mylvl).'</td>
+					<td>' . (calculateexpfromlvl($mylvl) - (calculateexpfromlvl($mylvl, true) - $myexp)) . '/' . calculateexpfromlvl($mylvl) . '</td>
 				</tr>
 				<tr>
-					<td style="width:100%;"><b>Requerido hasta el nivel '.($mylvl+1).':</b></td>
-					<td>'.(calculateexpfromlvl($mylvl, true) - $myexp).'</td>
+					<td style="width:100%;"><b>Requerido hasta el nivel ' . ($mylvl + 1) . ':</b></td>
+					<td>' . (calculateexpfromlvl($mylvl, true) - $myexp) . '</td>
 				</tr>
 				<tr>
 					<td style="width:100%;"><b>Experiencia acumulada:</b></td>
-					<td>'.$myexp.'</td>
+					<td>' . $myexp . '</td>
 				</tr>
 			</table>
 			</div>
@@ -191,21 +186,21 @@ echo '<div class="contenido" '.$weirdway.'>
 			<div class="groupbutton" style="height:40px;float:left;">
 				<div class="iconbutton">';
 
-				if(getmypoints(false, false) >= 10000000) {
-					echo '<img title="Platino" src="imgs/point-platinum.png" style="margin-top:12px;" />';
-				} else if(getmypoints(false, false) >= 100000) {
-					echo '<img title="Oro" src="imgs/point-gold.png" style="margin-top:12px;" />';
-				} else if(getmypoints(false, false) >= 1000) {
-					echo '<img title="Plata" src="imgs/point-silver.png" style="margin-top:12px;" />';
-				} else {
-					echo '<img title="Cobre" src="imgs/point-bronze.png" style="margin-top:12px;" />';
-				} 
+if (getmypoints(false, false) >= 10000000) {
+    echo '<img title="Platino" src="imgs/point-platinum.png" style="margin-top:12px;" />';
+} else if (getmypoints(false, false) >= 100000) {
+    echo '<img title="Oro" src="imgs/point-gold.png" style="margin-top:12px;" />';
+} else if (getmypoints(false, false) >= 1000) {
+    echo '<img title="Plata" src="imgs/point-silver.png" style="margin-top:12px;" />';
+} else {
+    echo '<img title="Cobre" src="imgs/point-bronze.png" style="margin-top:12px;" />';
+}
 
-				echo '</div>
-				<div class="button"><a href="#" style="line-height:40px;text-decoration:none;font-size:23px;color:yellowgreen;" title="'.getmypoints().'">'.getmypoints(true).'</a></div>
+echo '</div>
+				<div class="button"><a href="#" style="line-height:40px;text-decoration:none;font-size:23px;color:yellowgreen;" title="' . getmypoints() . '">' . getmypoints(true) . '</a></div>
 			</div>
 			<div style="float:right;height:40px;">
-				<input class="referlink" type="text" style="width:50%;height:40px;float:right;min-width:282px;" readonly="readonly" value="http://'.$_SERVER['SERVER_NAME'].'/?ref='.$id.'" />
+				<input class="referlink" type="text" style="width:50%;height:40px;float:right;min-width:282px;" readonly="readonly" value="http://' . $_SERVER['SERVER_NAME'] . '/?ref=' . $id . '" />
 				<span style="color:#999;font-size:23px;position: relative;left: -5px;top:6.5px;float:right;">Link de referido =></span>
 				<br class="clear">
 			</div>
@@ -220,10 +215,10 @@ echo '<div class="contenido" '.$weirdway.'>
 			</div>
 
       <div style="position: relative;float: right;left: -3px;margin-top: -20px;margin-bottom: -10px;">';
-        
-      include('langs.php');
 
-      echo '</div>
+include('langs.php');
+
+echo '</div>
 
       <br class="clear">
 
@@ -242,7 +237,7 @@ echo "<div id='cssmenu'>
 <ul>
    <li><a href='index.php'><span>Inicio</span></a></li>
    <li><a href='index.php?action=account'><span>Mi cuenta</span></a></li>
-   <li><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=feedback'><span>Tablón</span></a></li>
+   <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=feedback'><span>Tablón</span></a></li>
    <li class='has-sub'><a href='#'><span>Tienda</span></a>
       <ul>
          <li><a href='#'><span>Donaciones</span></a></li>
@@ -257,26 +252,26 @@ echo "<div id='cssmenu'>
    <li><a href='index.php?action=faq'><span>FAQ</span></a></li>
    <li class='has-sub last'><a href='#'><span>Soporte</span></a>
       <ul>
-         <li><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=ticket&go=create'><span>Crear ticket</span></a></li>
-         <li><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=ticket'><span>Ver mis tickets</span></a></li>
-         <li><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=report'><span>Reportar usuario</span></a></li>
-         <li><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=share'><span>Compartir contenido</span></a></li>
-         <li class='last'><a href='http://".$_SERVER['SERVER_NAME']."/forum/'><span>Ir al foro</span></a></li>
+         <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=ticket&go=create'><span>Crear ticket</span></a></li>
+         <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=ticket'><span>Ver mis tickets</span></a></li>
+         <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=report'><span>Reportar usuario</span></a></li>
+         <li><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=share'><span>Compartir contenido</span></a></li>
+         <li class='last'><a href='http://" . $_SERVER['SERVER_NAME'] . "/forum/'><span>Ir al foro</span></a></li>
       </ul>
    </li>";
 
-   if($acc_prior >= getprior("admin")) {
-      echo "<li class='adminlist'><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=admin-login'><span>Admin</span></a></li>";
-   }
+if ($acc_prior >= getprior("admin")) {
+    echo "<li class='adminlist'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin-login'><span>Admin</span></a></li>";
+}
 
-   if($acc_prior >= getprior("moderator")) {
-      echo "<li class='modlist'><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=admin-login&go=mod'><span>Moderación</span></a></li>";
-   }
+if ($acc_prior >= getprior("moderator")) {
+    echo "<li class='modlist'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin-login&go=mod'><span>Moderación</span></a></li>";
+}
 
-   if($acc_prior <= getprior('free')) {
-      echo "<li class='loginlist'><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=login'><span>Login</span></a></li>
-            <li class='activatelist'><a href='http://".$_SERVER['SERVER_NAME']."/index.php?action=activate'><span>Activar</span></a></li>";
-   }
+if ($acc_prior <= getprior('free')) {
+    echo "<li class='loginlist'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=login'><span>Login</span></a></li>
+            <li class='activatelist'><a href='http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=activate'><span>Activar</span></a></li>";
+}
 
 echo "</ul>
 </div>";
@@ -284,135 +279,137 @@ echo "</ul>
 //Charge main body
 
 $action = @$_GET['action'];
-if(empty($action)){$action='index';}
- 
-switch($action){
+if (empty($action)) {
+    $action = 'index';
+}
 
-  //Index (hecho)
-  case 'index':
-    include_once('inicio.php');
-    break;
- 
-  //See my account and edit it (hecho)
-  case 'account':
-    include_once('profile.php');
-    break;
+switch ($action) {
 
-  //See my current stats (hecho: 70%) [Faltan links y algunos detalles]
-  case 'stats':
-  	include_once('stats.php');
-  	break;
+    //Index (hecho)
+    case 'index':
+        include_once('inicio.php');
+        break;
 
-  //Search something (hecho: 50%)
-  case 'search':
-  	include_once('search.php');
-  	break;
+    //See my account and edit it (hecho)
+    case 'account':
+        include_once('profile.php');
+        break;
 
-  //Do an advanced search (hecho: 20%)
-  case 'advsearch':
-    include_once('advanced-search-filter.php');
-    break;
+    //See my current stats (hecho: 70%) [Faltan links y algunos detalles]
+    case 'stats':
+        include_once('stats.php');
+        break;
 
-  //Create a ticket or see the current ticket (hecho: 90%) [Falta: Administración]
-  case 'ticket':
-    include_once('ticket.php');
-    break;
+    //Search something (hecho: 50%)
+    case 'search':
+        include_once('search.php');
+        break;
 
-  //[TICKET] To create a new ticket add a new parameter called 'go=create', to see my tickets add 'go=mytickets'
+    //Do an advanced search (hecho: 20%)
+    case 'advsearch':
+        include_once('advanced-search-filter.php');
+        break;
 
-  //See the FAQ (Frequently asked question) (hecho)
-  case 'faq':
-    include_once('faq.php');
-    break;
+    //Create a ticket or see the current ticket (hecho: 90%) [Falta: Administración]
+    case 'ticket':
+        include_once('ticket.php');
+        break;
 
-  //See other profile (hecho: 70%) [Amigos, MPs]
-  case 'profile':
-  	include_once('profile.php');
-  	break;
+    //[TICKET] To create a new ticket add a new parameter called 'go=create', to see my tickets add 'go=mytickets'
 
-  //Admin part (hecho: 15%) [Falta: Editar items, añadir IP baneada]
-  case 'admin':
-  	include_once('admin/index.php');
-  	break;
+    //See the FAQ (Frequently asked question) (hecho)
+    case 'faq':
+        include_once('faq.php');
+        break;
 
-  //Log into admin (hecho)
-  case 'admin-login':
-  	include_once('admin/login.php');
-  	break;
+    //See other profile (hecho: 70%) [Amigos, MPs]
+    case 'profile':
+        include_once('profile.php');
+        break;
 
-  //See the feedback page (hecho)
-  case 'feedback':
-    include_once('feedback.php');
-    break;
+    //Admin part (hecho: 15%) [Falta: Editar items, añadir IP baneada]
+    case 'admin':
+        include_once('admin/index.php');
+        break;
 
-  //Report user (hecho)
-  case 'report':
-    include_once('report.php');
-    break;
+    //Log into admin (hecho)
+    case 'admin-login':
+        include_once('admin/login.php');
+        break;
 
-  //[REPORT] Parametro 'go=user|bug' (no hace bug, porque ya existen tickets)
+    //See the feedback page (hecho)
+    case 'feedback':
+        include_once('feedback.php');
+        break;
 
-  //Share content (sin realizar)
-  case 'share':
-    include_once('share.php');
-    break;
+    //Report user (hecho)
+    case 'report':
+        include_once('report.php');
+        break;
 
-  //Dialy bonus (hecho)
-  case 'dbonus':
-    include_once('dbonus.php');
-    break;
+    //[REPORT] Parametro 'go=user|bug' (no hace bug, porque ya existen tickets)
 
-  //User list (sin realizar)
-  case 'ulist':
-    include_once('ulist.php');
-    break;
+    //Share content (sin realizar)
+    case 'share':
+        include_once('share.php');
+        break;
 
-  //Refer list (sin realizar)
-  case 'rlist':
-    include_once('rlist.php');
-    break;
+    //Dialy bonus (hecho)
+    case 'dbonus':
+        include_once('dbonus.php');
+        break;
 
-  //Friend list (sin realizar)
-  case 'flist':
-    include_once('flist.php');
-    break;
+    //User list (sin realizar)
+    case 'ulist':
+        include_once('ulist.php');
+        break;
 
-  //Sistema de objetivos (sin realizar)
-  case 'quests':
-    include_once('quests.php');
-    break;
+    //Refer list (sin realizar)
+    case 'rlist':
+        include_once('rlist.php');
+        break;
 
-  //Buy or sell anything (sin realizar)
-  case 'shop':
-    include_once('shop.php');
-    break;
+    //Friend list (sin realizar)
+    case 'flist':
+        include_once('flist.php');
+        break;
 
-  //There you can buy anything by using a new parameter called 'buy=points|money|vip|premium|coupon'
+    //Sistema de objetivos (sin realizar)
+    case 'quests':
+        include_once('quests.php');
+        break;
 
-  //Activate your account (sin realizar)
-  case 'activate':
-    include_once('activate.php');
-    break;  
+    //Buy or sell anything (sin realizar)
+    case 'shop':
+        include_once('shop.php');
+        break;
 
-  //Login (algo así como reclamar puntos) (sin realizar)
-  case 'login':
-    include_once('login.php');
-    break;  
+    //There you can buy anything by using a new parameter called 'buy=points|money|vip|premium|coupon'
 
-  //Datasheet
-  case 'itemdata':
-    include_once('itemdata.php');
-    break;  
+    //Activate your account (sin realizar)
+    case 'activate':
+        include_once('activate.php');
+        break;
 
-  //Getting started
-  case 'getstarted':
-    include_once('getstarted.php');
-    break;  
- 
- //Not found (hecho: 10%)
-  default:
-    include_once('404.php');
-    break;
+    //Login (algo así como reclamar puntos) (sin realizar)
+    case 'login':
+        include_once('login.php');
+        break;
+
+    //Datasheet
+    case 'itemdata':
+        include_once('itemdata.php');
+        break;
+
+    //Getting started
+    case 'getstarted':
+        include_once('getstarted.php');
+        break;
+
+    //Not found (hecho: 10%)
+    default:
+        include_once('404.php');
+        break;
 }
 
 //<!--- Bottom/Footer -->

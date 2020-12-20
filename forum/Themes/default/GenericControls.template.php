@@ -13,11 +13,11 @@
 // This function displays all the stuff you get with a richedit box - BBC, smileys etc.
 function template_control_richedit($editor_id, $smileyContainer = null, $bbcContainer = null)
 {
-	global $context, $settings, $options, $txt, $modSettings, $scripturl;
+    global $context, $settings, $options, $txt, $modSettings, $scripturl;
 
-	$editor_context = &$context['controls']['richedit'][$editor_id];
+    $editor_context = &$context['controls']['richedit'][$editor_id];
 
-	echo '
+    echo '
 		<div>
 			<div style="width: 98.8%;">
 				<div>
@@ -29,39 +29,36 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 		<input type="hidden" name="', $editor_id, '_mode" id="', $editor_id, '_mode" value="0" />
 		<script type="text/javascript"><!-- // --><![CDATA[';
 
-		// Show the smileys.
-		if ((!empty($context['smileys']['postform']) || !empty($context['smileys']['popup'])) && !$editor_context['disable_smiley_box'] && $smileyContainer !== null)
-		{
-			echo '
+    // Show the smileys.
+    if ((!empty($context['smileys']['postform']) || !empty($context['smileys']['popup'])) && !$editor_context['disable_smiley_box'] && $smileyContainer !== null) {
+        echo '
 				var oSmileyBox_', $editor_id, ' = new smc_SmileyBox({
 					sUniqueId: ', JavaScriptEscape('smileyBox_' . $editor_id), ',
 					sContainerDiv: ', JavaScriptEscape($smileyContainer), ',
 					sClickHandler: ', JavaScriptEscape('oEditorHandle_' . $editor_id . '.insertSmiley'), ',
 					oSmileyLocations: {';
 
-			foreach ($context['smileys'] as $location => $smileyRows)
-			{
-				echo '
+        foreach ($context['smileys'] as $location => $smileyRows) {
+            echo '
 						', $location, ': [';
-				foreach ($smileyRows as $smileyRow)
-				{
-					echo '
+            foreach ($smileyRows as $smileyRow) {
+                echo '
 							[';
-					foreach ($smileyRow['smileys'] as $smiley)
-						echo '
+                foreach ($smileyRow['smileys'] as $smiley)
+                    echo '
 								{
 									sCode: ', JavaScriptEscape($smiley['code']), ',
 									sSrc: ', JavaScriptEscape($settings['smileys_url'] . '/' . $smiley['filename']), ',
 									sDescription: ', JavaScriptEscape($smiley['description']), '
 								}', empty($smiley['isLast']) ? ',' : '';
 
-				echo '
+                echo '
 							]', empty($smileyRow['isLast']) ? ',' : '';
-				}
-				echo '
+            }
+            echo '
 						]', $location === 'postform' ? ',' : '';
-			}
-			echo '
+        }
+        echo '
 					},
 					sSmileyBoxTemplate: ', JavaScriptEscape('
 						%smileyRows% %moreSmileys%
@@ -99,11 +96,10 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 							</body>
 						</html>'), '
 				});';
-		}
+    }
 
-		if ($context['show_bbc'] && $bbcContainer !== null)
-		{
-			echo '
+    if ($context['show_bbc'] && $bbcContainer !== null) {
+        echo '
 				var oBBCBox_', $editor_id, ' = new smc_BBCButtonBox({
 					sUniqueId: ', JavaScriptEscape('BBCBox_' . $editor_id), ',
 					sContainerDiv: ', JavaScriptEscape($bbcContainer), ',
@@ -111,16 +107,14 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 					sSelectChangeHandler: ', JavaScriptEscape('oEditorHandle_' . $editor_id . '.handleSelectChange'), ',
 					aButtonRows: [';
 
-			// Here loop through the array, printing the images/rows/separators!
-			foreach ($context['bbc_tags'] as $i => $buttonRow)
-			{
-				echo '
+        // Here loop through the array, printing the images/rows/separators!
+        foreach ($context['bbc_tags'] as $i => $buttonRow) {
+            echo '
 						[';
-				foreach ($buttonRow as $tag)
-				{
-					// Is there a "before" part for this bbc button? If not, it can't be a button!!
-					if (isset($tag['before']))
-						echo '
+            foreach ($buttonRow as $tag) {
+                // Is there a "before" part for this bbc button? If not, it can't be a button!!
+                if (isset($tag['before']))
+                    echo '
 							{
 								sType: \'button\',
 								bEnabled: ', empty($context['disabled_tags'][$tag['code']]) ? 'true' : 'false', ',
@@ -131,20 +125,19 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 								sDescription: ', JavaScriptEscape($tag['description']), '
 							}', empty($tag['isLast']) ? ',' : '';
 
-					// Must be a divider then.
-					else
-						echo '
+                // Must be a divider then.
+                else
+                    echo '
 							{
 								sType: \'divider\'
 							}', empty($tag['isLast']) ? ',' : '';
-				}
+            }
 
-				// Add the select boxes to the first row.
-				if ($i == 0)
-				{
-					// Show the font drop down...
-					if (!isset($context['disabled_tags']['font']))
-						echo ',
+            // Add the select boxes to the first row.
+            if ($i == 0) {
+                // Show the font drop down...
+                if (!isset($context['disabled_tags']['font']))
+                    echo ',
 							{
 								sType: \'select\',
 								sName: \'sel_face\',
@@ -163,9 +156,9 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 								}
 							}';
 
-					// Font sizes anyone?
-					if (!isset($context['disabled_tags']['size']))
-						echo ',
+                // Font sizes anyone?
+                if (!isset($context['disabled_tags']['size']))
+                    echo ',
 							{
 								sType: \'select\',
 								sName: \'sel_size\',
@@ -181,9 +174,9 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 								}
 							}';
 
-					// Print a drop down list for all the colors we allow!
-					if (!isset($context['disabled_tags']['color']))
-						echo ',
+                // Print a drop down list for all the colors we allow!
+                if (!isset($context['disabled_tags']['color']))
+                    echo ',
 							{
 								sType: \'select\',
 								sName: \'sel_color\',
@@ -206,11 +199,11 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 									\'white\': ', JavaScriptEscape($txt['white']), '
 								}
 							}';
-				}
-				echo '
+            }
+            echo '
 						]', $i == count($context['bbc_tags']) - 1 ? '' : ',';
-			}
-			echo '
+        }
+        echo '
 					],
 					sButtonTemplate: ', JavaScriptEscape('
 						<img id="%buttonId%" src="%buttonSrc%" align="bottom" width="23" height="22" alt="%buttonDescription%" title="%buttonDescription%" />
@@ -230,10 +223,10 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 						<div>%buttonRow%</div>
 					'), '
 				});';
-		}
+    }
 
-		// Now it's all drawn out we'll actually setup the box.
-		echo '
+    // Now it's all drawn out we'll actually setup the box.
+    echo '
 				var oEditorHandle_', $editor_id, ' = new smc_Editor({
 					sSessionId: ', JavaScriptEscape($context['session_id']), ',
 					sSessionVar: ', JavaScriptEscape($context['session_var']), ',
@@ -250,65 +243,63 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 				});
 				smf_editorArray[smf_editorArray.length] = oEditorHandle_', $editor_id, ';';
 
-		echo '
+    echo '
 			// ]]></script>';
 }
 
 function template_control_richedit_buttons($editor_id)
 {
-	global $context, $settings, $options, $txt, $modSettings, $scripturl;
+    global $context, $settings, $options, $txt, $modSettings, $scripturl;
 
-	$editor_context = &$context['controls']['richedit'][$editor_id];
+    $editor_context = &$context['controls']['richedit'][$editor_id];
 
-	echo '
+    echo '
 		<input type="submit" value="', isset($editor_context['labels']['post_button']) ? $editor_context['labels']['post_button'] : $txt['post'], '" tabindex="', $context['tabindex']++, '" onclick="return submitThisOnce(this);" accesskey="s" class="button_submit" />';
 
-	if ($editor_context['preview_type'])
-		echo '
+    if ($editor_context['preview_type'])
+        echo '
 		<input type="submit" name="preview" value="', isset($editor_context['labels']['preview_button']) ? $editor_context['labels']['preview_button'] : $txt['preview'], '" tabindex="', $context['tabindex']++, '" onclick="', $editor_context['preview_type'] == 2 ? 'return event.ctrlKey || previewPost();' : 'return submitThisOnce(this);', '" accesskey="p" class="button_submit" />';
 
-	if ($context['show_spellchecking'])
-		echo '
+    if ($context['show_spellchecking'])
+        echo '
 		<input type="button" value="', $txt['spell_check'], '" tabindex="', $context['tabindex']++, '" onclick="oEditorHandle_', $editor_id, '.spellCheckStart();" class="button_submit" />';
 }
 
 // What's this, verification?!
 function template_control_verification($verify_id, $display_type = 'all', $reset = false)
 {
-	global $context, $settings, $options, $txt, $modSettings;
+    global $context, $settings, $options, $txt, $modSettings;
 
-	$verify_context = &$context['controls']['verification'][$verify_id];
+    $verify_context = &$context['controls']['verification'][$verify_id];
 
-	// Keep track of where we are.
-	if (empty($verify_context['tracking']) || $reset)
-		$verify_context['tracking'] = 0;
+    // Keep track of where we are.
+    if (empty($verify_context['tracking']) || $reset)
+        $verify_context['tracking'] = 0;
 
-	// How many items are there to display in total.
-	$total_items = count($verify_context['questions']) + ($verify_context['show_visual'] ? 1 : 0);
+    // How many items are there to display in total.
+    $total_items = count($verify_context['questions']) + ($verify_context['show_visual'] ? 1 : 0);
 
-	// If we've gone too far, stop.
-	if ($verify_context['tracking'] > $total_items)
-		return false;
+    // If we've gone too far, stop.
+    if ($verify_context['tracking'] > $total_items)
+        return false;
 
-	// Loop through each item to show them.
-	for ($i = 0; $i < $total_items; $i++)
-	{
-		// If we're after a single item only show it if we're in the right place.
-		if ($display_type == 'single' && $verify_context['tracking'] != $i)
-			continue;
+    // Loop through each item to show them.
+    for ($i = 0; $i < $total_items; $i++) {
+        // If we're after a single item only show it if we're in the right place.
+        if ($display_type == 'single' && $verify_context['tracking'] != $i)
+            continue;
 
-		if ($display_type != 'single')
-			echo '
+        if ($display_type != 'single')
+            echo '
 			<div id="verification_control_', $i, '" class="verification_control">';
 
-		// Do the actual stuff - image first?
-		if ($i == 0 && $verify_context['show_visual'])
-		{
-			if ($context['use_graphic_library'])
-				echo '
+        // Do the actual stuff - image first?
+        if ($i == 0 && $verify_context['show_visual']) {
+            if ($context['use_graphic_library'])
+                echo '
 				<img src="', $verify_context['image_href'], '" alt="', $txt['visual_verification_description'], '" id="verification_image_', $verify_id, '" />';
-			else
-				echo '
+            else
+                echo '
 				<img src="', $verify_context['image_href'], ';letter=1" alt="', $txt['visual_verification_description'], '" id="verification_image_', $verify_id, '_1" />
 				<img src="', $verify_context['image_href'], ';letter=2" alt="', $txt['visual_verification_description'], '" id="verification_image_', $verify_id, '_2" />
 				<img src="', $verify_context['image_href'], ';letter=3" alt="', $txt['visual_verification_description'], '" id="verification_image_', $verify_id, '_3" />
@@ -316,44 +307,42 @@ function template_control_verification($verify_id, $display_type = 'all', $reset
 				<img src="', $verify_context['image_href'], ';letter=5" alt="', $txt['visual_verification_description'], '" id="verification_image_', $verify_id, '_5" />
 				<img src="', $verify_context['image_href'], ';letter=6" alt="', $txt['visual_verification_description'], '" id="verification_image_', $verify_id, '_6" />';
 
-			if (WIRELESS)
-				echo '<br />
+            if (WIRELESS)
+                echo '<br />
 				<input type="text" name="', $verify_id, '_vv[code]" value="', !empty($verify_context['text_value']) ? $verify_context['text_value'] : '', '" size="30" tabindex="', $context['tabindex']++, '" class="input_text" />';
-			else
-				echo '
+            else
+                echo '
 				<div class="smalltext" style="margin: 4px 0 8px 0;">
 					<a href="', $verify_context['image_href'], ';sound" id="visual_verification_', $verify_id, '_sound" rel="nofollow">', $txt['visual_verification_sound'], '</a> / <a href="#" id="visual_verification_', $verify_id, '_refresh">', $txt['visual_verification_request_new'], '</a>', $display_type != 'quick_reply' ? '<br />' : '', '<br />
 					', $txt['visual_verification_description'], ':', $display_type != 'quick_reply' ? '<br />' : '', '
 					<input type="text" name="', $verify_id, '_vv[code]" value="', !empty($verify_context['text_value']) ? $verify_context['text_value'] : '', '" size="30" tabindex="', $context['tabindex']++, '" class="input_text" />
 				</div>';
-		}
-		else
-		{
-			// Where in the question array is this question?
-			$qIndex = $verify_context['show_visual'] ? $i - 1 : $i;
+        } else {
+            // Where in the question array is this question?
+            $qIndex = $verify_context['show_visual'] ? $i - 1 : $i;
 
-			echo '
+            echo '
 				<div class="smalltext">
 					', $verify_context['questions'][$qIndex]['q'], ':<br />
 					<input type="text" name="', $verify_id, '_vv[q][', $verify_context['questions'][$qIndex]['id'], ']" size="30" value="', $verify_context['questions'][$qIndex]['a'], '" ', $verify_context['questions'][$qIndex]['is_error'] ? 'style="border: 1px red solid;"' : '', ' tabindex="', $context['tabindex']++, '" class="input_text" />
 				</div>';
-		}
+        }
 
-		if ($display_type != 'single')
-			echo '
+        if ($display_type != 'single')
+            echo '
 			</div>';
 
-		// If we were displaying just one and we did it, break.
-		if ($display_type == 'single' && $verify_context['tracking'] == $i)
-			break;
-	}
+        // If we were displaying just one and we did it, break.
+        if ($display_type == 'single' && $verify_context['tracking'] == $i)
+            break;
+    }
 
-	// Assume we found something, always,
-	$verify_context['tracking']++;
+    // Assume we found something, always,
+    $verify_context['tracking']++;
 
-	// Tell something displaying piecemeal to keep going.
-	if ($display_type == 'single')
-		return true;
+    // Tell something displaying piecemeal to keep going.
+    if ($display_type == 'single')
+        return true;
 }
 
 ?>
