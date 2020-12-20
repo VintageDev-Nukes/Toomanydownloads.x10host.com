@@ -320,7 +320,7 @@ $txt['profile_error_password_chars'] = 'Your password must contain a mix of uppe
 $txt['profile_error_already_requested_group'] = 'You already have an outstanding request for this group!';
 $txt['profile_error_openid_in_use'] = 'Another user is already using that OpenID authentication URL';
 
-$txt['mysql_error_space'] = ' - check database storage space or contact the server administrator.';
+$txt['mysqli_error_space'] = ' - check database storage space or contact the server administrator.';
 
 $txt['icon_not_found'] = 'The icon image could not be found in the default theme - please ensure the image has been uploaded and try again.';
 $txt['icon_after_itself'] = 'The icon cannot be positioned after itself!';

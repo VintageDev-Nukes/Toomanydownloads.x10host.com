@@ -29,17 +29,17 @@ if(empty($editid) && empty($editdata) && empty($newadd))
 	        </tr>
 	        <tr><td>ID</td><td>Mensaje</td><td>Acciones</td></tr>';
 
-	          $pages->items_total = mysql_num_rows(mysql_query("SELECT * FROM items"));
+	          $pages->items_total = mysqli_num_rows(mysqli_query("SELECT * FROM items"));
 	          $pages->mid_range = 7;
 	          $pages->paginate();
 
 			  $query = "SELECT * FROM items ORDER BY id DESC $pages->limit"; //aquí se lee * (todo) de demo
-			  $result = mysql_query($query) or die(mysql_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
+			  $result = mysqli_query($query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
 
 			  $times = 0;
 
-			  if(mysql_num_rows($result)) {
-			    while($rs=mysql_fetch_array($result))  {
+			  if(mysqli_num_rows($result)) {
+			    while($rs=mysqli_fetch_array($result))  {
 			      	echo '<tr><td>'.$rs['id'].'</td><td>'.$rs['name'].'</td><td>[<a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=admin&go=items&edit='.$rs['id'].'">Editar</a>] [<a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=admin&go=items&editdata='.$rs['id'].'">Añadir / Editar Ficha técnica</a>] [<a href="#" onclick="javascript:submitformbyid(\'approve\');">Aprobar</a>] [<a href="#" onclick="javascript:submitformbyid(\'delete\');">Borrar</a>]</td></tr>';
 			    	echo '<form method="post" id="approve" action="http://'.$_SERVER['SERVER_NAME'].'/forms/ItemManager.php"><input type="hidden" name="approve" value="'.$rs['id'].'"></form>';
     		  		echo '<form method="post" id="delete" action="http://'.$_SERVER['SERVER_NAME'].'/forms/ItemManager.php"><input type="hidden" name="delete" value="'.$rs['id'].'"></form>';
@@ -57,8 +57,8 @@ if(empty($editid) && empty($editdata) && empty($newadd))
 } else if(isset($editid) && empty($editdata) && empty($newadd)) 
 {
 
-		$get_cat = mysql_query("SELECT * FROM items WHERE id='$editid'");
-		$row = mysql_fetch_array($get_cat);
+		$get_cat = mysqli_query("SELECT * FROM items WHERE id='$editid'");
+		$row = mysqli_fetch_array($get_cat);
 
 		$cname = $row['name'];
 		$cdesc = $row['description'];
@@ -123,8 +123,8 @@ if(empty($editid) && empty($editdata) && empty($newadd))
 } else if (empty($editid) && isset($editdata) && empty($newadd)) 
 {
 
-	$get_cat = mysql_query("SELECT cat as cat, name as name FROM items WHERE id='$editdata'");
-	$row = mysql_fetch_array($get_cat);
+	$get_cat = mysqli_query("SELECT cat as cat, name as name FROM items WHERE id='$editdata'");
+	$row = mysqli_fetch_array($get_cat);
 	$cname = $row['name'];
 	$ccat = $row['cat'];
  	

@@ -24,7 +24,7 @@ if(isset($newfb)) {
 
 	if($continue) {
 		$query="INSERT INTO feedback (user_id, mensaje, creation) VALUES ('$user_id', '$mensaje', '$creation')";
-		mysql_query($query) or die ('Error: ' . mysql_error());
+		mysqli_query($query) or die ('Error: ' . mysqli_error());
 		$success = 'Su comentario fue enviado. Su mensaje está pendiente de moderación.';
 		$_SESSION['success'] = $success;
 		header("location:http://".$_SERVER['SERVER_NAME']."/index.php?action=feedback"); //Replace by a <div class="success"></div>
@@ -39,7 +39,7 @@ if(isset($_POST['delete']))
 {
 	$did = $_POST['delete'];
 	$query="UPDATE feedback SET approved='-1' WHERE id='$did'";
-	mysql_query($query) or die ('Error: ' . mysql_error());
+	mysqli_query($query) or die ('Error: ' . mysqli_error());
 	$success = 'El comentario fue borrado.';
 	$_SESSION['success'] = $success;
 	header("location:http://".$_SERVER['SERVER_NAME']."/index.php?action=admin&go=feedback");
@@ -49,7 +49,7 @@ if(isset($_POST['approve']))
 {
 	$aid = $_POST['approve'];
 	$query="UPDATE feedback SET approved='1' WHERE id='$aid'";
-	mysql_query($query) or die ('Error: ' . mysql_error());
+	mysqli_query($query) or die ('Error: ' . mysqli_error());
 	$success = 'El comentario fue aprobado.';
 	$_SESSION['success'] = $success;
 	header("location:http://".$_SERVER['SERVER_NAME']."/index.php?action=admin&go=feedback");

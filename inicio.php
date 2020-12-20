@@ -142,16 +142,16 @@ if($cat == 'All')
 
 echo '<div class="contenido">';
 
-$pages->items_total = mysql_num_rows(mysql_query("SELECT * FROM items WHERE cat='$cat'"));
+$pages->items_total = mysqli_num_rows(mysqli_query("SELECT * FROM items WHERE cat='$cat'"));
 $pages->mid_range = 7;
 $pages->paginate();
 
 $query = "SELECT * FROM items WHERE cat='$cat' ORDER BY points ASC $pages->limit";
-$result = mysql_query($query) or die(mysql_error());
+$result = mysqli_query($query) or die(mysqli_error());
 
-if(mysql_num_rows($result)) {
+if(mysqli_num_rows($result)) {
 	echo '<div class="inside" style="margin:10px auto;">';
-  	while($rs=mysql_fetch_array($result)) {
+  	while($rs=mysqli_fetch_array($result)) {
 		include('itembase.php');
   	}
   	//echo '<br class="clear">
@@ -220,7 +220,7 @@ $orderby = $_GET['orderby'];
 if(empty($orderby)) {$orderby = 'points';}
 
 $query = "SELECT * FROM users ORDER BY $orderby DESC LIMIT 0,3";
-$result = mysql_query($query) or die(mysql_error());
+$result = mysqli_query($query) or die(mysqli_error());
 
 echo '<div class="union">
 <div class="box_title">
@@ -245,9 +245,9 @@ Top usuarios
 		$string = "";
 		$nick = "";
 
-		if(mysql_num_rows($result)) {
+		if(mysqli_num_rows($result)) {
 
-  			while($rs=mysql_fetch_array($result)) 
+  			while($rs=mysqli_fetch_array($result))
   			{
 
   				$cur_id = $rs['id'];
@@ -269,7 +269,7 @@ Top usuarios
   					$string = 'Visitas '.specialnumformat($rs['numvsts']);
   				}
 
-  				$row = mysql_fetch_assoc(mysql_query("SELECT nickname FROM users WHERE id='$cur_id'"));
+  				$row = mysqli_fetch_assoc(mysqli_query("SELECT nickname FROM users WHERE id='$cur_id'"));
 
   				if($row['nickname'] == null) 
   				{

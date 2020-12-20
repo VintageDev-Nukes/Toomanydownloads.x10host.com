@@ -31,11 +31,11 @@ if($go == 'mytickets')
 	<h3 style="margin:0 0 10px 0;">Tus tickets:</h3>';
 
 	$query = "SELECT * FROM ticket WHERE user_id='$id' AND state != 'erased' ORDER BY creation DESC";
-	$result = mysql_query($query) or die(mysql_error());
+	$result = mysqli_query($query) or die(mysqli_error());
 
-	if(mysql_num_rows($result)) {
+	if(mysqli_num_rows($result)) {
 		echo '<table cellspacing="0" class="showtickets"><tr class="showticketheader"><td style="width: 75%;">Ticket</td><td style="width: 100px;text-align: center;">Nº de respuestas</td><td style="width: 120px;text-align: center;">Última respuesta</td></tr>';
-	  	while($rs=mysql_fetch_array($result)) {
+	  	while($rs=mysqli_fetch_array($result)) {
 			echo'<tr class="ticketlist"><td><a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=ticket&go=show&id='.$rs['id'].'">'.$rs['titulo'].'</a></td><td></td><td></td></tr>'; 
 		}
 		echo '</table>';
@@ -97,21 +97,21 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 } else if($go == 'show') 
 {
 
-	(int)$ticket_id = mysql_real_escape_string($_GET['id']);
+	(int)$ticket_id = mysqli_real_escape_string($_GET['id']);
 
 	setreaded("ticket_".$ticket_id);
 
-	$get_creator_query = mysql_query("SELECT user_id as user_id, state as state FROM ticket WHERE id='$ticket_id'");
+	$get_creator_query = mysqli_query("SELECT user_id as user_id, state as state FROM ticket WHERE id='$ticket_id'");
 	
-	if(!mysql_num_rows($get_creator_query)) {
+	if(!mysqli_num_rows($get_creator_query)) {
 		header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=404');
 	}
 
-	$row = mysql_fetch_array($get_creator_query);
+	$row = mysqli_fetch_array($get_creator_query);
 	$creator_id = $row['user_id'];
 	$state = $row['state'];
 
-	$row = mysql_fetch_array(mysql_query("SELECT * FROM users WHERE id='$id'"));
+	$row = mysqli_fetch_array(mysqli_query("SELECT * FROM users WHERE id='$id'"));
 	(int)$creator_points = $row['points'];
 	(int)$creator_money = $row['money'];
 	(int)$creator_exp = $row['exp'];
@@ -140,7 +140,7 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 
 	if(($acc_prior == getprior("admi") || $creator_id == $id) && ($state == 'opened' || $state == 'closed')) {
 
-		$row = mysql_fetch_array(mysql_query("SELECT nickname FROM users WHERE id='$creator_id'"));
+		$row = mysqli_fetch_array(mysqli_query("SELECT nickname FROM users WHERE id='$creator_id'"));
 
 		$nick = "";
 		$user_id = $row['user_id'];
@@ -153,9 +153,9 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 		  	$nick = '<a href="http://'.$_SERVER['SERVER_NAME'].'/?action=profile&id='.$cur_id.'" target="_blank"><u>'.$row['nickname'].'</u></a>';
 		}
 		  		
-		$ticketquery = mysql_query("SELECT * FROM ticket WHERE id='$ticket_id'");
+		$ticketquery = mysqli_query("SELECT * FROM ticket WHERE id='$ticket_id'");
 
-		while($rs = mysql_fetch_array($ticketquery)) {		
+		while($rs = mysqli_fetch_array($ticketquery)) {
 			
 			echo '<script>
 				function setvalues(id, value) {
@@ -261,14 +261,14 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 
 		}
 
-		$commentsquery = mysql_query("SELECT * FROM ticket_comments WHERE ticket_id='$ticket_id'") or die('Error: '.mysql_error());
+		$commentsquery = mysqli_query("SELECT * FROM ticket_comments WHERE ticket_id='$ticket_id'") or die('Error: '.mysqli_error());
 
-		if(mysql_num_rows($commentsquery)) {
+		if(mysqli_num_rows($commentsquery)) {
 			$times = 0;
-			while($rs=mysql_fetch_array($commentsquery)) {
+			while($rs=mysqli_fetch_array($commentsquery)) {
 
 						$commenter_id = $rs['user_id'];
-						$row = mysql_fetch_array(mysql_query("SELECT nickname FROM users WHERE id='$commenter_id'"));
+						$row = mysqli_fetch_array(mysqli_query("SELECT nickname FROM users WHERE id='$commenter_id'"));
 
 						$nickname = "";
 

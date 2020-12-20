@@ -7,14 +7,14 @@ $item_id_str = "";
 if(isset($gdid)) 
 {
 
-	$get_itemdata_query = mysql_query("SELECT * FROM items WHERE id='$gdid'");
+	$get_itemdata_query = mysqli_query("SELECT * FROM items WHERE id='$gdid'");
 
-	if(!mysql_num_rows($get_itemdata_query))
+	if(!mysqli_num_rows($get_itemdata_query))
 	{
 		header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=404');
 	}
 
-	$rs1 = mysql_fetch_array($get_itemdata_query);
+	$rs1 = mysqli_fetch_array($get_itemdata_query);
 
 	$ccat = $rs1['cat'];
 
@@ -22,14 +22,14 @@ if(isset($gdid))
 
 		$item_id_str = $ccat."_".$gdid;
 
-		$get_gamedata_query = mysql_query("SELECT * FROM gamedata WHERE item_id='$item_id_str'");
+		$get_gamedata_query = mysqli_query("SELECT * FROM gamedata WHERE item_id='$item_id_str'");
 
-		if(!mysql_num_rows($get_gamedata_query))
+		if(!mysqli_num_rows($get_gamedata_query))
 		{
 			header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=404');
 		}
 
-		$rs2 = mysql_fetch_array($get_gamedata_query);
+		$rs2 = mysqli_fetch_array($get_gamedata_query);
 
 		$name = $rs1['name'];
 		$thumb = $rs1['thumb'];
@@ -226,7 +226,7 @@ if(isset($gdid))
 							<div class="contenido">
 								<div class="inside" style="text-align:center;">';
 
-		$get_all_items = mysql_num_rows(mysql_query("SELECT * FROM items"));
+		$get_all_items = mysqli_num_rows(mysqli_query("SELECT * FROM items"));
 
 		$rand = array();
 
@@ -238,7 +238,7 @@ if(isset($gdid))
 
 			$gid = $rand[$cid];
 
-			$rs = mysql_fetch_array(mysql_query("SELECT * FROM items WHERE cat='$ccat' AND id='$gid' ORDER BY points ASC"));
+			$rs = mysqli_fetch_array(mysqli_query("SELECT * FROM items WHERE cat='$ccat' AND id='$gid' ORDER BY points ASC"));
 
 			include('itembase.php');
 	

@@ -13,8 +13,8 @@ $newticket = $_POST['newticket'];
 $newcomment = $_POST['newcomment'];
 
 //Variables
-(int)$close_id = mysql_real_escape_string($_POST['close_id']);
-(int)$delete_id = mysql_real_escape_string($_POST['delete_id']);
+(int)$close_id = mysqli_real_escape_string($_POST['close_id']);
+(int)$delete_id = mysqli_real_escape_string($_POST['delete_id']);
 
 
 if(isset($close_id) || isset($delete_id)) {
@@ -34,7 +34,7 @@ if(isset($close_id) || isset($delete_id)) {
 		$str = "cerrado";
 	}
 
-	mysql_query($query) or die ('Error: ' . mysql_error());
+	mysqli_query($query) or die ('Error: ' . mysqli_error());
 	$success = 'El ticket fue '.$str.' correctamente.';
 	$_SESSION['success'] = $success;
 
@@ -46,8 +46,8 @@ if(isset($newticket)) {
 
 	//Variables
 	(int)$user_id = getmyreferid();
-	$title = mysql_real_escape_string($_POST['title']);
-	$content = mysql_real_escape_string($_POST['content']);
+	$title = mysqli_real_escape_string($_POST['title']);
+	$content = mysqli_real_escape_string($_POST['content']);
 	(int)$creation = time();
 
 	session_start(); 
@@ -80,7 +80,7 @@ if(isset($newticket)) {
 	if($continue) {
 		
 		$query="INSERT INTO ticket (user_id, titulo, contenido, creation) VALUES ('$user_id', '$title', '$content', '$creation')";
-		mysql_query($query) or die ('Error: ' . mysql_error());
+		mysqli_query($query) or die ('Error: ' . mysqli_error());
 		$success = 'Su ticket fue creado.';
 		$_SESSION['success'] = $success;
 		header("location:http://".$_SERVER['SERVER_NAME']."/index.php?action=ticket"); //Replace by a <div class="success"></div>
@@ -94,10 +94,10 @@ if(isset($newticket)) {
 if(isset($newcomment)) {
 
 	(int)$id = getmyreferid();
-	(int)$ticket_id = mysql_real_escape_string($_POST['ticket_id']);
+	(int)$ticket_id = mysqli_real_escape_string($_POST['ticket_id']);
 	(int)$creation = time();
 
-	$comment = mysql_real_escape_string($_POST['comment']);
+	$comment = mysqli_real_escape_string($_POST['comment']);
 
 	session_start(); 
 
@@ -111,7 +111,7 @@ if(isset($newcomment)) {
 	if($continue) {
 		
 		$query="INSERT INTO ticket_comments (ticket_id, user_id, contenido, creation) VALUES ('$ticket_id', '$id', '$comment', '$creation')";
-		mysql_query($query) or die ('Error: ' . mysql_error());
+		mysqli_query($query) or die ('Error: ' . mysqli_error());
 		$success = 'El comentario fue añadido satisfactoriamente.';
 		$_SESSION['success'] = $success;
 		header("Location: http://".$_SERVER['SERVER_NAME']."/index.php?action=ticket&go=show&id=".$ticket_id);

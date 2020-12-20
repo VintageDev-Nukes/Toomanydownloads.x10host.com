@@ -24,28 +24,28 @@ if (!defined('SMF'))
 // Initialize the database settings
 function smf_db_initiate($db_server, $db_name, $db_user, $db_passwd, $db_prefix, $db_options = array())
 {
-	global $smcFunc, $mysql_set_mode;
+	global $smcFunc, $mysqli_set_mode;
 
 	// Map some database specific functions, only do this once.
-	if (!isset($smcFunc['db_fetch_assoc']) || $smcFunc['db_fetch_assoc'] != 'mysql_fetch_assoc')
+	if (!isset($smcFunc['db_fetch_assoc']) || $smcFunc['db_fetch_assoc'] != 'mysqli_fetch_assoc')
 		$smcFunc += array(
 			'db_query' => 'smf_db_query',
 			'db_quote' => 'smf_db_quote',
-			'db_fetch_assoc' => 'mysql_fetch_assoc',
-			'db_fetch_row' => 'mysql_fetch_row',
-			'db_free_result' => 'mysql_free_result',
+			'db_fetch_assoc' => 'mysqli_fetch_assoc',
+			'db_fetch_row' => 'mysqli_fetch_row',
+			'db_free_result' => 'mysqli_free_result',
 			'db_insert' => 'smf_db_insert',
 			'db_insert_id' => 'smf_db_insert_id',
-			'db_num_rows' => 'mysql_num_rows',
-			'db_data_seek' => 'mysql_data_seek',
-			'db_num_fields' => 'mysql_num_fields',
+			'db_num_rows' => 'mysqli_num_rows',
+			'db_data_seek' => 'mysqli_data_seek',
+			'db_num_fields' => 'mysqli_num_fields',
 			'db_escape_string' => 'addslashes',
 			'db_unescape_string' => 'stripslashes',
-			'db_server_info' => 'mysql_get_server_info',
+			'db_server_info' => 'mysqli_get_server_info',
 			'db_affected_rows' => 'smf_db_affected_rows',
 			'db_transaction' => 'smf_db_transaction',
-			'db_error' => 'mysql_error',
-			'db_select_db' => 'mysql_select_db',
+			'db_error' => 'mysqli_error',
+			'db_select_db' => 'mysqli_select_db',
 			'db_title' => 'MySQL',
 			'db_sybase' => false,
 			'db_case_sensitive' => false,
@@ -53,9 +53,9 @@ function smf_db_initiate($db_server, $db_name, $db_user, $db_passwd, $db_prefix,
 		);
 
 	if (!empty($db_options['persist']))
-		$connection = @mysql_pconnect($db_server, $db_user, $db_passwd);
+		$connection = @mysqli_pconnect($db_server, $db_user, $db_passwd);
 	else
-		$connection = @mysql_connect($db_server, $db_user, $db_passwd);
+		$connection = @mysqli_connect($db_server, $db_user, $db_passwd);
 
 	// Something's wrong, show an error if its fatal (which we assume it is)
 	if (!$connection)
@@ -67,11 +67,11 @@ function smf_db_initiate($db_server, $db_name, $db_user, $db_passwd, $db_prefix,
 	}
 
 	// Select the database, unless told not to
-	if (empty($db_options['dont_select_db']) && !@mysql_select_db($db_name, $connection) && empty($db_options['non_fatal']))
+	if (empty($db_options['dont_select_db']) && !@mysqli_select_db($db_name, $connection) && empty($db_options['non_fatal']))
 		db_fatal_error();
 
 	// This makes it possible to have SMF automatically change the sql_mode and autocommit if needed.
-	if (isset($mysql_set_mode) && $mysql_set_mode === true)
+	if (isset($mysqli_set_mode) && $mysqli_set_mode === true)
 		$smcFunc['db_query']('', 'SET sql_mode = \'\', AUTOCOMMIT = 1',
 		array(),
 		false
@@ -132,7 +132,7 @@ function smf_db_replacement__callback($matches)
 
 		case 'string':
 		case 'text':
-			return sprintf('\'%1$s\'', mysql_real_escape_string($replacement, $connection));
+			return sprintf('\'%1$s\'', mysqli_real_escape_string($replacement, $connection));
 		break;
 
 		case 'array_int':
@@ -163,7 +163,7 @@ function smf_db_replacement__callback($matches)
 					smf_db_error_backtrace('Database error, given array of string values is empty. (' . $matches[2] . ')', '', E_USER_ERROR, __FILE__, __LINE__);
 
 				foreach ($replacement as $key => $value)
-					$replacement[$key] = sprintf('\'%1$s\'', mysql_real_escape_string($value, $connection));
+					$replacement[$key] = sprintf('\'%1$s\'', mysqli_real_escape_string($value, $connection));
 
 				return implode(', ', $replacement);
 			}
@@ -351,9 +351,9 @@ function smf_db_query($identifier, $db_string, $db_values = array(), $connection
 	}
 
 	if (empty($db_unbuffered))
-		$ret = @mysql_query($db_string, $connection);
+		$ret = @mysqli_query($db_string, $connection);
 	else
-		$ret = @mysql_unbuffered_query($db_string, $connection);
+		$ret = @mysqli_unbuffered_query($db_string, $connection);
 	if ($ret === false && empty($db_values['db_error_skip']))
 		$ret = smf_db_error($db_string, $connection);
 
@@ -368,7 +368,7 @@ function smf_db_affected_rows($connection = null)
 {
 	global $db_connection;
 
-	return mysql_affected_rows($connection == null ? $db_connection : $connection);
+	return mysqli_affected_rows($connection == null ? $db_connection : $connection);
 }
 
 function smf_db_insert_id($table, $field = null, $connection = null)
@@ -378,7 +378,7 @@ function smf_db_insert_id($table, $field = null, $connection = null)
 	$table = str_replace('{db_prefix}', $db_prefix, $table);
 
 	// MySQL doesn't need the table or field information.
-	return mysql_insert_id($connection == null ? $db_connection : $connection);
+	return mysqli_insert_id($connection == null ? $db_connection : $connection);
 }
 
 // Do a transaction.
@@ -390,11 +390,11 @@ function smf_db_transaction($type = 'commit', $connection = null)
 	$connection = $connection == null ? $db_connection : $connection;
 
 	if ($type == 'begin')
-		return @mysql_query('BEGIN', $connection);
+		return @mysqli_query('BEGIN', $connection);
 	elseif ($type == 'rollback')
-		return @mysql_query('ROLLBACK', $connection);
+		return @mysqli_query('ROLLBACK', $connection);
 	elseif ($type == 'commit')
-		return @mysql_query('COMMIT', $connection);
+		return @mysqli_query('COMMIT', $connection);
 
 	return false;
 }
@@ -414,8 +414,8 @@ function smf_db_error($db_string, $connection = null)
 	$connection = $connection == null ? $db_connection : $connection;
 
 	// This is the error message...
-	$query_error = mysql_error($connection);
-	$query_errno = mysql_errno($connection);
+	$query_error = mysqli_error($connection);
+	$query_errno = mysqli_errno($connection);
 
 	// Error numbers:
 	//    1016: Can't open file '....MYI'
@@ -515,20 +515,20 @@ function smf_db_error($db_string, $connection = null)
 				if (SMF == 'SSI' && !empty($ssi_db_user) && !empty($ssi_db_passwd))
 				{
 					if (empty($db_persist))
-						$db_connection = @mysql_connect($db_server, $ssi_db_user, $ssi_db_passwd);
+						$db_connection = @mysqli_connect($db_server, $ssi_db_user, $ssi_db_passwd);
 					else
-						$db_connection = @mysql_pconnect($db_server, $ssi_db_user, $ssi_db_passwd);
+						$db_connection = @mysqli_pconnect($db_server, $ssi_db_user, $ssi_db_passwd);
 				}
 				// Fall back to the regular username and password if need be
 				if (!$db_connection)
 				{
 					if (empty($db_persist))
-						$db_connection = @mysql_connect($db_server, $db_user, $db_passwd);
+						$db_connection = @mysqli_connect($db_server, $db_user, $db_passwd);
 					else
-						$db_connection = @mysql_pconnect($db_server, $db_user, $db_passwd);
+						$db_connection = @mysqli_pconnect($db_server, $db_user, $db_passwd);
 				}
 
-				if (!$db_connection || !@mysql_select_db($db_name, $db_connection))
+				if (!$db_connection || !@mysqli_select_db($db_name, $db_connection))
 					$db_connection = false;
 			}
 
@@ -539,7 +539,7 @@ function smf_db_error($db_string, $connection = null)
 				{
 					$ret = $smcFunc['db_query']('', $db_string, false, false);
 
-					$new_errno = mysql_errno($db_connection);
+					$new_errno = mysqli_errno($db_connection);
 					if ($ret !== false || in_array($new_errno, array(1205, 1213)))
 						break;
 				}
@@ -556,10 +556,10 @@ function smf_db_error($db_string, $connection = null)
 				$query_error .= ' - check database storage space.';
 			else
 			{
-				if (!isset($txt['mysql_error_space']))
+				if (!isset($txt['mysqli_error_space']))
 					loadLanguage('Errors');
 
-				$query_error .= !isset($txt['mysql_error_space']) ? ' - check database storage space.' : $txt['mysql_error_space'];
+				$query_error .= !isset($txt['mysqli_error_space']) ? ' - check database storage space.' : $txt['mysqli_error_space'];
 			}
 		}
 	}

@@ -11,10 +11,10 @@ function connect()
 	// ######### connect + select  database ###########
 	// ################################################
 
-	mysql_connect($localhost, $dbuser, $dbpass) or die('Could not connect: ' . mysql_error());
+	mysqli_connect($localhost, $dbuser, $dbpass) or die('Could not connect: ' . mysqli_error());
 	
-	$conn = mysql_select_db($dbname) or die ("Can't use database $dbname! : " . mysql_error());
-	//mysql_set_charset('utf8',$conn);
+	$conn = mysqli_select_db($dbname) or die ("Can't use database $dbname! : " . mysqli_error());
+	//mysqli_set_charset('utf8',$conn);
 
 	return $conn;
 
@@ -35,20 +35,20 @@ $ip = $_SERVER["REMOTE_ADDR"];
 $id = getmyreferid();
 $agent = $_SERVER["HTTP_USER_AGENT"];
 $datetime = time();
-(int)$refer = mysql_real_escape_string($_GET['ref']);
+(int)$refer = mysqli_real_escape_string($_GET['ref']);
 if(empty($refer)) {$refer=null;}
 
-if(!mysql_num_rows(mysql_query("SELECT ip_address FROM $dbtableinfo WHERE ip_address = '$ip'"))) // check if the IP is in database
+if(!mysqli_num_rows(mysqli_query("SELECT ip_address FROM $dbtableinfo WHERE ip_address = '$ip'"))) // check if the IP is in database
 {
 	//If not , add it.	
 
-	mysql_query("INSERT INTO $dbtableinfo (ip_address, user_agent, datetime, refer_id, lastconn) VALUES('$ip', '$agent', '$datetime', '$refer', '$datetime')") or die('Could not add IP: ' . mysql_error());
+	mysqli_query("INSERT INTO $dbtableinfo (ip_address, user_agent, datetime, refer_id, lastconn) VALUES('$ip', '$agent', '$datetime', '$refer', '$datetime')") or die('Could not add IP: ' . mysqli_error());
 
 } else {
 
 	//Else, update some rows
 
-	$row = mysql_fetch_assoc(mysql_query("SELECT * FROM $dbtableinfo WHERE id='$id'"));
+	$row = mysqli_fetch_assoc(mysqli_query("SELECT * FROM $dbtableinfo WHERE id='$id'"));
 
 	$exp = $row['exp'];
 	$lvl = $row['lvl'];
@@ -61,7 +61,7 @@ if(!mysql_num_rows(mysql_query("SELECT ip_address FROM $dbtableinfo WHERE ip_add
 
 	//if(time() - (int)$lastconn > 600) { //If last connection is greater than ten mintutes update it.
 	
-		mysql_query("UPDATE $dbtableinfo SET lastconn='$datetime' WHERE ip_address='$ip'") or die('Could not update user info: ' . mysql_error());
+		mysqli_query("UPDATE $dbtableinfo SET lastconn='$datetime' WHERE ip_address='$ip'") or die('Could not update user info: ' . mysqli_error());
 
 	//}
 
@@ -70,7 +70,7 @@ if(!mysql_num_rows(mysql_query("SELECT ip_address FROM $dbtableinfo WHERE ip_add
 	if(!stilltoday($lastconn))
 	{
 		//Dialy bonus
-		mysql_query("UPDATE $dbtableinfo SET remainingvisits='$remainingvisits' WHERE ip_address='$ip'") or die('Could not update user info: ' . mysql_error());
+		mysqli_query("UPDATE $dbtableinfo SET remainingvisits='$remainingvisits' WHERE ip_address='$ip'") or die('Could not update user info: ' . mysqli_error());
 	}
 
 	$proceed = false;
@@ -80,7 +80,7 @@ if(!mysql_num_rows(mysql_query("SELECT ip_address FROM $dbtableinfo WHERE ip_add
 
 		//Refer data
 
-		$row2 = mysql_fetch_assoc(mysql_query("SELECT * FROM $dbtableinfo WHERE id='$refer'"));
+		$row2 = mysqli_fetch_assoc(mysqli_query("SELECT * FROM $dbtableinfo WHERE id='$refer'"));
 		$rexp = $row2['exp'];
 		$rlvl = $row2['lvl'];
 		$rmultiplier = $row2['multiplier'];		
@@ -142,7 +142,7 @@ function sumvisit($id)
 
 	global $dbtableinfo;
 
-	mysql_query("UPDATE $dbtableinfo SET numvsts = numvsts + 1 WHERE id='$id'");
+	mysqli_query("UPDATE $dbtableinfo SET numvsts = numvsts + 1 WHERE id='$id'");
 
 }
 
@@ -150,7 +150,7 @@ function getdailybonus()
 {
 	global $dbtableinfo;
 
-	$row = mysql_fetch_assoc(mysql_query("SELECT remainingvisits as remvsts, lvl as lvl, multiplier as mult FROM $dbtableinfo WHERE id='$id'"));
+	$row = mysqli_fetch_assoc(mysqli_query("SELECT remainingvisits as remvsts, lvl as lvl, multiplier as mult FROM $dbtableinfo WHERE id='$id'"));
 
 	if(!$row['remvsts']) 
 	{
@@ -168,7 +168,7 @@ function newvisited($user, $date) {
 
 	$id = getmyreferid();
 
-	$row = mysql_fetch_assoc(mysql_query("SELECT visitarray FROM $dbtableinfo WHERE id='$id'"));
+	$row = mysqli_fetch_assoc(mysqli_query("SELECT visitarray FROM $dbtableinfo WHERE id='$id'"));
 
 	if($row['visitarray'] != null) {
 		$visitarray = (array)unserialize($row['visitarray']);
@@ -179,7 +179,7 @@ function newvisited($user, $date) {
 		$svisit = serialize($visitarray);
 	}
 
-	mysql_query("UPDATE $dbtableinfo SET visitarray='$svisit' WHERE id='$id'");
+	mysqli_query("UPDATE $dbtableinfo SET visitarray='$svisit' WHERE id='$id'");
 
 }
 
@@ -190,7 +190,7 @@ function removeremvisit()
 
 	$id = getmyreferid();
 
-	mysql_query("UPDATE $dbtableinfo SET remainingvisits = remainingvisits - 1 WHERE id='$id'");
+	mysqli_query("UPDATE $dbtableinfo SET remainingvisits = remainingvisits - 1 WHERE id='$id'");
 }
 
 function maxviewsperday() 
@@ -200,7 +200,7 @@ function maxviewsperday()
 
 	$id = getmyreferid();
 
-	$row = mysql_fetch_assoc(mysql_query("SELECT remainingvisits FROM $dbtableinfo WHERE id='$id'"));
+	$row = mysqli_fetch_assoc(mysqli_query("SELECT remainingvisits FROM $dbtableinfo WHERE id='$id'"));
 
 	if($row['remainingvisits']) //The actual visits is true because it's greater than 1
 	{
@@ -219,13 +219,13 @@ function uptlastclaim()
 	$id = getmyreferid();
 	$now = time();
 
-	mysql_query("UPDATE $dbtableinfo SET lastclaim = '$now' WHERE id='$id'");
+	mysqli_query("UPDATE $dbtableinfo SET lastclaim = '$now' WHERE id='$id'");
 
 }
 
 function checkisbanned($ip) 
 {
-	if(mysql_num_rows(mysql_query("SELECT id FROM bannedips WHERE ip='$ip'"))) 
+	if(mysqli_num_rows(mysqli_query("SELECT id FROM bannedips WHERE ip='$ip'")))
 	{
 		return true;
 	} else 
@@ -253,7 +253,7 @@ function thisexists() //Check if there is any account with the current visitor's
 
 	$id = getmyreferid();
 
-	if(mysql_num_rows(mysql_query("SELECT id FROM $dbtableinfo WHERE id='$id'"))) {
+	if(mysqli_num_rows(mysqli_query("SELECT id FROM $dbtableinfo WHERE id='$id'"))) {
 		return true;
 	} else {
 		return false;
@@ -265,7 +265,7 @@ function userexists($id) //Check if there is any account with the current visito
 
 	global $dbtableinfo;
 
-	if(mysql_num_rows(mysql_query("SELECT id FROM $dbtableinfo WHERE id='$id'"))) {
+	if(mysqli_num_rows(mysqli_query("SELECT id FROM $dbtableinfo WHERE id='$id'"))) {
 		return true;
 	} else {
 		return false;
@@ -279,10 +279,10 @@ function getmyreferid()
 
 	$ip = $_SERVER["REMOTE_ADDR"]; 
 
-	$query = mysql_query("SELECT id FROM $dbtableinfo WHERE ip_address='$ip' AND acc_prior > -3 LIMIT 0,1");
+	$query = mysqli_query("SELECT id FROM $dbtableinfo WHERE ip_address='$ip' AND acc_prior > -3 LIMIT 0,1");
 
-	if(mysql_num_rows($query)) {
-		$row = mysql_fetch_assoc($query);
+	if(mysqli_num_rows($query)) {
+		$row = mysqli_fetch_assoc($query);
 		return $row['id'];
 	} /*else {
 		die('Hubo un error al procesar la información. #0001');
@@ -309,9 +309,9 @@ function getpointsbyid($id)
 
 	global $dbtableinfo;
 
-	$query = mysql_query("SELECT points FROM $dbtableinfo WHERE id='$id'");
+	$query = mysqli_query("SELECT points FROM $dbtableinfo WHERE id='$id'");
 
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$rowd = $row['points'];
 
 	return (int)$rowd;
@@ -322,9 +322,9 @@ function getexpbyid($id)
 
 	global $dbtableinfo;
 
-	$query = mysql_query("SELECT exp FROM $dbtableinfo WHERE id='$id'");
+	$query = mysqli_query("SELECT exp FROM $dbtableinfo WHERE id='$id'");
 
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$rowd = $row['exp'];
 
 	return (int)$rowd;
@@ -335,9 +335,9 @@ function getlvlbyid($id)
 
 	global $dbtableinfo;
 
-	$query = mysql_query("SELECT lvl FROM $dbtableinfo WHERE id='$id'");
+	$query = mysqli_query("SELECT lvl FROM $dbtableinfo WHERE id='$id'");
 
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$rowd = $row['lvl'];
 
 	return (int)$rowd;
@@ -348,9 +348,9 @@ function getmultbyid($id)
 
 	global $dbtableinfo;
 
-	$query = mysql_query("SELECT multiplier FROM $dbtableinfo WHERE id='$id'");
+	$query = mysqli_query("SELECT multiplier FROM $dbtableinfo WHERE id='$id'");
 
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$rowd = $row['multiplier'];
 
 	return (int)$rowd;
@@ -382,13 +382,13 @@ function getmypoints($round = false, $texted = true, $commas = true, $dots = tru
 
 	$ip = $_SERVER["REMOTE_ADDR"]; 
 
-	$query = mysql_query("SELECT points FROM $dbtableinfo WHERE ip_address='$ip'");
+	$query = mysqli_query("SELECT points FROM $dbtableinfo WHERE ip_address='$ip'");
 
 	$string = "";
 
 	if(thisexists()) {
 
-		$row = mysql_fetch_assoc($query);
+		$row = mysqli_fetch_assoc($query);
 		$rowd = $row['points'];
 
 		if($texted) {
@@ -512,7 +512,7 @@ function setpoints($id, $pointsquantity, $type = 0)
 	}
 
 	if(thisexists()) {
-		mysql_query("UPDATE $dbtableinfo SET points = $allpoints WHERE id='$id'");
+		mysqli_query("UPDATE $dbtableinfo SET points = $allpoints WHERE id='$id'");
 	} else {
 		die('Hubo un error al procesar la información. #0003');
 	}
@@ -542,7 +542,7 @@ function setexperience($id, $expquantity, $type = 0)
 	}
 
 	if(thisexists()) {
-		mysql_query("UPDATE $dbtableinfo SET exp = $allexp WHERE id='$id'");
+		mysqli_query("UPDATE $dbtableinfo SET exp = $allexp WHERE id='$id'");
 	} else {
 		die('Hubo un error al procesar la información. #0003');
 	}
@@ -571,16 +571,16 @@ function recalculatelvl($id, $actualvl, $exp)
 		}
 	}
 
-	mysql_query("UPDATE $dbtableinfo SET lvl = '$newlvl' WHERE id='$id'");
+	mysqli_query("UPDATE $dbtableinfo SET lvl = '$newlvl' WHERE id='$id'");
 
-	$row = mysql_fetch_assoc(mysql_query("SELECT multiplier FROM $dbtableinfo WHERE id='$id'"));;
+	$row = mysqli_fetch_assoc(mysqli_query("SELECT multiplier FROM $dbtableinfo WHERE id='$id'"));;
 
 	$actualmulty = $row['multiplier'];
 	$newmulti = calculatemultfromlvl($newlvl);
 
 	if($newmulti > $actualmulty) 
 	{
-		mysql_query("UPDATE $dbtableinfo SET multiplier = '$newmulti' WHERE id='$id'");
+		mysqli_query("UPDATE $dbtableinfo SET multiplier = '$newmulti' WHERE id='$id'");
 	}
 
 	/*if(strlen($newlvl) > 1) {
@@ -604,7 +604,7 @@ function recalculatelvl($id, $actualvl, $exp)
 		if($templvl/5+1 >= $multiplier) 
 		{
 			$newmult = $templvl/5+1;
-			mysql_query("UPDATE $dbtableinfo SET multiplier = '$newmult' WHERE id='$id'");
+			mysqli_query("UPDATE $dbtableinfo SET multiplier = '$newmult' WHERE id='$id'");
 		}
 	} else 
 	{
@@ -897,7 +897,7 @@ function isnew($post_type) {
 
 	$id = getmyreferid();
 
-	$row = mysql_fetch_assoc(mysql_query("SELECT notifications FROM $dbtableinfo WHERE id='$id'"));
+	$row = mysqli_fetch_assoc(mysqli_query("SELECT notifications FROM $dbtableinfo WHERE id='$id'"));
 
 	$notarray = (array)unserialize($row['notifications']);
 	if($notarray[$post_type]) {
@@ -913,13 +913,13 @@ function setreaded($post_type) {
 
 	$id = getmyreferid();
 
-	$row = mysql_fetch_assoc(mysql_query("SELECT notifications FROM $dbtableinfo WHERE id='$id'"));
+	$row = mysqli_fetch_assoc(mysqli_query("SELECT notifications FROM $dbtableinfo WHERE id='$id'"));
 
 	$notarray = (array)unserialize($row['notifications']);
 	$notarray[$post_type] = true;
 	$snot = serialize($notarray);
 
-	mysql_query("UPDATE $dbtableinfo SET notifications='$snot' WHERE id='$id'");
+	mysqli_query("UPDATE $dbtableinfo SET notifications='$snot' WHERE id='$id'");
 
 }
 

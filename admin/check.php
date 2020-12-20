@@ -2,7 +2,7 @@
 
 $uid = getmyreferid();
 
-$row = mysql_fetch_array(mysql_query("SELECT acc_prior FROM users WHERE id='$uid'"));
+$row = mysqli_fetch_array(mysqli_query("SELECT acc_prior FROM users WHERE id='$uid'"));
 
 $acc_prior = $row['acc_prior'];
 

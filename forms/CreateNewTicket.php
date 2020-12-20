@@ -9,8 +9,8 @@ $continue = true;
 
 //Variables
 (int)$user_id = getmyreferid();
-$title = mysql_real_escape_string($_POST['title']);
-$content = mysql_real_escape_string($_POST['content']);
+$title = mysqli_real_escape_string($_POST['title']);
+$content = mysqli_real_escape_string($_POST['content']);
 (int)$creation = time();
 
 session_start(); 
@@ -41,9 +41,9 @@ if(empty($content))
 }
 
 if($continue) {
-	mysql_query("SET NAMES 'utf8'");
+	mysqli_query("SET NAMES 'utf8'");
 	$query="INSERT INTO ticket (user_id, titulo, contenido, creation) VALUES ('$user_id', '$title', '$content', '$creation')";
-	mysql_query($query) or die ('Error: ' . mysql_error());
+	mysqli_query($query) or die ('Error: ' . mysqli_error());
 	$success['ticket_created'] = 'Su ticket fue creado.';
 	$_SESSION['success'] = $success;
 	header("location:http://".$_SERVER['SERVER_NAME']."/index.php?action=ticket"); //Replace by a <div class="success"></div>

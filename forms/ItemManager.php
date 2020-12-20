@@ -22,11 +22,11 @@ if(isset($newitemadmin) || isset($newitem)) {
 		$sended_by = "0";
 	}
 
-	$name = mysql_real_escape_string($_POST['name']);
-	$description = mysql_real_escape_string($_POST['description']);
+	$name = mysqli_real_escape_string($_POST['name']);
+	$description = mysqli_real_escape_string($_POST['description']);
 	$url = $_POST['url'];
-	$thumb = mysql_real_escape_string($_POST['thumb']);
-	(int)$points = mysql_real_escape_string($_POST['points']);
+	$thumb = mysqli_real_escape_string($_POST['thumb']);
+	(int)$points = mysqli_real_escape_string($_POST['points']);
 
 	session_start(); 
 
@@ -83,7 +83,7 @@ if(isset($newitemadmin) || isset($newitem)) {
 
 	if($continue) {
 		$query="INSERT INTO items (name, description, url, thumb, points, approved, sended_by) VALUES ('$name', '$description', '$url', '$thumb', '$points', '$approved', '$sended_by')";
-		mysql_query($query) or die ('Error: ' . mysql_error());
+		mysqli_query($query) or die ('Error: ' . mysqli_error());
 		$success = 'El item fue creado satisfactoriamente.';
 		$_SESSION['success'] = $success;
 		header("Location: http://".$_SERVER['SERVER_NAME']."/index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
@@ -96,7 +96,7 @@ if(isset($newitemadmin) || isset($newitem)) {
 
 /*if(isset($delete_id)) {
 	$query="DELETE FROM items WHERE id='$delete_id'";
-	mysql_query($query) or die ('Error: ' . mysql_error());
+	mysqli_query($query) or die ('Error: ' . mysqli_error());
 	header("Location: http://".$_SERVER['SERVER_NAME']."/index.php?action=admin");
 }*/
 
@@ -104,7 +104,7 @@ if(isset($_POST['delete']))
 {
 	$did = $_POST['delete'];
 	$query="UPDATE items SET approved='-1' WHERE id='$did'";
-	mysql_query($query) or die ('Error: ' . mysql_error());
+	mysqli_query($query) or die ('Error: ' . mysqli_error());
 	$success = 'El comentario fue borrado.';
 	$_SESSION['success'] = $success;
 	header("Location: http://".$_SERVER['SERVER_NAME']."/index.php?action=admin&go=items");
@@ -114,7 +114,7 @@ if(isset($_POST['approve']))
 {
 	$aid = $_POST['approve'];
 	$query="UPDATE items SET approved='1' WHERE id='$aid'";
-	mysql_query($query) or die ('Error: ' . mysql_error());
+	mysqli_query($query) or die ('Error: ' . mysqli_error());
 	$success = 'El comentario fue aprobado.';
 	$_SESSION['success'] = $success;
 	header("Location: http://".$_SERVER['SERVER_NAME']."/index.php?action=admin&go=items");
@@ -136,7 +136,7 @@ if(isset($_POST['editdata']))
 		$add = true;
 		$edit = false;
 
-		if(mysql_num_rows(mysql_query("SELECT id FROM gamedata WHERE item_id='$item_id_str'"))) 
+		if(mysqli_num_rows(mysqli_query("SELECT id FROM gamedata WHERE item_id='$item_id_str'")))
 		{
 			$add = false;
 			$edit = true;
@@ -144,19 +144,19 @@ if(isset($_POST['editdata']))
 
 		$finalreq = "";
 
-		$name = mysql_real_escape_string($_POST['name']);
-		$description = mysql_real_escape_string($_POST['description']);
-		$platform = mysql_real_escape_string($_POST['platform']);
-		$dev = mysql_real_escape_string($_POST['dev']);
-		$distributor = mysql_real_escape_string($_POST['distributor']);
-		$genre = mysql_real_escape_string($_POST['genre']);
-		$players = mysql_real_escape_string($_POST['players']);
-		$lang = mysql_real_escape_string($_POST['lang']);
-		$age = mysql_real_escape_string($_POST['age']);
+		$name = mysqli_real_escape_string($_POST['name']);
+		$description = mysqli_real_escape_string($_POST['description']);
+		$platform = mysqli_real_escape_string($_POST['platform']);
+		$dev = mysqli_real_escape_string($_POST['dev']);
+		$distributor = mysqli_real_escape_string($_POST['distributor']);
+		$genre = mysqli_real_escape_string($_POST['genre']);
+		$players = mysqli_real_escape_string($_POST['players']);
+		$lang = mysqli_real_escape_string($_POST['lang']);
+		$age = mysqli_real_escape_string($_POST['age']);
 		$release = strtotime($_POST['release']);
-		$minreq = mysql_real_escape_string($_POST['minreq']);
-		$req = mysql_real_escape_string($_POST['req']);
-		$maxreq = mysql_real_escape_string($_POST['maxreq']);
+		$minreq = mysqli_real_escape_string($_POST['minreq']);
+		$req = mysqli_real_escape_string($_POST['req']);
+		$maxreq = mysqli_real_escape_string($_POST['maxreq']);
 		$media_img = $_POST['media_img'];
 		$media_video = $_POST['media_video'];
 		$fmedia_img = "";
@@ -169,70 +169,70 @@ if(isset($_POST['editdata']))
 
 			if($name != null) 
 			{
-				mysql_query("UPDATE gamedata SET name='$name' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET name='$name' WHERE item_id='$item_id_str'");
 			}
 
 			if($description != null) 
 			{
-				mysql_query("UPDATE gamedata SET description='$description' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET description='$description' WHERE item_id='$item_id_str'");
 			}
 
 			if($platform != null) 
 			{
-				mysql_query("UPDATE gamedata SET platform='$platform' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET platform='$platform' WHERE item_id='$item_id_str'");
 			}
 
 			if($dev != null) 
 			{
-				mysql_query("UPDATE gamedata SET dev='$dev' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET dev='$dev' WHERE item_id='$item_id_str'");
 			}
 
 			if($distributor != null) 
 			{
-				mysql_query("UPDATE gamedata SET distributor='$distributor' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET distributor='$distributor' WHERE item_id='$item_id_str'");
 			}
 
 			if($genre != null) 
 			{
-				mysql_query("UPDATE gamedata SET genre='$genre' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET genre='$genre' WHERE item_id='$item_id_str'");
 			}
 
 			if($players != null) 
 			{
-				mysql_query("UPDATE gamedata SET players='$players' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET players='$players' WHERE item_id='$item_id_str'");
 			}
 
 			if($lang != null) 
 			{
-				mysql_query("UPDATE gamedata SET lang='$lang' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET lang='$lang' WHERE item_id='$item_id_str'");
 			}
 
 			if($age != null) 
 			{
-				mysql_query("UPDATE gamedata SET age='$age' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET age='$age' WHERE item_id='$item_id_str'");
 			}
 
 			if($release != null) 
 			{
-				mysql_query("UPDATE gamedata SET release='$release' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET release='$release' WHERE item_id='$item_id_str'");
 			}
 
 			if($req != null || $minreq != null || $maxreq != null) 
 			{
 				$finalreq = serialize(array(0 => $minreq, 1 => $req, 2 => $maxreq));
-				mysql_query("UPDATE gamedata SET req='$finalreq' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET req='$finalreq' WHERE item_id='$item_id_str'");
 			}
 
 			if($media_img != null) 
 			{
 				$fmedia_img = serialize(preg_split('/\n|\r\n?/', $media_img));
-				mysql_query("UPDATE gamedata SET media_img='$fmedia_img' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET media_img='$fmedia_img' WHERE item_id='$item_id_str'");
 			}
 
 			if($media_video != null) 
 			{
 				$fmedia_video = serialize(preg_split('/\n|\r\n?/', $media_video));
-				mysql_query("UPDATE gamedata SET media_video='$fmedia_video' WHERE item_id='$item_id_str'");
+				mysqli_query("UPDATE gamedata SET media_video='$fmedia_video' WHERE item_id='$item_id_str'");
 			}
 
 			if($continue) {
@@ -354,7 +354,7 @@ if(isset($_POST['editdata']))
 
 			if($continue) {
 				$query="INSERT INTO gamedata (item_id, name, gamedesc, platform, dev, distributor, genre, players, lang, age, `release`, media_img, media_video, req) VALUES ('$item_id_str' ,'$name', '$description', '$platform', '$dev', '$distributor', '$genre', '$players', '$lang', '$age', '$release', '$fmedia_img', '$fmedia_video', '$finalreq')";
-				mysql_query($query) or die ('Error: ' . mysql_error());
+				mysqli_query($query) or die ('Error: ' . mysqli_error());
 				$success = 'La ficha técnica de este juego fue añadida correctamente.';
 				$_SESSION['success'] = $success;
 				header("Location: http://".$_SERVER['SERVER_NAME']."/index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
@@ -372,12 +372,12 @@ if(isset($_POST['editdata']))
 if(isset($_POST['edititem'])) 
 {
 
-	(int)$edid = mysql_real_escape_string($_POST['edititem_id']);
-	$name = mysql_real_escape_string($_POST['name']);
-	$description = mysql_real_escape_string($_POST['description']);
+	(int)$edid = mysqli_real_escape_string($_POST['edititem_id']);
+	$name = mysqli_real_escape_string($_POST['name']);
+	$description = mysqli_real_escape_string($_POST['description']);
 	$url = $_POST['url'];
-	$thumb = mysql_real_escape_string($_POST['thumb']);
-	(int)$points = mysql_real_escape_string($_POST['points']);
+	$thumb = mysqli_real_escape_string($_POST['thumb']);
+	(int)$points = mysqli_real_escape_string($_POST['points']);
 
 	session_start(); 
 
@@ -394,12 +394,12 @@ if(isset($_POST['edititem']))
 
 	if(isset($name)) 
 	{
-		mysql_query("UPDATE items SET name='$name' WHERE id='$edid'");
+		mysqli_query("UPDATE items SET name='$name' WHERE id='$edid'");
 	}
 
 	if(isset($description)) 
 	{
-		mysql_query("UPDATE items SET description='$description' WHERE id='$edid'");
+		mysqli_query("UPDATE items SET description='$description' WHERE id='$edid'");
 	}
 
 	if(isset($url)) 
@@ -410,12 +410,12 @@ if(isset($_POST['edititem']))
 		{
 			$url = serialize(preg_split('/\n|\r\n?/', $_POST['url']));
 		}
-		mysql_query("UPDATE items SET url='$url' WHERE id='$edid'");
+		mysqli_query("UPDATE items SET url='$url' WHERE id='$edid'");
 	}
 
 	if(isset($thumb)) 
 	{
-		mysql_query("UPDATE items SET thumb='$thumb' WHERE id='$edid'");
+		mysqli_query("UPDATE items SET thumb='$thumb' WHERE id='$edid'");
 	}
 
 	if($continue) {

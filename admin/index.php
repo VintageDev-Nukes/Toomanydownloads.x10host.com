@@ -18,16 +18,16 @@ if($_REQUEST['action'] != 'admin') {
 
 $now = time();
 $atime = $now - 600;
-$get_all_users = mysql_query("SELECT * FROM users");
-$get_connected_users = mysql_query("SELECT * FROM users WHERE lastconn > $atime AND acc_prior > -3");
-$get_total_points = mysql_query("SELECT SUM(points) as totalpoints FROM users WHERE acc_prior < 4");
-$get_all_items = mysql_query("SELECT * FROM items");
-$get_total_downloads = mysql_query("SELECT SUM(downloads) as totaldowns FROM items");
-$users_num = mysql_num_rows($get_all_users);
-$connected_users = mysql_num_rows($get_connected_users);
-$total_points = mysql_fetch_array($get_total_points);
-$items_num = mysql_num_rows($get_all_items);
-$total_downs = mysql_fetch_array($get_total_downloads);
+$get_all_users = mysqli_query("SELECT * FROM users");
+$get_connected_users = mysqli_query("SELECT * FROM users WHERE lastconn > $atime AND acc_prior > -3");
+$get_total_points = mysqli_query("SELECT SUM(points) as totalpoints FROM users WHERE acc_prior < 4");
+$get_all_items = mysqli_query("SELECT * FROM items");
+$get_total_downloads = mysqli_query("SELECT SUM(downloads) as totaldowns FROM items");
+$users_num = mysqli_num_rows($get_all_users);
+$connected_users = mysqli_num_rows($get_connected_users);
+$total_points = mysqli_fetch_array($get_total_points);
+$items_num = mysqli_num_rows($get_all_items);
+$total_downs = mysqli_fetch_array($get_total_downloads);
 
 //<!--- Styles -->
 
@@ -183,10 +183,10 @@ switch($action){
   <?
 
   $query = "SELECT * FROM items ORDER BY id ASC"; //aquí se lee * (todo) de demo
-  $result = mysql_query($query) or die(mysql_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
+  $result = mysqli_query($query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
 
-  if(mysql_num_rows($result)) {
-    while($rs=mysql_fetch_array($result))  {
+  if(mysqli_num_rows($result)) {
+    while($rs=mysqli_fetch_array($result))  {
       echo $rs['id'].'.- '.$rs['name'].' [Editar] [<form id="delete" style="display:inline;" action="http://'.$_SERVER['SERVER_NAME'].'/forms/ItemManager.php"><a href="#" onclick="javascript:deleteConfirm();">Quitar</a><input type="hidden" name="delete_id" value="'.$rs['id'].'" /></form>]<br>';
     }
   } else {

@@ -5,12 +5,12 @@ session_start();
 $id = getmyreferid();
 $mult = getmultbyid($id);
 
-$advsearch = mysql_real_escape_string($_POST['advanced-search']);
-$searchtype = mysql_real_escape_string($_POST['searchtype']);
-$whatsearch = mysql_real_escape_string($_POST['whatsearch']);
-$search = mysql_real_escape_string($_POST['search']);
-$advanced = mysql_real_escape_string($_POST['advtext']);
-$cat = mysql_real_escape_string($_POST['cat']);
+$advsearch = mysqli_real_escape_string($_POST['advanced-search']);
+$searchtype = mysqli_real_escape_string($_POST['searchtype']);
+$whatsearch = mysqli_real_escape_string($_POST['whatsearch']);
+$search = mysqli_real_escape_string($_POST['search']);
+$advanced = mysqli_real_escape_string($_POST['advtext']);
+$cat = mysqli_real_escape_string($_POST['cat']);
 
 $errors = array();
 $rand = array();
@@ -30,18 +30,18 @@ if(empty($search) && empty($advsearch))
 
 	//Show results...
 
-	$search_query = mysql_query("SELECT * FROM items WHERE cat='$cat' AND name LIKE '%$search%' ORDER BY points ASC");
+	$search_query = mysqli_query("SELECT * FROM items WHERE cat='$cat' AND name LIKE '%$search%' ORDER BY points ASC");
 
 	echo '<div class="contenido">
 	<div class="inside">
 
 	<h1 style="margin:0px;">Resultados de la búsqueda:</h1>';
 
-	if(mysql_num_rows($search_query)) {
+	if(mysqli_num_rows($search_query)) {
 
 		$rid = 0;
 
-		while($rs=mysql_fetch_array($search_query)) 
+		while($rs=mysqli_fetch_array($search_query))
 		{
 
 			$rand = array("there_".$rid => $rs['id']);
@@ -54,7 +54,7 @@ if(empty($search) && empty($advsearch))
 
 		echo '<hr><h1 style="color:#fff!important;">Resultados similares:</h1>';
 
-		$get_all_items = mysql_num_rows(mysql_query("SELECT * FROM items"));
+		$get_all_items = mysqli_num_rows(mysqli_query("SELECT * FROM items"));
 
 		for($i = 0; $i < 4; $i++) {
 			$rand = getrand($rand, $i, $get_all_items);
@@ -64,7 +64,7 @@ if(empty($search) && empty($advsearch))
 
 			$gid = $rand[$cid];
 
-			$rs = mysql_fetch_array(mysql_query("SELECT * FROM items WHERE cat='$cat' AND id='$gid' ORDER BY points ASC"));
+			$rs = mysqli_fetch_array(mysqli_query("SELECT * FROM items WHERE cat='$cat' AND id='$gid' ORDER BY points ASC"));
 
 			include('itembase.php');
 	
@@ -112,15 +112,15 @@ if(empty($search) && empty($advsearch))
 
 	foreach ($searchWords as $key => $value) {
 
-		$search_query = mysql_query("SELECT * FROM items WHERE cat='$cat' AND $whatsearch LIKE '%$value%' ORDER BY points ASC");
+		$search_query = mysqli_query("SELECT * FROM items WHERE cat='$cat' AND $whatsearch LIKE '%$value%' ORDER BY points ASC");
 
 		echo '<h1>Resultados de "<b style="color:#1C8B00;">'.$value.'</b>":</h1>';
 
-		if(mysql_num_rows($search_query)) {
+		if(mysqli_num_rows($search_query)) {
 
 			$rid = 0;
 
-			while($rs=mysql_fetch_array($search_query)) 
+			while($rs=mysqli_fetch_array($search_query))
 			{
 
 				$rand = array("there_".$rid => $rs['id']);
@@ -139,7 +139,7 @@ if(empty($search) && empty($advsearch))
 
 			echo '<hr><h1 style="color:#fff!important;">Resultados similares:</h1>';
 
-		$get_all_items = mysql_num_rows(mysql_query("SELECT * FROM items"));
+		$get_all_items = mysqli_num_rows(mysqli_query("SELECT * FROM items"));
 
 		for($i = 0; $i < 4; $i++) {
 			$rand = getrand($rand, $i, $get_all_items);
@@ -149,7 +149,7 @@ if(empty($search) && empty($advsearch))
 
 			$gid = $rand[$cid];
 
-			$rs = mysql_fetch_array(mysql_query("SELECT * FROM items WHERE cat='$cat' AND id='$gid' ORDER BY points ASC"));
+			$rs = mysqli_fetch_array(mysqli_query("SELECT * FROM items WHERE cat='$cat' AND id='$gid' ORDER BY points ASC"));
 
 			include('itembase.php');
 	

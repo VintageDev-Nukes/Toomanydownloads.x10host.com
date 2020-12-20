@@ -7,16 +7,16 @@ $current_action = @$_GET['action'];
 
 if(isset($uid) && $current_action != 'account') {
 
-$get_user_query = mysql_query("SELECT * FROM users WHERE id='$uid'");
+$get_user_query = mysqli_query("SELECT * FROM users WHERE id='$uid'");
 
-if(!mysql_num_rows($get_user_query))
+if(!mysqli_num_rows($get_user_query))
 {
 	header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=404');
 }
 
-$row = mysql_fetch_array($get_user_query);
+$row = mysqli_fetch_array($get_user_query);
 
-$urefernum =  mysql_num_rows(mysql_query("SELECT * FROM users WHERE refer_id='$uid'"));
+$urefernum =  mysqli_num_rows(mysqli_query("SELECT * FROM users WHERE refer_id='$uid'"));
 (int)$upoints = $row['points'];
 (int)$umoney = $row['money'];
 (int)$ulvl = $row['lvl'];
@@ -342,10 +342,10 @@ echo '<tr>
 		<div class="inside">
 			<div class="boxinside">';
 
-		$report_query = mysql_query("SELECT * FROM report WHERE user_id='$uid'");
+		$report_query = mysqli_query("SELECT * FROM report WHERE user_id='$uid'");
 
-		if(mysql_num_rows($report_query)) {
-			while($rs = mysql_fetch_array($ticketquery)) {	
+		if(mysqli_num_rows($report_query)) {
+			while($rs = mysqli_fetch_array($ticketquery)) {
 				echo '<div class="'.$rs['type'].'">'.$rs['message'].'</div>';
 			}
 		} else {

@@ -232,11 +232,11 @@ if (!function_exists('array_diff_key'))
 	}
 }
 
-if (!function_exists('mysql_real_escape_string'))
+if (!function_exists('mysqli_real_escape_string'))
 {
-	function mysql_real_escape_string($string, $connection = null)
+	function mysqli_real_escape_string($string, $connection = null)
 	{
-		return mysql_escape_string($string);
+		return mysqli_escape_string($string);
 	}
 }
 

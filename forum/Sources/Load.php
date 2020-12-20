@@ -90,7 +90,7 @@ if (!defined('SMF'))
 		// !!!
 
 	void loadDatabase()
-		- takes care of mysql_set_mode, if set.
+		- takes care of mysqli_set_mode, if set.
 		// !!!
 
 	bool sessionOpen(string session_save_path, string session_name)
