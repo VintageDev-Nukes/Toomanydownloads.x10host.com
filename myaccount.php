@@ -14,7 +14,7 @@ if(isset($_SESSION)) {
 
 $id = getmyreferid();
 
-$row = mysqli_fetch_assoc(mysqli_query("SELECT * FROM $dbtableinfo WHERE id='$id'"));
+$row = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM $dbtableinfo WHERE id='$id'"));
 
 $ip = $row['ip_address'];
 $email = $row['email'];

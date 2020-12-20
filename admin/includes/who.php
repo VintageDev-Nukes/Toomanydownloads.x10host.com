@@ -9,7 +9,7 @@ echo '<table class="admintable" cellspacing="0" style="margin-top:20px;">
         </tr>
         <tr><td>ID</td><td>Nick</td></tr>';
 
-$pages->items_total = mysqli_num_rows(mysqli_query("SELECT * FROM ticket"));
+$pages->items_total = mysqli_num_rows(mysqli_query($db, "SELECT * FROM ticket"));
 $pages->mid_range = 7;
 $pages->paginate();
 
@@ -17,7 +17,7 @@ $now = time();
 $atime = $now - 600;
 
 $query = "SELECT * FROM users WHERE lastconn > $atime AND acc_prior > -3 ORDER BY lastconn DESC $pages->limit"; //aqu� se lee * (todo) de demo
-$result = mysqli_query($query) or die(mysqli_error()); //Aqu� se muestra el resultado que est� listo para ser mostrado con un while linea: 19
+$result = mysqli_query($db, $query) or die(mysqli_error()); //Aqu� se muestra el resultado que est� listo para ser mostrado con un while linea: 19
 
 if (mysqli_num_rows($result)) {
     while ($rs = mysqli_fetch_array($result)) {

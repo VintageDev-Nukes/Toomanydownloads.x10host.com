@@ -2,9 +2,9 @@
 
 //Connection Values
 $localhost = 'localhost';
-$dbuser =  'toomanyd_ikill';
-$dbpass = '';
-$dbname = 'toomanyd_database';
+$dbuser =  'usuario';
+$dbpass = 'usuario';
+$dbname = 'toomany';
 
 //User System values
 $dbtableinfo = 'users';

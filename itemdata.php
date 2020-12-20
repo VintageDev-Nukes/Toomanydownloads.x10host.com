@@ -7,7 +7,7 @@ $item_id_str = "";
 if(isset($gdid)) 
 {
 
-	$get_itemdata_query = mysqli_query("SELECT * FROM items WHERE id='$gdid'");
+	$get_itemdata_query = mysqli_query($db, "SELECT * FROM items WHERE id='$gdid'");
 
 	if(!mysqli_num_rows($get_itemdata_query))
 	{
@@ -22,7 +22,7 @@ if(isset($gdid))
 
 		$item_id_str = $ccat."_".$gdid;
 
-		$get_gamedata_query = mysqli_query("SELECT * FROM gamedata WHERE item_id='$item_id_str'");
+		$get_gamedata_query = mysqli_query($db, "SELECT * FROM gamedata WHERE item_id='$item_id_str'");
 
 		if(!mysqli_num_rows($get_gamedata_query))
 		{
@@ -226,7 +226,7 @@ if(isset($gdid))
 							<div class="contenido">
 								<div class="inside" style="text-align:center;">';
 
-		$get_all_items = mysqli_num_rows(mysqli_query("SELECT * FROM items"));
+		$get_all_items = mysqli_num_rows(mysqli_query($db, "SELECT * FROM items"));
 
 		$rand = array();
 
@@ -238,7 +238,7 @@ if(isset($gdid))
 
 			$gid = $rand[$cid];
 
-			$rs = mysqli_fetch_array(mysqli_query("SELECT * FROM items WHERE cat='$ccat' AND id='$gid' ORDER BY points ASC"));
+			$rs = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM items WHERE cat='$ccat' AND id='$gid' ORDER BY points ASC"));
 
 			include('itembase.php');
 	

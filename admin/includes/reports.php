@@ -14,7 +14,7 @@ if (empty($rid)) {
         <tr><td>ID</td><td>Autor / Creación</td><td>Acciones</td></tr>';
 
     $query = "SELECT * FROM user_report ORDER BY creation DESC"; //aquí se lee * (todo) de demo
-    $result = mysqli_query($query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
+    $result = mysqli_query($db, $query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
 
     if (mysqli_num_rows($result)) {
         while ($rs = mysqli_fetch_array($result)) {
@@ -34,12 +34,12 @@ if (empty($rid)) {
         </tr>
         <tr><td>ID</td><td>Autor / Creación</td><td>Acciones</td></tr>';
 
-    $pages->items_total = mysqli_num_rows(mysqli_query("SELECT * FROM user_report"));
+    $pages->items_total = mysqli_num_rows(mysqli_query($db, "SELECT * FROM user_report"));
     $pages->mid_range = 7;
     $pages->paginate();
 
     $query = "SELECT * FROM user_report ORDER BY creation DESC $pages->limit"; //aquí se lee * (todo) de demo
-    $result = mysqli_query($query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
+    $result = mysqli_query($db, $query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
 
     if (mysqli_num_rows($result)) {
         while ($rs = mysqli_fetch_array($result)) {
@@ -61,7 +61,7 @@ if (empty($rid)) {
     setreaded("report_" . $rid);
 
     $query = "SELECT * FROM user_report WHERE id='$rid' ORDER BY creation DESC LIMIT 0,1"; //aquí se lee * (todo) de demo
-    $result = mysqli_query($query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
+    $result = mysqli_query($db, $query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
 
     if (mysqli_num_rows($result)) {
         while ($rs = mysqli_fetch_array($result)) {
@@ -69,7 +69,7 @@ if (empty($rid)) {
             $nick = "";
             $user_id = $rs['reported_by'];
 
-            $row = mysqli_fetch_array(mysqli_query("SELECT nickname FROM users WHERE id='$user_id'"));
+            $row = mysqli_fetch_array(mysqli_query($db, "SELECT nickname FROM users WHERE id='$user_id'"));
 
             if ($row['nickname'] == null) {
                 $nick = '<a href="http://' . $_SERVER['SERVER_NAME'] . '/?action=profile&id=' . $user_id . '" target="_blank"><u>#user' . $user_id . '</u></a>';

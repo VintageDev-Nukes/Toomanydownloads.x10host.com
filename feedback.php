@@ -18,12 +18,12 @@ echo '<div class="contenido">
         </tr>
         <tr style="background:#111;"><td>Mensaje</td><td>Creación</td><td>Por</td></tr>';
         
-      	$pages->items_total = mysqli_num_rows(mysqli_query("SELECT * FROM ticket"));
+      	$pages->items_total = mysqli_num_rows(mysqli_query($db, "SELECT * FROM ticket"));
 		$pages->mid_range = 7;
 		$pages->paginate();
 
 		  $query = "SELECT * FROM feedback ORDER BY creation DESC $pages->limit"; //aquí se lee * (todo) de demo
-		  $result = mysqli_query($query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
+		  $result = mysqli_query($db, $query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
 
 		  if(mysqli_num_rows($result)) {
 		    while($rs=mysqli_fetch_array($result)) {
@@ -32,7 +32,7 @@ echo '<div class="contenido">
 			    	$nick = "";
 			  		$user_id = $rs['user_id'];
 
-			      	$row = mysqli_fetch_array(mysqli_query("SELECT nickname FROM users WHERE id='$user_id'"));
+			      	$row = mysqli_fetch_array(mysqli_query($db, "SELECT nickname FROM users WHERE id='$user_id'"));
 
 			  		if($row['nickname'] == null) 
 			  		{

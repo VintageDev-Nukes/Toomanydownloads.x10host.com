@@ -1,7 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/motor.php');
-connect();
+// connect();
 
 $continue = true;
 $errors = array();
@@ -34,7 +34,7 @@ if (isset($close_id) || isset($delete_id)) {
         $str = "cerrado";
     }
 
-    mysqli_query($query) or die ('Error: ' . mysqli_error());
+    mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
     $success = 'El ticket fue ' . $str . ' correctamente.';
     $_SESSION['success'] = $success;
 
@@ -77,7 +77,7 @@ if (isset($newticket)) {
     if ($continue) {
 
         $query = "INSERT INTO ticket (user_id, titulo, contenido, creation) VALUES ('$user_id', '$title', '$content', '$creation')";
-        mysqli_query($query) or die ('Error: ' . mysqli_error());
+        mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
         $success = 'Su ticket fue creado.';
         $_SESSION['success'] = $success;
         header("location:http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=ticket"); //Replace by a <div class="success"></div>
@@ -106,7 +106,7 @@ if (isset($newcomment)) {
     if ($continue) {
 
         $query = "INSERT INTO ticket_comments (ticket_id, user_id, contenido, creation) VALUES ('$ticket_id', '$id', '$comment', '$creation')";
-        mysqli_query($query) or die ('Error: ' . mysqli_error());
+        mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
         $success = 'El comentario fue añadido satisfactoriamente.';
         $_SESSION['success'] = $success;
         header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=ticket&go=show&id=" . $ticket_id);

@@ -1,7 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/motor.php');
-connect();
+// connect();
 
 $errors = array();
 $success = array();
@@ -38,9 +38,9 @@ if (empty($content)) {
 }
 
 if ($continue) {
-    mysqli_query("SET NAMES 'utf8'");
+    mysqli_query($db, "SET NAMES 'utf8'");
     $query = "INSERT INTO ticket (user_id, titulo, contenido, creation) VALUES ('$user_id', '$title', '$content', '$creation')";
-    mysqli_query($query) or die ('Error: ' . mysqli_error());
+    mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
     $success['ticket_created'] = 'Su ticket fue creado.';
     $_SESSION['success'] = $success;
     header("location:http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=ticket"); //Replace by a <div class="success"></div>

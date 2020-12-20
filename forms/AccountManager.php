@@ -1,7 +1,7 @@
 <?php
 
 include($_SERVER['DOCUMENT_ROOT'] . '/motor.php');
-connect(); //Set connection
+// connect(); //Set connection
 
 //Set my id (this has to be changed in order of moderation implementation)
 (int)$id = getmyreferid();
@@ -47,7 +47,7 @@ if (isset($_POST['newemail'])) {
     $activation = md5(uniqid(rand(), true));
     $newemail = mysqli_real_escape_string($_REQUEST['updateemail']);
 
-    $row = mysqli_fetch_assoc(mysqli_query("SELECT email FROM users WHERE id='$id'"));
+    $row = mysqli_fetch_assoc(mysqli_query($db, "SELECT email FROM users WHERE id='$id'"));
 
     if (empty($newemail)) {
         $emailerrors['emptyemail'] = 'Debe introducir un email.';
@@ -69,8 +69,8 @@ if (isset($_POST['newemail'])) {
             $givepoints = false;
         }
 
-        $emailset = mysqli_query("UPDATE users SET email='$newemail' WHERE id='$id'");
-        $actset = mysqli_query("UPDATE users SET activation='$activation' WHERE id='$id'");
+        $emailset = mysqli_query($db, "UPDATE users SET email='$newemail' WHERE id='$id'");
+        $actset = mysqli_query($db, "UPDATE users SET activation='$activation' WHERE id='$id'");
 
         if (!$emailset) {
             $errors['emailset'] = 'Error: ' . mysqli_error(); //Show us the error
@@ -123,7 +123,7 @@ if (isset($_POST['newcode'])) {
     $rawcode = $_REQUEST['updatecode'];
     $newcode = md5($_REQUEST['updatecode']);
 
-    $row = mysqli_fetch_assoc(mysqli_query("SELECT password FROM users WHERE id='$id'"));
+    $row = mysqli_fetch_assoc(mysqli_query($db, "SELECT password FROM users WHERE id='$id'"));
 
     if (empty($rawcode)) {
         $codeerrors['emptycode'] = 'Debe introducir un código.';
@@ -138,7 +138,7 @@ if (isset($_POST['newcode'])) {
             $givepoints = false;
         }
 
-        $codeset = mysqli_query("UPDATE users SET password='$newcode' WHERE id='$id'");
+        $codeset = mysqli_query($db, "UPDATE users SET password='$newcode' WHERE id='$id'");
 
         if (!$codeset) {
             $errors['codeset'] = 'Error: ' . mysqli_error(); //Show us the error
@@ -208,7 +208,7 @@ if (isset($_POST['claimp'])) {
         $proceed = false;
     }
 
-    $idquery = mysqli_query("SELECT id FROM users WHERE id='$oldid'");
+    $idquery = mysqli_query($db, "SELECT id FROM users WHERE id='$oldid'");
 
     if (mysqli_num_rows($idquery)) {
 
@@ -219,7 +219,7 @@ if (isset($_POST['claimp'])) {
             $proceed = false;
         }
 
-        $emailquery = mysqli_query("SELECT email FROM users WHERE email='$oldemail'");
+        $emailquery = mysqli_query($db, "SELECT email FROM users WHERE email='$oldemail'");
 
         if (!$emailquery) {
             $errors['getoldemail'] = 'Error: ' . mysqli_error();
@@ -227,7 +227,7 @@ if (isset($_POST['claimp'])) {
             $proceed = false;
         }
 
-        $row = mysqli_fetch_assoc(mysqli_query("SELECT * FROM users WHERE id='$oldid'"));
+        $row = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM users WHERE id='$oldid'"));
 
         if (!$row) {
             $errors['getoldpass'] = 'Error: ' . mysqli_error();
@@ -254,7 +254,7 @@ if (isset($_POST['claimp'])) {
 
             if ($oldcode === $userpass) {
 
-                $row = mysqli_fetch_array(mysqli_query("SELECT * FROM users WHERE id='$oldid'"));
+                $row = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM users WHERE id='$oldid'"));
                 $oldpoints = $row['points'];
 
                 if ($ip == $row['ip_address']) {
@@ -265,8 +265,8 @@ if (isset($_POST['claimp'])) {
                 } else {
 
                     //Update the main account to transfer the old stats
-                    $updatequery = mysqli_query("UPDATE users SET acc_prior='-3' WHERE id='$id'");
-                    $updatequery = mysqli_query("UPDATE users SET ip_address='$ip' WHERE id='$oldid'");
+                    $updatequery = mysqli_query($db, "UPDATE users SET acc_prior='-3' WHERE id='$id'");
+                    $updatequery = mysqli_query($db, "UPDATE users SET ip_address='$ip' WHERE id='$oldid'");
 
                     if (!$updatequery) {
                         $errors['updateuser'] = 'Error: ' . mysqli_error();
@@ -317,13 +317,13 @@ if (isset($_POST['newavatar'])) {
     //Then, set variables
     $avatar = mysqli_real_escape_string($_POST['newavatar']);
 
-    mysqli_query("UPDATE users SET avatar='$avatar' WHERE id='$id'");
+    mysqli_query($db, "UPDATE users SET avatar='$avatar' WHERE id='$id'");
 
     $success = 'Su perfil fue actualizado satisfactoriamente.';
     $_SESSION['success'] = $success;
 
     /*if(isset($avatar)) {
-        mysqli_query("UPDATE users SET avatar='$avatar' WHERE id='$id'");
+        mysqli_query($db, "UPDATE users SET avatar='$avatar' WHERE id='$id'");
     } else {
         $avatarerrora['empty_avatar'] = 'URL de avatar vacío.';
         $_SESSION['avatar_errors'] = $avatarerrors;
@@ -358,35 +358,35 @@ if (isset($_POST['newpersinfo'])) {
     $uweb = mysqli_real_escape_string($_POST['updateweburl']);
 
     if ($rname != null) {
-        mysqli_query("UPDATE users SET realname='$rname' WHERE id='$id'");
+        mysqli_query($db, "UPDATE users SET realname='$rname' WHERE id='$id'");
     }
 
     if ($birthdate != null) {
-        mysqli_query("UPDATE users SET birthdate='$birthdate' WHERE id='$id'");
+        mysqli_query($db, "UPDATE users SET birthdate='$birthdate' WHERE id='$id'");
     }
 
     if ($gender != null) {
-        mysqli_query("UPDATE users SET gender='$gender' WHERE id='$id'");
+        mysqli_query($db, "UPDATE users SET gender='$gender' WHERE id='$id'");
     }
 
     if ($location != null) {
-        mysqli_query("UPDATE users SET location='$location' WHERE id='$id'");
+        mysqli_query($db, "UPDATE users SET location='$location' WHERE id='$id'");
     }
 
     if ($skype != null) {
-        mysqli_query("UPDATE users SET skype='$skype' WHERE id='$id'");
+        mysqli_query($db, "UPDATE users SET skype='$skype' WHERE id='$id'");
     }
 
     if ($mail != null) {
-        mysqli_query("UPDATE users SET mail='$mail' WHERE id='$id'");
+        mysqli_query($db, "UPDATE users SET mail='$mail' WHERE id='$id'");
     }
 
     if ($tweb != null) {
-        mysqli_query("UPDATE users SET website_title='$tweb' WHERE id='$id'");
+        mysqli_query($db, "UPDATE users SET website_title='$tweb' WHERE id='$id'");
     }
 
     if ($uweb != null) {
-        mysqli_query("UPDATE users SET website_url='$uweb' WHERE id='$id'");
+        mysqli_query($db, "UPDATE users SET website_url='$uweb' WHERE id='$id'");
     }
 
     if ($proceed) {
@@ -406,7 +406,7 @@ if (isset($_POST['new_banner'])) {
 
     $newbanner = mysqli_real_escape_string($_POST['new_banner']);
 
-    mysqli_query("UPDATE users SET header_banner='$newbanner' WHERE id='$id'");
+    mysqli_query($db, "UPDATE users SET header_banner='$newbanner' WHERE id='$id'");
 
     $success = 'Su perfil fue actualizado satisfactoriamente.';
     $_SESSION['success'] = $success;
@@ -423,7 +423,7 @@ if (isset($_POST['new_ptxt'])) {
 
     $new_ptxt = htmlspecialchars(mysqli_real_escape_string($_POST['new_ptxt']));
 
-    mysqli_query("UPDATE users SET personal_text='$new_ptxt' WHERE id='$id'");
+    mysqli_query($db, "UPDATE users SET personal_text='$new_ptxt' WHERE id='$id'");
 
     $success = 'Su perfil fue actualizado satisfactoriamente.';
     $_SESSION['success'] = $success;

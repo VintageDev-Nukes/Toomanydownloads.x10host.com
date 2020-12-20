@@ -18,11 +18,11 @@ if ($_REQUEST['action'] != 'admin') {
 
 $now = time();
 $atime = $now - 600;
-$get_all_users = mysqli_query("SELECT * FROM users");
-$get_connected_users = mysqli_query("SELECT * FROM users WHERE lastconn > $atime AND acc_prior > -3");
-$get_total_points = mysqli_query("SELECT SUM(points) as totalpoints FROM users WHERE acc_prior < 4");
-$get_all_items = mysqli_query("SELECT * FROM items");
-$get_total_downloads = mysqli_query("SELECT SUM(downloads) as totaldowns FROM items");
+$get_all_users = mysqli_query($db, "SELECT * FROM users");
+$get_connected_users = mysqli_query($db, "SELECT * FROM users WHERE lastconn > $atime AND acc_prior > -3");
+$get_total_points = mysqli_query($db, "SELECT SUM(points) as totalpoints FROM users WHERE acc_prior < 4");
+$get_all_items = mysqli_query($db, "SELECT * FROM items");
+$get_total_downloads = mysqli_query($db, "SELECT SUM(downloads) as totaldowns FROM items");
 $users_num = mysqli_num_rows($get_all_users);
 $connected_users = mysqli_num_rows($get_connected_users);
 $total_points = mysqli_fetch_array($get_total_points);
@@ -185,7 +185,7 @@ switch ($action) {
 <?
 
 $query = "SELECT * FROM items ORDER BY id ASC"; //aquí se lee * (todo) de demo
-$result = mysqli_query($query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
+$result = mysqli_query($db, $query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
 
 if(mysqli_num_rows($result)) {
 while($rs=mysqli_fetch_array($result))  {

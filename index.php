@@ -1,9 +1,9 @@
-<?
+<?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/jdownloader.php');
+require_once(__DIR__ . '/jdownloader.php');
 include('motor.php');
 timequery();
-connect();
+// connect();
 addinfo();
 
 if (empty($_COOKIE["TMDCookie"])) {
@@ -23,9 +23,9 @@ $web_creation = 1392734684;
 
 //Global variables requested from all includes and requires
 
-$row = mysqli_fetch_assoc(mysqli_query("SELECT * FROM users WHERE id='$id'"));
+$row = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM users WHERE id='$id'"));
 
-$refernum = mysqli_num_rows(mysqli_query("SELECT * FROM users WHERE refer_id='$id'"));
+$refernum = mysqli_num_rows(mysqli_query($db, "SELECT * FROM users WHERE refer_id='$id'"));
 $nickname = $row['nickname'];
 $ip = $row['ip_address'];
 $code = $row['password'];
@@ -60,7 +60,7 @@ if ($nickname != null) {
 
 setcookie("jdownloader", "", time() - 3600);
 
-//$row = mysqli_fetch_assoc(mysqli_query("SELECT visitarray FROM users WHERE id='1'"));
+//$row = mysqli_fetch_assoc(mysqli_query($db, "SELECT visitarray FROM users WHERE id='1'"));
 
 //$visitarray = (array)unserialize($row['visitarray']);
 

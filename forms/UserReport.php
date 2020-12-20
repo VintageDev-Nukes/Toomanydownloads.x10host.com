@@ -1,7 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/motor.php');
-connect();
+// connect();
 
 $continue = true;
 
@@ -39,7 +39,7 @@ if (isset($newreport)) {
         $continue = false;
     }
 
-    if (!mysqli_num_rows(mysqli_query("SELECT * FROM users WHERE id='$reported'"))) {
+    if (!mysqli_num_rows(mysqli_query($db, "SELECT * FROM users WHERE id='$reported'"))) {
         $errors['user_not_exists'] = 'El usuario dado no existe.';
         $_SESSION['form_errors'] = $errors;
         $continue = false;
@@ -47,7 +47,7 @@ if (isset($newreport)) {
 
     if ($continue) {
         $query = "INSERT INTO user_report (reported_by, reported_user, message, creation) VALUES ('$user_id', '$reported', '$reason', '$creation')";
-        mysqli_query($query) or die ('Error: ' . mysqli_error());
+        mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
         $success = 'Su reporte fue enviado. En breve, un administrador del equipo revisará su reporte. Gracias.';
         $_SESSION['success'] = $success;
         header("location:http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=report"); //Replace by a <div class="success"></div>

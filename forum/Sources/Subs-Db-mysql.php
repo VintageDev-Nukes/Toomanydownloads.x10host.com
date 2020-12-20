@@ -351,7 +351,7 @@ function smf_db_query($identifier, $db_string, $db_values = array(), $connection
 	}
 
 	if (empty($db_unbuffered))
-		$ret = @mysqli_query($db_string, $connection);
+		$ret = @mysqli_query($db, $db_string, $connection);
 	else
 		$ret = @mysqli_unbuffered_query($db_string, $connection);
 	if ($ret === false && empty($db_values['db_error_skip']))
@@ -390,11 +390,11 @@ function smf_db_transaction($type = 'commit', $connection = null)
 	$connection = $connection == null ? $db_connection : $connection;
 
 	if ($type == 'begin')
-		return @mysqli_query('BEGIN', $connection);
+		return @mysqli_query($db, 'BEGIN', $connection);
 	elseif ($type == 'rollback')
-		return @mysqli_query('ROLLBACK', $connection);
+		return @mysqli_query($db, 'ROLLBACK', $connection);
 	elseif ($type == 'commit')
-		return @mysqli_query('COMMIT', $connection);
+		return @mysqli_query($db, 'COMMIT', $connection);
 
 	return false;
 }

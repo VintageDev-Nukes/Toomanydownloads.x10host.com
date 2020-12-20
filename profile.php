@@ -7,7 +7,7 @@ $current_action = @$_GET['action'];
 
 if(isset($uid) && $current_action != 'account') {
 
-$get_user_query = mysqli_query("SELECT * FROM users WHERE id='$uid'");
+$get_user_query = mysqli_query($db, "SELECT * FROM users WHERE id='$uid'");
 
 if(!mysqli_num_rows($get_user_query))
 {
@@ -16,7 +16,7 @@ if(!mysqli_num_rows($get_user_query))
 
 $row = mysqli_fetch_array($get_user_query);
 
-$urefernum =  mysqli_num_rows(mysqli_query("SELECT * FROM users WHERE refer_id='$uid'"));
+$urefernum =  mysqli_num_rows(mysqli_query($db, "SELECT * FROM users WHERE refer_id='$uid'"));
 (int)$upoints = $row['points'];
 (int)$umoney = $row['money'];
 (int)$ulvl = $row['lvl'];
@@ -342,7 +342,7 @@ echo '<tr>
 		<div class="inside">
 			<div class="boxinside">';
 
-		$report_query = mysqli_query("SELECT * FROM report WHERE user_id='$uid'");
+		$report_query = mysqli_query($db, "SELECT * FROM report WHERE user_id='$uid'");
 
 		if(mysqli_num_rows($report_query)) {
 			while($rs = mysqli_fetch_array($ticketquery)) {

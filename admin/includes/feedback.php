@@ -19,7 +19,7 @@ echo '<table name="approved" class="admintable" cellspacing="0">
         <tr><td>ID</td><td>Mensaje</td><td>Acciones</td></tr>';
 
 $query = "SELECT * FROM feedback ORDER BY creation DESC"; //aquí se lee * (todo) de demo
-$result = mysqli_query($query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
+$result = mysqli_query($db, $query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
 
 $times = 0;
 
@@ -47,7 +47,7 @@ echo '<table name="deleted" class="admintable" cellspacing="0" style="margin-top
         <tr><td>ID</td><td>Mensaje</td></tr>';
 
 $query = "SELECT * FROM feedback ORDER BY creation DESC"; //aquí se lee * (todo) de demo
-$result = mysqli_query($query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
+$result = mysqli_query($db, $query) or die(mysqli_error()); //Aquí se muestra el resultado que está listo para ser mostrado con un while linea: 19
 
 $times = 0;
 

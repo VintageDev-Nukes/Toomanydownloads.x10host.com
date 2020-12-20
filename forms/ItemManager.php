@@ -1,7 +1,7 @@
 <?
 require_once($_SERVER['DOCUMENT_ROOT'] . '/jdownloader.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/motor.php');
-connect();
+// connect();
 
 $continue = true;
 
@@ -76,7 +76,7 @@ if (isset($newitemadmin) || isset($newitem)) {
 
     if ($continue) {
         $query = "INSERT INTO items (name, description, url, thumb, points, approved, sended_by) VALUES ('$name', '$description', '$url', '$thumb', '$points', '$approved', '$sended_by')";
-        mysqli_query($query) or die ('Error: ' . mysqli_error());
+        mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
         $success = 'El item fue creado satisfactoriamente.';
         $_SESSION['success'] = $success;
         header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
@@ -88,14 +88,14 @@ if (isset($newitemadmin) || isset($newitem)) {
 
 /*if(isset($delete_id)) {
 	$query="DELETE FROM items WHERE id='$delete_id'";
-	mysqli_query($query) or die ('Error: ' . mysqli_error());
+	mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
 	header("Location: http://".$_SERVER['SERVER_NAME']."/index.php?action=admin");
 }*/
 
 if (isset($_POST['delete'])) {
     $did = $_POST['delete'];
     $query = "UPDATE items SET approved='-1' WHERE id='$did'";
-    mysqli_query($query) or die ('Error: ' . mysqli_error());
+    mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
     $success = 'El comentario fue borrado.';
     $_SESSION['success'] = $success;
     header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items");
@@ -104,7 +104,7 @@ if (isset($_POST['delete'])) {
 if (isset($_POST['approve'])) {
     $aid = $_POST['approve'];
     $query = "UPDATE items SET approved='1' WHERE id='$aid'";
-    mysqli_query($query) or die ('Error: ' . mysqli_error());
+    mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
     $success = 'El comentario fue aprobado.';
     $_SESSION['success'] = $success;
     header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items");
@@ -124,7 +124,7 @@ if (isset($_POST['editdata'])) {
         $add = true;
         $edit = false;
 
-        if (mysqli_num_rows(mysqli_query("SELECT id FROM gamedata WHERE item_id='$item_id_str'"))) {
+        if (mysqli_num_rows(mysqli_query($db, "SELECT id FROM gamedata WHERE item_id='$item_id_str'"))) {
             $add = false;
             $edit = true;
         }
@@ -154,58 +154,58 @@ if (isset($_POST['editdata'])) {
         if ($edit && !$add) {
 
             if ($name != null) {
-                mysqli_query("UPDATE gamedata SET name='$name' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET name='$name' WHERE item_id='$item_id_str'");
             }
 
             if ($description != null) {
-                mysqli_query("UPDATE gamedata SET description='$description' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET description='$description' WHERE item_id='$item_id_str'");
             }
 
             if ($platform != null) {
-                mysqli_query("UPDATE gamedata SET platform='$platform' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET platform='$platform' WHERE item_id='$item_id_str'");
             }
 
             if ($dev != null) {
-                mysqli_query("UPDATE gamedata SET dev='$dev' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET dev='$dev' WHERE item_id='$item_id_str'");
             }
 
             if ($distributor != null) {
-                mysqli_query("UPDATE gamedata SET distributor='$distributor' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET distributor='$distributor' WHERE item_id='$item_id_str'");
             }
 
             if ($genre != null) {
-                mysqli_query("UPDATE gamedata SET genre='$genre' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET genre='$genre' WHERE item_id='$item_id_str'");
             }
 
             if ($players != null) {
-                mysqli_query("UPDATE gamedata SET players='$players' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET players='$players' WHERE item_id='$item_id_str'");
             }
 
             if ($lang != null) {
-                mysqli_query("UPDATE gamedata SET lang='$lang' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET lang='$lang' WHERE item_id='$item_id_str'");
             }
 
             if ($age != null) {
-                mysqli_query("UPDATE gamedata SET age='$age' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET age='$age' WHERE item_id='$item_id_str'");
             }
 
             if ($release != null) {
-                mysqli_query("UPDATE gamedata SET release='$release' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET release='$release' WHERE item_id='$item_id_str'");
             }
 
             if ($req != null || $minreq != null || $maxreq != null) {
                 $finalreq = serialize(array(0 => $minreq, 1 => $req, 2 => $maxreq));
-                mysqli_query("UPDATE gamedata SET req='$finalreq' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET req='$finalreq' WHERE item_id='$item_id_str'");
             }
 
             if ($media_img != null) {
                 $fmedia_img = serialize(preg_split('/\n|\r\n?/', $media_img));
-                mysqli_query("UPDATE gamedata SET media_img='$fmedia_img' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET media_img='$fmedia_img' WHERE item_id='$item_id_str'");
             }
 
             if ($media_video != null) {
                 $fmedia_video = serialize(preg_split('/\n|\r\n?/', $media_video));
-                mysqli_query("UPDATE gamedata SET media_video='$fmedia_video' WHERE item_id='$item_id_str'");
+                mysqli_query($db, "UPDATE gamedata SET media_video='$fmedia_video' WHERE item_id='$item_id_str'");
             }
 
             if ($continue) {
@@ -308,7 +308,7 @@ if (isset($_POST['editdata'])) {
 
             if ($continue) {
                 $query = "INSERT INTO gamedata (item_id, name, gamedesc, platform, dev, distributor, genre, players, lang, age, `release`, media_img, media_video, req) VALUES ('$item_id_str' ,'$name', '$description', '$platform', '$dev', '$distributor', '$genre', '$players', '$lang', '$age', '$release', '$fmedia_img', '$fmedia_video', '$finalreq')";
-                mysqli_query($query) or die ('Error: ' . mysqli_error());
+                mysqli_query($db, $query) or die ('Error: ' . mysqli_error());
                 $success = 'La ficha técnica de este juego fue añadida correctamente.';
                 $_SESSION['success'] = $success;
                 header("Location: http://" . $_SERVER['SERVER_NAME'] . "/index.php?action=admin&go=items"); //Replace by a <div class="success"></div>
@@ -345,11 +345,11 @@ if (isset($_POST['edititem'])) {
     }*/
 
     if (isset($name)) {
-        mysqli_query("UPDATE items SET name='$name' WHERE id='$edid'");
+        mysqli_query($db, "UPDATE items SET name='$name' WHERE id='$edid'");
     }
 
     if (isset($description)) {
-        mysqli_query("UPDATE items SET description='$description' WHERE id='$edid'");
+        mysqli_query($db, "UPDATE items SET description='$description' WHERE id='$edid'");
     }
 
     if (isset($url)) {
@@ -358,11 +358,11 @@ if (isset($_POST['edititem'])) {
         } else if ($points == 0) {
             $url = serialize(preg_split('/\n|\r\n?/', $_POST['url']));
         }
-        mysqli_query("UPDATE items SET url='$url' WHERE id='$edid'");
+        mysqli_query($db, "UPDATE items SET url='$url' WHERE id='$edid'");
     }
 
     if (isset($thumb)) {
-        mysqli_query("UPDATE items SET thumb='$thumb' WHERE id='$edid'");
+        mysqli_query($db, "UPDATE items SET thumb='$thumb' WHERE id='$edid'");
     }
 
     if ($continue) {
