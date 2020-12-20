@@ -4,7 +4,6 @@ include('Settings.php');
 
 function connect()
 {
-
     global $localhost, $dbuser, $dbpass, $dbname;
 
     // ################################################
@@ -17,14 +16,12 @@ function connect()
     //mysqli_set_charset('utf8',$conn);
 
     return $conn;
-
 }
 
 $db = connect();
 
 function addinfo()
 {
-
     global $dbtableinfo;
 
 // #################################################################
@@ -135,22 +132,17 @@ function addinfo()
         }
 
     }
-
-
 }
 
 function sumvisit($id)
 {
-
-    global $dbtableinfo;
-
+    global $dbtableinfo, $db;
     mysqli_query($db, "UPDATE $dbtableinfo SET numvsts = numvsts + 1 WHERE id='$id'");
-
 }
 
 function getdailybonus()
 {
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $row = mysqli_fetch_assoc(mysqli_query($db, "SELECT remainingvisits as remvsts, lvl as lvl, multiplier as mult FROM $dbtableinfo WHERE id='$id'"));
 
@@ -165,8 +157,7 @@ function getdailybonus()
 
 function newvisited($user, $date)
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $id = getmyreferid();
 
@@ -182,13 +173,11 @@ function newvisited($user, $date)
     }
 
     mysqli_query($db, "UPDATE $dbtableinfo SET visitarray='$svisit' WHERE id='$id'");
-
 }
 
 function removeremvisit()
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $id = getmyreferid();
 
@@ -197,8 +186,7 @@ function removeremvisit()
 
 function maxviewsperday()
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $id = getmyreferid();
 
@@ -214,18 +202,17 @@ function maxviewsperday()
 
 function uptlastclaim()
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $id = getmyreferid();
     $now = time();
 
     mysqli_query($db, "UPDATE $dbtableinfo SET lastclaim = '$now' WHERE id='$id'");
-
 }
 
 function checkisbanned($ip)
 {
+    global $db;
     if (mysqli_num_rows(mysqli_query($db, "SELECT id FROM bannedips WHERE ip='$ip'"))) {
         return true;
     } else {
@@ -247,8 +234,7 @@ function stilltoday($date) //Comprueba si la fecha está todavía dentro de este
 
 function thisexists() //Check if there is any account with the current visitor's IP
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $id = getmyreferid();
 
@@ -261,8 +247,7 @@ function thisexists() //Check if there is any account with the current visitor's
 
 function userexists($id) //Check if there is any account with the current visitor's IP
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     if (mysqli_num_rows(mysqli_query($db, "SELECT id FROM $dbtableinfo WHERE id='$id'"))) {
         return true;
@@ -273,8 +258,7 @@ function userexists($id) //Check if there is any account with the current visito
 
 function getmyreferid()
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $ip = $_SERVER["REMOTE_ADDR"];
 
@@ -306,8 +290,7 @@ function formatnumber($number, $dots = true)
 
 function getpointsbyid($id)
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $query = mysqli_query($db, "SELECT points FROM $dbtableinfo WHERE id='$id'");
 
@@ -319,8 +302,7 @@ function getpointsbyid($id)
 
 function getexpbyid($id)
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $query = mysqli_query($db, "SELECT exp FROM $dbtableinfo WHERE id='$id'");
 
@@ -332,8 +314,7 @@ function getexpbyid($id)
 
 function getlvlbyid($id)
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $query = mysqli_query($db, "SELECT lvl FROM $dbtableinfo WHERE id='$id'");
 
@@ -345,8 +326,7 @@ function getlvlbyid($id)
 
 function getmultbyid($id)
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $query = mysqli_query($db, "SELECT multiplier FROM $dbtableinfo WHERE id='$id'");
 
@@ -377,8 +357,7 @@ function recurseTree($var)
 
 function getmypoints($round = false, $texted = true, $commas = true, $dots = true)
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $ip = $_SERVER["REMOTE_ADDR"];
 
@@ -457,7 +436,6 @@ function getmypoints($round = false, $texted = true, $commas = true, $dots = tru
 
 function specialnumformat($num, $dots = false)
 {
-
     $string = "";
 
     if ($num >= 1000000000000000000000000000000000) {
@@ -546,13 +524,11 @@ function setexperience($id, $expquantity, $type = 0)
     } else {
         die('Hubo un error al procesar la información. #0003');
     }
-
 }
 
 function recalculatelvl($id, $actualvl, $exp)
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $newlvl = $actualvl;
 
@@ -617,12 +593,10 @@ function recalculatelvl($id, $actualvl, $exp)
     }
 
     //We have to set the multiplier (1 more) each five levels
-
 }
 
 function calculateexpfromlvl($lvl, $accumulative = false)
 {
-
     //3 is the exp of the lvl 0
     (int)$number = 0;
 
@@ -647,7 +621,6 @@ function calculateexpfromlvl($lvl, $accumulative = false)
 
 function calculatebonusptsfromlvl($lvl, $accumulative = false)
 {
-
     //5 is the points gave in the lvl 0
     (int)$number = 0;
 
@@ -668,12 +641,10 @@ function calculatebonusptsfromlvl($lvl, $accumulative = false)
     }
 
     return $number;
-
 }
 
 function calculatemultfromlvl($lvl)
 {
-
     $number = floor($lvl / 5);
 
     if ($number == 0) {
@@ -685,7 +656,6 @@ function calculatemultfromlvl($lvl)
 
 function calculatevisitstoreachlvl($lvl, $accumulative = false)
 {
-
     (int)$number = 0;
 
     if ($accumulative) {
@@ -705,12 +675,10 @@ function calculatevisitstoreachlvl($lvl, $accumulative = false)
     }
 
     return $number;
-
 }
 
 function strdate($date)
 {
-
     $str_time = "";
 
     if ($date == null) {
@@ -752,7 +720,6 @@ function strdate($date)
     }
 
     return $str_time;
-
 }
 
 function getcssclassbyreporttype($type_report)
@@ -762,7 +729,6 @@ function getcssclassbyreporttype($type_report)
 
 function getLocationInfoByIp($ip)
 {
-
     if ($ip == null) {
         $ip = $_SERVER["REMOTE_ADDR"];
     }
@@ -786,6 +752,7 @@ function getLocationInfoByIp($ip)
         $result['currencySymbol_UTF8'] = $ip_data->geoplugin_currencySymbol_UTF8;
         $result['currencyConverter'] = $ip_data->geoplugin_currencyConverter;
     }
+
     return $result;
 }
 
@@ -899,8 +866,7 @@ function isnew($post_type)
 
 function setreaded($post_type)
 {
-
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
     $id = getmyreferid();
 
@@ -911,7 +877,6 @@ function setreaded($post_type)
     $snot = serialize($notarray);
 
     mysqli_query($db, "UPDATE $dbtableinfo SET notifications='$snot' WHERE id='$id'");
-
 }
 
 function timequery()
@@ -929,7 +894,6 @@ function timequery()
 
 function getrand($array, $cur, $max)
 {
-
     $num = rand(1, $max);
 
     while (true) {
@@ -946,7 +910,6 @@ function getrand($array, $cur, $max)
 
     $array[$cur] = $num;
     return $array;
-
 }
 
 function perenc($str)
