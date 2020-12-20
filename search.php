@@ -5,12 +5,12 @@ session_start();
 $id = getmyreferid();
 $mult = getmultbyid($id);
 
-$advsearch = mysqli_real_escape_string($_POST['advanced-search']);
-$searchtype = mysqli_real_escape_string($_POST['searchtype']);
-$whatsearch = mysqli_real_escape_string($_POST['whatsearch']);
-$search = mysqli_real_escape_string($_POST['search']);
-$advanced = mysqli_real_escape_string($_POST['advtext']);
-$cat = mysqli_real_escape_string($_POST['cat']);
+$advsearch = mysqli_real_escape_string($db, $_POST['advanced-search']);
+$searchtype = mysqli_real_escape_string($db, $_POST['searchtype']);
+$whatsearch = mysqli_real_escape_string($db, $_POST['whatsearch']);
+$search = mysqli_real_escape_string($db, $_POST['search']);
+$advanced = mysqli_real_escape_string($db, $_POST['advtext']);
+$cat = mysqli_real_escape_string($db, $_POST['cat']);
 
 $errors = array();
 $rand = array();

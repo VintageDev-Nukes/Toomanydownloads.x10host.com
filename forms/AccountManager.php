@@ -45,7 +45,7 @@ if (isset($_POST['newemail'])) {
     //User has setted a new email.
 
     $activation = md5(uniqid(rand(), true));
-    $newemail = mysqli_real_escape_string($_REQUEST['updateemail']);
+    $newemail = mysqli_real_escape_string($db, $_REQUEST['updateemail']);
 
     $row = mysqli_fetch_assoc(mysqli_query($db, "SELECT email FROM users WHERE id='$id'"));
 
@@ -178,12 +178,12 @@ if (isset($_POST['claimp'])) {
 
     $row = null;
 
-    $oldid = mysqli_real_escape_string($_REQUEST['oldid']);
+    $oldid = mysqli_real_escape_string($db, $_REQUEST['oldid']);
 
     $rawoldcode = $_REQUEST['oldcode'];
     $oldcode = md5($_REQUEST['oldcode']);
 
-    $oldemail = mysqli_real_escape_string($_REQUEST['oldemail']);
+    $oldemail = mysqli_real_escape_string($db, $_REQUEST['oldemail']);
 
     $oldpoints = 0;
 
@@ -315,7 +315,7 @@ if (isset($_POST['newavatar'])) {
     session_start();
 
     //Then, set variables
-    $avatar = mysqli_real_escape_string($_POST['newavatar']);
+    $avatar = mysqli_real_escape_string($db, $_POST['newavatar']);
 
     mysqli_query($db, "UPDATE users SET avatar='$avatar' WHERE id='$id'");
 
@@ -347,15 +347,15 @@ if (isset($_POST['newpersinfo'])) {
     session_start();
 
     //Then, set variables
-    //$rawbirthdate = mysqli_real_escape_string($_POST['updateavatar']);
-    $rname = mysqli_real_escape_string($_POST['realname']);
+    //$rawbirthdate = mysqli_real_escape_string($db, $_POST['updateavatar']);
+    $rname = mysqli_real_escape_string($db, $_POST['realname']);
     $birthdate = strtotime($_POST['birthday'] . '-' . $_POST['birthmonth'] . '-' . $_POST['birthyear']);
-    $gender = mysqli_real_escape_string($_POST['gender']);
-    $location = mysqli_real_escape_string($_POST['ubication']);
-    $skype = mysqli_real_escape_string($_POST['updateskype']);
-    $mail = mysqli_real_escape_string($_POST['updatemail']);
-    $tweb = mysqli_real_escape_string($_POST['updatewebtitle']);
-    $uweb = mysqli_real_escape_string($_POST['updateweburl']);
+    $gender = mysqli_real_escape_string($db, $_POST['gender']);
+    $location = mysqli_real_escape_string($db, $_POST['ubication']);
+    $skype = mysqli_real_escape_string($db, $_POST['updateskype']);
+    $mail = mysqli_real_escape_string($db, $_POST['updatemail']);
+    $tweb = mysqli_real_escape_string($db, $_POST['updatewebtitle']);
+    $uweb = mysqli_real_escape_string($db, $_POST['updateweburl']);
 
     if ($rname != null) {
         mysqli_query($db, "UPDATE users SET realname='$rname' WHERE id='$id'");
@@ -404,7 +404,7 @@ if (isset($_POST['new_banner'])) {
     //First of all, start a new session.
     session_start();
 
-    $newbanner = mysqli_real_escape_string($_POST['new_banner']);
+    $newbanner = mysqli_real_escape_string($db, $_POST['new_banner']);
 
     mysqli_query($db, "UPDATE users SET header_banner='$newbanner' WHERE id='$id'");
 
@@ -421,7 +421,7 @@ if (isset($_POST['new_ptxt'])) {
     //First of all, start a new session.
     session_start();
 
-    $new_ptxt = htmlspecialchars(mysqli_real_escape_string($_POST['new_ptxt']));
+    $new_ptxt = htmlspecialchars(mysqli_real_escape_string($db, $_POST['new_ptxt']));
 
     mysqli_query($db, "UPDATE users SET personal_text='$new_ptxt' WHERE id='$id'");
 

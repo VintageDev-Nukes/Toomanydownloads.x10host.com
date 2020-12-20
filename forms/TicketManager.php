@@ -13,8 +13,8 @@ $newticket = $_POST['newticket'];
 $newcomment = $_POST['newcomment'];
 
 //Variables
-(int)$close_id = mysqli_real_escape_string($_POST['close_id']);
-(int)$delete_id = mysqli_real_escape_string($_POST['delete_id']);
+(int)$close_id = mysqli_real_escape_string($db, $_POST['close_id']);
+(int)$delete_id = mysqli_real_escape_string($db, $_POST['delete_id']);
 
 
 if (isset($close_id) || isset($delete_id)) {
@@ -46,8 +46,8 @@ if (isset($newticket)) {
 
     //Variables
     (int)$user_id = getmyreferid();
-    $title = mysqli_real_escape_string($_POST['title']);
-    $content = mysqli_real_escape_string($_POST['content']);
+    $title = mysqli_real_escape_string($db, $_POST['title']);
+    $content = mysqli_real_escape_string($db, $_POST['content']);
     (int)$creation = time();
 
     session_start();
@@ -90,10 +90,10 @@ if (isset($newticket)) {
 if (isset($newcomment)) {
 
     (int)$id = getmyreferid();
-    (int)$ticket_id = mysqli_real_escape_string($_POST['ticket_id']);
+    (int)$ticket_id = mysqli_real_escape_string($db, $_POST['ticket_id']);
     (int)$creation = time();
 
-    $comment = mysqli_real_escape_string($_POST['comment']);
+    $comment = mysqli_real_escape_string($db, $_POST['comment']);
 
     session_start();
 

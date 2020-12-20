@@ -9,8 +9,8 @@ $continue = true;
 
 //Variables
 (int)$user_id = getmyreferid();
-$title = mysqli_real_escape_string($_POST['title']);
-$content = mysqli_real_escape_string($_POST['content']);
+$title = mysqli_real_escape_string($db, $_POST['title']);
+$content = mysqli_real_escape_string($db, $_POST['content']);
 (int)$creation = time();
 
 session_start();

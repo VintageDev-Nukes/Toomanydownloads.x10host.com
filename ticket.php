@@ -97,7 +97,7 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 } else if($go == 'show') 
 {
 
-	(int)$ticket_id = mysqli_real_escape_string($_GET['id']);
+	(int)$ticket_id = mysqli_real_escape_string($db, $_GET['id']);
 
 	setreaded("ticket_".$ticket_id);
 

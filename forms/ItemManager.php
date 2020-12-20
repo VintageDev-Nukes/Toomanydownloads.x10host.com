@@ -1,4 +1,4 @@
-<?
+<?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/jdownloader.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/motor.php');
 // connect();
@@ -22,11 +22,11 @@ if (isset($newitemadmin) || isset($newitem)) {
         $sended_by = "0";
     }
 
-    $name = mysqli_real_escape_string($_POST['name']);
-    $description = mysqli_real_escape_string($_POST['description']);
+    $name = mysqli_real_escape_string($db, $_POST['name']);
+    $description = mysqli_real_escape_string($db, $_POST['description']);
     $url = $_POST['url'];
-    $thumb = mysqli_real_escape_string($_POST['thumb']);
-    (int)$points = mysqli_real_escape_string($_POST['points']);
+    $thumb = mysqli_real_escape_string($db, $_POST['thumb']);
+    (int)$points = mysqli_real_escape_string($db, $_POST['points']);
 
     session_start();
 
@@ -131,19 +131,19 @@ if (isset($_POST['editdata'])) {
 
         $finalreq = "";
 
-        $name = mysqli_real_escape_string($_POST['name']);
-        $description = mysqli_real_escape_string($_POST['description']);
-        $platform = mysqli_real_escape_string($_POST['platform']);
-        $dev = mysqli_real_escape_string($_POST['dev']);
-        $distributor = mysqli_real_escape_string($_POST['distributor']);
-        $genre = mysqli_real_escape_string($_POST['genre']);
-        $players = mysqli_real_escape_string($_POST['players']);
-        $lang = mysqli_real_escape_string($_POST['lang']);
-        $age = mysqli_real_escape_string($_POST['age']);
+        $name = mysqli_real_escape_string($db, $_POST['name']);
+        $description = mysqli_real_escape_string($db, $_POST['description']);
+        $platform = mysqli_real_escape_string($db, $_POST['platform']);
+        $dev = mysqli_real_escape_string($db, $_POST['dev']);
+        $distributor = mysqli_real_escape_string($db, $_POST['distributor']);
+        $genre = mysqli_real_escape_string($db, $_POST['genre']);
+        $players = mysqli_real_escape_string($db, $_POST['players']);
+        $lang = mysqli_real_escape_string($db, $_POST['lang']);
+        $age = mysqli_real_escape_string($db, $_POST['age']);
         $release = strtotime($_POST['release']);
-        $minreq = mysqli_real_escape_string($_POST['minreq']);
-        $req = mysqli_real_escape_string($_POST['req']);
-        $maxreq = mysqli_real_escape_string($_POST['maxreq']);
+        $minreq = mysqli_real_escape_string($db, $_POST['minreq']);
+        $req = mysqli_real_escape_string($db, $_POST['req']);
+        $maxreq = mysqli_real_escape_string($db, $_POST['maxreq']);
         $media_img = $_POST['media_img'];
         $media_video = $_POST['media_video'];
         $fmedia_img = "";
@@ -324,12 +324,12 @@ if (isset($_POST['editdata'])) {
 
 if (isset($_POST['edititem'])) {
 
-    (int)$edid = mysqli_real_escape_string($_POST['edititem_id']);
-    $name = mysqli_real_escape_string($_POST['name']);
-    $description = mysqli_real_escape_string($_POST['description']);
+    (int)$edid = mysqli_real_escape_string($db, $_POST['edititem_id']);
+    $name = mysqli_real_escape_string($db, $_POST['name']);
+    $description = mysqli_real_escape_string($db, $_POST['description']);
     $url = $_POST['url'];
-    $thumb = mysqli_real_escape_string($_POST['thumb']);
-    (int)$points = mysqli_real_escape_string($_POST['points']);
+    $thumb = mysqli_real_escape_string($db, $_POST['thumb']);
+    (int)$points = mysqli_real_escape_string($db, $_POST['points']);
 
     session_start();
 

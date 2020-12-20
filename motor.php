@@ -10,9 +10,9 @@ function connect()
     // ######### connect + select  database ###########
     // ################################################
 
-    $conn = mysqli_connect($localhost, $dbuser, $dbpass) or die('Could not connect: ' . mysqli_error());
+    $conn = mysqli_connect($localhost, $dbuser, $dbpass) or die('Could not connect: ' . mysqli_error($conn));
 
-    mysqli_select_db($conn, $dbname) or die ("Can't use database $dbname! : " . mysqli_error());
+    mysqli_select_db($conn, $dbname) or die ("Can't use database $dbname! : " . mysqli_error($conn));
     //mysqli_set_charset('utf8',$conn);
 
     return $conn;
@@ -22,7 +22,7 @@ $db = connect();
 
 function addinfo()
 {
-    global $dbtableinfo;
+    global $dbtableinfo, $db;
 
 // #################################################################
 // ######### add IP and user-agent and time or update it ###########
@@ -34,21 +34,17 @@ function addinfo()
     $id = getmyreferid();
     $agent = $_SERVER["HTTP_USER_AGENT"];
     $datetime = time();
-    (int)$refer = mysqli_real_escape_string($_GET['ref']);
+    (int)$refer = mysqli_real_escape_string($db, @$_GET['ref']);
     if (empty($refer)) {
-        $refer = null;
+        $refer = -1;
     }
 
     if (!mysqli_num_rows(mysqli_query($db, "SELECT ip_address FROM $dbtableinfo WHERE ip_address = '$ip'"))) // check if the IP is in database
     {
         //If not , add it.
-
-        mysqli_query($db, "INSERT INTO $dbtableinfo (ip_address, user_agent, datetime, refer_id, lastconn) VALUES('$ip', '$agent', '$datetime', '$refer', '$datetime')") or die('Could not add IP: ' . mysqli_error());
-
+        mysqli_query($db, "INSERT INTO $dbtableinfo (ip_address, user_agent, datetime, refer_id, lastconn) VALUES('$ip', '$agent', '$datetime', '$refer', '$datetime')") or die('Could not add IP: ' . mysqli_error($db));
     } else {
-
         //Else, update some rows
-
         $row = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM $dbtableinfo WHERE id='$id'"));
 
         $exp = $row['exp'];
@@ -62,7 +58,7 @@ function addinfo()
 
         //if(time() - (int)$lastconn > 600) { //If last connection is greater than ten mintutes update it.
 
-        mysqli_query($db, "UPDATE $dbtableinfo SET lastconn='$datetime' WHERE ip_address='$ip'") or die('Could not update user info: ' . mysqli_error());
+        mysqli_query($db, "UPDATE $dbtableinfo SET lastconn='$datetime' WHERE ip_address='$ip'") or die('Could not update user info: ' . mysqli_error($db));
 
         //}
 
@@ -70,14 +66,13 @@ function addinfo()
 
         if (!stilltoday($lastconn)) {
             //Dialy bonus
-            mysqli_query($db, "UPDATE $dbtableinfo SET remainingvisits='$remainingvisits' WHERE ip_address='$ip'") or die('Could not update user info: ' . mysqli_error());
+            mysqli_query($db, "UPDATE $dbtableinfo SET remainingvisits='$remainingvisits' WHERE ip_address='$ip'") or die('Could not update user info: ' . mysqli_error($db));
         }
 
         $proceed = false;
 
         if ($refer != null) //There is a referer, and a refered user
         {
-
             //Refer data
 
             $row2 = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM $dbtableinfo WHERE id='$refer'"));
@@ -89,10 +84,8 @@ function addinfo()
 
             if ($refer != getmyreferid()) //The simplest thing is check that the current user is the same in the variable index.php?ref=id
             {
-
                 if (!checkisbanned($ip) && maxviewsperday() && userexists($refer)) //Check if the current visitor's ip is banned and the maxviewsperday is actually available.
                 {
-
                     //For Debugging...
                     /*setpoints($refer, 1);
                     newvisited($refer, time());*/
@@ -130,7 +123,6 @@ function addinfo()
             recalculatelvl($id, $lvl, $exp);
             sumvisit($refer);
         }
-
     }
 }
 
@@ -152,7 +144,6 @@ function getdailybonus()
         $morepoints = round(pow(120 * $mult, 1 + $lvl / 100));
         setpoints($id, $morepoints);
     }
-
 }
 
 function newvisited($user, $date)

@@ -12,7 +12,7 @@ if (isset($newreport)) {
     //Variables
     (int)$user_id = getmyreferid();
     (int)$reported = $_POST['ruid'];
-    $reason = mysqli_real_escape_string($_POST['reason']);
+    $reason = mysqli_real_escape_string($db, $_POST['reason']);
     (int)$creation = time();
 
     session_start();

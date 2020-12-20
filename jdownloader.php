@@ -24,9 +24,7 @@ function encrypturl($link) {
 
 function jdcheck() 
 {
-
 	if(empty($_POST['jdownloader'])) {
-
 		echo '<script language="javascript">
 		   var jdownloader=false;
 		</script>
@@ -47,15 +45,10 @@ function jdcheck()
 		</script>';
 
 		echo '<form id="jdcheck" method="post"><input type="hidden" name="jdownloader" id="jdbool" /></form>';
-
-	} else
-	{
-
+	} else {
 		setarraytocookie("Jdownloader", $_POST['jdownloader']);
-		echo '<script language="javascript">location.reload(true);</script>';
-
+		// echo '<script language="javascript">location.reload(true);</script>';
 	}
-
 }
 
 ?>

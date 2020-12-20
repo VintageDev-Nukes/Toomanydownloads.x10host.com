@@ -132,7 +132,7 @@ function smf_db_replacement__callback($matches)
 
 		case 'string':
 		case 'text':
-			return sprintf('\'%1$s\'', mysqli_real_escape_string($replacement, $connection));
+			return sprintf('\'%1$s\'', mysqli_real_escape_string($db, $replacement, $connection));
 		break;
 
 		case 'array_int':
@@ -163,7 +163,7 @@ function smf_db_replacement__callback($matches)
 					smf_db_error_backtrace('Database error, given array of string values is empty. (' . $matches[2] . ')', '', E_USER_ERROR, __FILE__, __LINE__);
 
 				foreach ($replacement as $key => $value)
-					$replacement[$key] = sprintf('\'%1$s\'', mysqli_real_escape_string($value, $connection));
+					$replacement[$key] = sprintf('\'%1$s\'', mysqli_real_escape_string($db, $value, $connection));
 
 				return implode(', ', $replacement);
 			}

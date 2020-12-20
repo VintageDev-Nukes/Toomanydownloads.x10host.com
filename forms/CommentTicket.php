@@ -6,10 +6,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/motor.php');
 $continue = true;
 
 (int)$id = getmyreferid();
-(int)$ticket_id = mysqli_real_escape_string($_POST['ticket_id']);
+(int)$ticket_id = mysqli_real_escape_string($db, $_POST['ticket_id']);
 (int)$creation = time();
 
-$comment = mysqli_real_escape_string($_POST['comment']);
+$comment = mysqli_real_escape_string($db, $_POST['comment']);
 
 session_start();
 

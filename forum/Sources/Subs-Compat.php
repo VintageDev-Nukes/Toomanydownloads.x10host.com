@@ -234,7 +234,7 @@ if (!function_exists('array_diff_key'))
 
 if (!function_exists('mysqli_real_escape_string'))
 {
-	function mysqli_real_escape_string($string, $connection = null)
+	function mysqli_real_escape_string($db, $string, $connection = null)
 	{
 		return mysqli_escape_string($string);
 	}
