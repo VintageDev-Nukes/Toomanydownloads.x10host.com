@@ -207,7 +207,7 @@ echo '</div>
 				<div class="button"><a href="#" style="line-height:40px;text-decoration:none;font-size:23px;color:yellowgreen;" title="' . getmypoints() . '">' . getmypoints(true) . '</a></div>
 			</div>
 			<div style="float:right;height:40px;">
-				<input class="referlink" type="text" style="width:50%;height:40px;float:right;min-width:282px;" readonly="readonly" value="?ref=' . $id . '" />
+				<input class="referlink" type="text" style="width:50%;height:40px;float:right;min-width:282px;" readonly="readonly" value="https://'.$_SERVER['SERVER_NAME'].'/?ref=' . $id . '" />
 				<span style="color:#999;font-size:23px;position: relative;left: -5px;top:6.5px;float:right;">Link de referido =></span>
 				<br class="clear">
 			</div>

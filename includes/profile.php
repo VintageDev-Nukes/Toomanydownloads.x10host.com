@@ -1,6 +1,4 @@
-<?php 
-
-session_start();
+<?php
 
 $uid = @$_GET['id'];
 $current_action = @$_GET['action'];
@@ -121,7 +119,7 @@ echo '<table style="margin-top:20px;width:80%;margin-left:10%;">
 						  		<div style="position: relative;z-index: 2;top: 15px;margin-bottom: 25px;" onmouseover="javascript:show(\'chga\');" onmouseout="javascript:hide(\'chga\');">
 							  		<div style="width: 127px;height: 129px;border: 9px '.$statecolor.' solid;margin: 0 0 45px 23px;border-radius: 20px;position: relative;top: -20px;"></div>
 							  		<img src="'.$avatarstr. '" style="display: block;margin: -198px 0 0 32;width: 126px;height: 126px;position: relative;top: -4px;">
-							  		<img src="../imgs/msn-frame.png" style="margin: -213px 0 0 0;position: relative;top: 51px;">';
+							  		<img src="imgs/msn-frame.png" style="margin: -213px 0 0 0;position: relative;top: 51px;">';
 
 							  		if($acc_prior > getprior("free") && $uid == $id) {
 							  			echo '<div class="changeavatar" id="chga" style="display:none;position: absolute;"><a href="#t" name="t" onclick="javascript:show(\'changeavatar\');">Cambiar</a></div>';
