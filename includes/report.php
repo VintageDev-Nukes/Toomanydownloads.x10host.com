@@ -20,7 +20,7 @@ echo '<div class="union" style="margin-top:20px;width:80%;margin-left:10%;">
 					session_destroy();
 				}
 
-				echo '<form id="ureporter" method="post" action="http://'.$_SERVER['SERVER_NAME'].'/forms/UserReport.php">';
+				echo '<form id="ureporter" method="post" action="forms/UserReport.php">';
 
 				$ruid = @$_GET['id'];
 
@@ -74,7 +74,7 @@ echo '<div class="union" style="margin-top:20px;width:80%;margin-left:10%;">
 				}
 
 				echo '<h4 style="margin:0px;">Captcha:</h4>
-						<img src="http://'.$_SERVER['SERVER_NAME'].'/captcha/captcha.php"/><br>
+						<img src="captcha/captcha.php"/><br>
 						<input type="text" name="vercode" style="margin-left: 0px;width: 80px;" /><br><br>
 						<input type="submit" name="reported" value="Reportar usuario" style="display:block;margin:auto;" />
 						<br>

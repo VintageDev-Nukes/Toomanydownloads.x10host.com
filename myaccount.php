@@ -58,7 +58,7 @@ echo '<div class="contenido">
       echo '<pre>'.$_GET['test'].'</pre>';
     }*/
     
-  	echo '<form id="form1" name="form1" method="post" action="http://'.$_SERVER['SERVER_NAME'].'/forms/AccountManager.php">
+  	echo '<form id="form1" name="form1" method="post" action="forms/AccountManager.php">
       <table width="80%" align="center" class="tbl">
         <tbody>
           <tr>
@@ -100,7 +100,7 @@ echo '<div class="contenido">
             </td>
             <td align="center" class="tbl">
               <h3>
-                http://'.$_SERVER['SERVER_NAME'].'/?ref='.$id.'
+                ?ref='.$id.'
               </h3>
             </td>
           </tr>

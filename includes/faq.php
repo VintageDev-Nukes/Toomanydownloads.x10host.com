@@ -18,7 +18,7 @@ echo '<div class="contenido">
 		<b>+ ¿Hay alguna forma de ganar puntos más rápido?</b><br>
 		- Todo Spam nunca es malo, eso sí, ten cuidado donde lo envías. (Puedes ser reportado y baneado).<br>
 		Subiendo de nivel, o desbloqueando el bonus diario.
-		También puedes ayudarnos mandando tus links <a target="_nofollow" href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=share"><u>aquí</u></a>. Ganarás de 500 a 2500 puntos y 0,05$.
+		También puedes ayudarnos mandando tus links <a target="_nofollow" href="index.php?action=share"><u>aquí</u></a>. Ganarás de 500 a 2500 puntos y 0,05$.
 
 		<br><br>
 

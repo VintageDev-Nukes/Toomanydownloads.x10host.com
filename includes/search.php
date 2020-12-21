@@ -23,7 +23,7 @@ if(empty($search) && empty($advsearch))
 	$errors['empty_search'] = 'Debe introducir un valor de busqueda.';
 	$_SESSION['search_errors'] = $errors;
 
-	header('Location: http://'.$_SERVER['SERVER_NAME'].'/');
+	header('Location: ');
 
 } else if(isset($search) && empty($advanced) && empty($advsearch))
 {
@@ -70,12 +70,12 @@ if(empty($search) && empty($advsearch))
 	
 		}
 	
-		echo '<form action="http://'.$_SERVER['SERVER_NAME'].'/"><input type="submit" value="Mostrar más resultados" style="display:block;margin:auto;"></form>';
+		echo '<form action=""><input type="submit" value="Mostrar más resultados" style="display:block;margin:auto;"></form>';
 
 	} else 
 	{
 		echo 'No hubo ningún resultado.
-		<form action="http://'.$_SERVER['SERVER_NAME'].'/"><input type="submit" value="Volver al inicio" style="display:block;margin:auto;"></form>';
+		<form action=""><input type="submit" value="Volver al inicio" style="display:block;margin:auto;"></form>';
 	}
 
 	echo '</div>
@@ -86,7 +86,7 @@ if(empty($search) && empty($advsearch))
 	$errors['empty_advsearch'] = 'Debe introducir un valor de busqueda.';
 	$_SESSION['advsearch_errors'] = $errors;
 
-	header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=advsearch');
+	header('Location: index.php?action=advsearch');
 } else if(isset($advanced) && isset($advsearch) && empty($search)) 
 {
 	//Show results...
@@ -155,12 +155,12 @@ if(empty($search) && empty($advsearch))
 	
 		}
 
-		echo '<form action="http://'.$_SERVER['SERVER_NAME'].'/"><input type="submit" value="Mostrar más resultados" style="display:block;margin:auto;"></form>';
+		echo '<form action=""><input type="submit" value="Mostrar más resultados" style="display:block;margin:auto;"></form>';
 
 		} else 
 		{
 			echo 'No hubo ningún resultado.
-			<form action="http://'.$_SERVER['SERVER_NAME'].'/"><input type="submit" value="Volver al inicio" style="display:block;margin:auto;"></form>';
+			<form action=""><input type="submit" value="Volver al inicio" style="display:block;margin:auto;"></form>';
 		}
 
 	}

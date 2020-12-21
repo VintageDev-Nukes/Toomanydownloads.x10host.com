@@ -19,7 +19,7 @@ echo '<table class="admintable" cellspacing="0">
   if(mysqli_num_rows($result)) {
     while($rs=mysqli_fetch_array($result))  {
     	if(isnew("report_".$rs['id'])) {
-      		echo '<tr><td>'.$rs['id'].'</td><td>Usuario #'.$rs['reported_user'].' ha sido reportado por el usuario #'.$rs['reported_by'].' hace '.strdate($rs['creation']).'</td><td>[<a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=admin&go=report&id='.$rs['id'].'" target="_blank">Ver</a>]<br></td></tr>';
+      		echo '<tr><td>'.$rs['id'].'</td><td>Usuario #'.$rs['reported_user'].' ha sido reportado por el usuario #'.$rs['reported_by'].' hace '.strdate($rs['creation']).'</td><td>[<a href="index.php?action=admin&go=report&id='.$rs['id'].'" target="_blank">Ver</a>]<br></td></tr>';
     	}
     }
   } else {
@@ -44,7 +44,7 @@ echo '<table class="admintable" cellspacing="0" style="margin-top:20px;">
   if(mysqli_num_rows($result)) {
     while($rs=mysqli_fetch_array($result))  {
     	if(!isnew("report_".$rs['id'])) {
-      		echo '<tr><td>'.$rs['id'].'</td><td>Usuario #'.$rs['reported_user'].' ha sido reportado por el usuario #'.$rs['reported_by'].' hace '.strdate($rs['creation']).'</td><td>[<a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=admin&go=report&id='.$rs['id'].'" target="_blank">Ver</a>]<br></td></tr>';
+      		echo '<tr><td>'.$rs['id'].'</td><td>Usuario #'.$rs['reported_user'].' ha sido reportado por el usuario #'.$rs['reported_by'].' hace '.strdate($rs['creation']).'</td><td>[<a href="index.php?action=admin&go=report&id='.$rs['id'].'" target="_blank">Ver</a>]<br></td></tr>';
     	}
     }
   } else {
@@ -73,10 +73,10 @@ echo '<table class="admintable" cellspacing="0" style="margin-top:20px;">
 
 		if($row['nickname'] == null) 
 		{
-		  	$nick = '<a href="http://'.$_SERVER['SERVER_NAME'].'/?action=profile&id='.$user_id.'" target="_blank"><u>#user'.$user_id.'</u></a>';
+		  	$nick = '<a href="index.php?action=profile&id='.$user_id.'" target="_blank"><u>#user'.$user_id.'</u></a>';
 		} else 
 		{
-		  	$nick = '<a href="http://'.$_SERVER['SERVER_NAME'].'/?action=profile&id='.$cur_id.'" target="_blank"><u>'.$row['nickname'].'</u></a>';
+		  	$nick = '<a href="index.php?action=profile&id='.$cur_id.'" target="_blank"><u>'.$row['nickname'].'</u></a>';
 		}
 
     	echo '<table class="admintable" cellspacing="0">

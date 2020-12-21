@@ -11,7 +11,7 @@ if(isset($gdid))
 
 	if(!mysqli_num_rows($get_itemdata_query))
 	{
-		header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=404');
+		header('Location: index.php?action=404');
 	}
 
 	$rs1 = mysqli_fetch_array($get_itemdata_query);
@@ -26,7 +26,7 @@ if(isset($gdid))
 
 		if(!mysqli_num_rows($get_gamedata_query))
 		{
-			header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=404');
+			header('Location: index.php?action=404');
 		}
 
 		$rs2 = mysqli_fetch_array($get_gamedata_query);
@@ -204,7 +204,7 @@ if(isset($gdid))
 						{
 							echo '<FORM id="downloadgame_'.$rsa['id'].'" ACTION="http://127.0.0.1:9666/flash/addcrypted2" target="hidden" METHOD="POST" onsubmit="javascript:sended('.$rs1['id'].');">
 		   							<INPUT TYPE="hidden" NAME="passwords" VALUE="myPassword"> 
-		   							<INPUT TYPE="hidden" NAME="source" VALUE="http://'.$_SERVER['SERVER_NAME'].'/">  
+		   							<INPUT TYPE="hidden" NAME="source" VALUE="">  
 		   							<INPUT TYPE="hidden" NAME="jk" VALUE="function f(){ return \'31323334353637383930393837363534\';}">
 		   							<INPUT TYPE="hidden" NAME="crypted" VALUE="'.$rsa['url'].'">
 		   							<INPUT TYPE="hidden" NAME="id" VALUE="'.$rsa['id'].'">
@@ -250,7 +250,7 @@ if(isset($gdid))
 
 } else 
 {
-	header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=404');
+	header('Location: index.php?action=404');
 }
 
 ?>

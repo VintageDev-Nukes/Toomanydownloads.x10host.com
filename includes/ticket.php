@@ -36,11 +36,11 @@ if($go == 'mytickets')
 	if(mysqli_num_rows($result)) {
 		echo '<table cellspacing="0" class="showtickets"><tr class="showticketheader"><td style="width: 75%;">Ticket</td><td style="width: 100px;text-align: center;">Nº de respuestas</td><td style="width: 120px;text-align: center;">Última respuesta</td></tr>';
 	  	while($rs=mysqli_fetch_array($result)) {
-			echo'<tr class="ticketlist"><td><a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=ticket&go=show&id='.$rs['id'].'">'.$rs['titulo'].'</a></td><td></td><td></td></tr>'; 
+			echo'<tr class="ticketlist"><td><a href="index.php?action=ticket&go=show&id='.$rs['id'].'">'.$rs['titulo'].'</a></td><td></td><td></td></tr>';
 		}
 		echo '</table>';
 	} else {
-		echo 'Actualmente no tienes ningún ticket. <a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=ticket&go=create"><u>Haz click aquí para crear uno</u></a>.';
+		echo 'Actualmente no tienes ningún ticket. <a href="index.php?action=ticket&go=create"><u>Haz click aquí para crear uno</u></a>.';
 	}
 
 	echo '</div>';
@@ -56,7 +56,7 @@ if($go == 'mytickets')
 
 echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 
-<form method="post" action="http://'.$_SERVER['SERVER_NAME'].'/forms/TicketManager.php">';
+<form method="post" action="forms/TicketManager.php">';
 
 	if(isset($errors['empty_title'])) 
 	{
@@ -86,7 +86,7 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 	}
 
 	echo '<h4 style="margin:0px;">Captcha:</h4>
-	<img src="http://'.$_SERVER['SERVER_NAME'].'/captcha/captcha.php"/><br>
+	<img src="captcha/captcha.php"/><br>
 	<input type="text" name="vercode" style="margin-left: 0px;width: 80px;" /><br><br>
 	<input type="submit" name="newticket" value="Enviar" style="display:block;margin:auto;" />
 </form>';
@@ -104,7 +104,7 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 	$get_creator_query = mysqli_query($db, "SELECT user_id as user_id, state as state FROM ticket WHERE id='$ticket_id'");
 	
 	if(!mysqli_num_rows($get_creator_query)) {
-		header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=404');
+		header('Location: index.php?action=404');
 	}
 
 	$row = mysqli_fetch_array($get_creator_query);
@@ -147,10 +147,10 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 
 		if($row['nickname'] == null) 
 		{
-		  	$nick = '<a href="http://'.$_SERVER['SERVER_NAME'].'/?action=profile&id='.$user_id.'" target="_blank"><u>Usuario #'.$user_id.'</u></a>';
+		  	$nick = '<a href="index.php?action=profile&id='.$user_id.'" target="_blank"><u>Usuario #'.$user_id.'</u></a>';
 		} else 
 		{
-		  	$nick = '<a href="http://'.$_SERVER['SERVER_NAME'].'/?action=profile&id='.$cur_id.'" target="_blank"><u>'.$row['nickname'].'</u></a>';
+		  	$nick = '<a href="index.php?action=profile&id='.$cur_id.'" target="_blank"><u>'.$row['nickname'].'</u></a>';
 		}
 		  		
 		$ticketquery = mysqli_query($db, "SELECT * FROM ticket WHERE id='$ticket_id'");
@@ -164,7 +164,7 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 			</script>';
 
 			if($acc_prior >= getprior('mod')) {
-				echo '<form id="changeticket" action="http://'.$_SERVER['SERVER_NAME'].'/forms/ChangeTicketStatus.php" method="post">
+				echo '<form id="changeticket" action="forms/ChangeTicketStatus.php" method="post">
 					<input type="hidden" id="delete_id" name="delete_id" />
 					<input type="hidden" id="close_id" name="close_id" />
 				</form>';
@@ -277,7 +277,7 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 						  	$nickname = 'Agente de soporte';
 						} else if($commenter_id == $id)
 						{
-						  	$nickname = '<a href="http://'.$_SERVER['SERVER_NAME'].'/?action=profile&id='.$commenter_id.'" target="_blank"><u>'.$nick.'</u></a>';
+						  	$nickname = '<a href="index.php?action=profile&id='.$commenter_id.'" target="_blank"><u>'.$nick.'</u></a>';
 						}
 
 						$times++;
@@ -310,7 +310,7 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 
 		if($state != 'closed') {
 
-			echo '<form action="http://'.$_SERVER['SERVER_NAME'].'/forms/TicketManager.php" method="post">
+			echo '<form action="forms/TicketManager.php" method="post">
 					<table class="ticketbody">
 						<tr>
 						<td>
@@ -373,7 +373,7 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 
 } else 
 {
-	header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=404');
+	header('Location: index.php?action=404');
 }
 
 ?>

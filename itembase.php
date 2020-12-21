@@ -11,7 +11,7 @@
 	    	echo '<div class="grid_1" id="item">
 				<div class="reward_image">
 					<h5 title="'.number_format($rs['points']*$mult, 0, ',', '.').' puntos">'.$ptstring.'</h5>
-					<a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=itemdata&id='.$rs['id'].'" style="position: absolute;right: 0px;margin: 3px 5px 0 0;"><img src="imgs/itemdata.png" /></a>
+					<a href="index.php?action=itemdata&id='.$rs['id'].'" style="position: absolute;right: 0px;margin: 3px 5px 0 0;"><img src="imgs/itemdata.png" /></a>
 					<img src="'.$rs['thumb'].'" alt="'.$rs['description'].'" width="180" height="180">
 				</div>
 				<div class="reward_text">
@@ -39,7 +39,7 @@
 								    <h1>Descargar con JDownloader:</h1>
 								    <FORM id="downloadgame_'.$rs['id'].'" ACTION="http://127.0.0.1:9666/flash/addcrypted2" target="hidden" METHOD="POST" onsubmit="javascript:sended('.$rs['id'].');">
 			   							<INPUT TYPE="hidden" NAME="passwords" VALUE="myPassword"> 
-			   							<INPUT TYPE="hidden" NAME="source" VALUE="http://'.$_SERVER['SERVER_NAME'].'/">  
+			   							<INPUT TYPE="hidden" NAME="source" VALUE="">  
 			   							<INPUT TYPE="hidden" NAME="jk" VALUE="function f(){ return \'31323334353637383930393837363534\';}">
 			   							<INPUT TYPE="hidden" NAME="crypted" VALUE="'.encrypturl($rs['url']).'">
 			   							<INPUT TYPE="hidden" NAME="id" VALUE="'.$rs['id'].'">
@@ -50,7 +50,7 @@
 
 								echo '<hr style="margin-top: 20px;width: 90%;border: 1px #111 dashed;"><h1>... O quizás desees ver su ficha ténica:
 
-								<form action="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=itemdata&id='.$rs['id'].'"><input type="submit" value="Ver la ficha ténica de este Item" /></form></h1>';
+								<form action="index.php?action=itemdata&id='.$rs['id'].'"><input type="submit" value="Ver la ficha ténica de este Item" /></form></h1>';
 
 							  echo '</div>
 						</div>';
@@ -76,14 +76,14 @@
 							  <h1>Descarga del archivo:</h1>
 							   <FORM id="downloadgame_'.$rs['id'].'" ACTION="http://127.0.0.1:9666/flash/addcrypted2" target="hidden" METHOD="POST" onsubmit="javascript:sended('.$rs['id'].');">
 		   							<INPUT TYPE="hidden" NAME="passwords" VALUE="myPassword"> 
-		   							<INPUT TYPE="hidden" NAME="source" VALUE="http://'.$_SERVER['SERVER_NAME'].'/">  
+		   							<INPUT TYPE="hidden" NAME="source" VALUE="">  
 		   							<INPUT TYPE="hidden" NAME="jk" VALUE="function f(){ return \'31323334353637383930393837363534\';}">
 		   							<INPUT TYPE="hidden" NAME="crypted" VALUE="'.$rs['url'].'">
 		   							<INPUT TYPE="hidden" NAME="id" VALUE="'.$rs['id'].'">
 		   							<input name="downloaded" type="submit" value="Descargar" />
 								</FORM>
 								<hr style="margin-top: 20px;width: 90%;border: 1px #111 dashed;"><h1>... O quizás desees ver su ficha ténica:
-								<form action="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=itemdata&id='.$rs['id'].'"><input type="submit" value="Ver la ficha ténica de este Item" /></form></h1>
+								<form action="index.php?action=itemdata&id='.$rs['id'].'"><input type="submit" value="Ver la ficha ténica de este Item" /></form></h1>
 							  </div>
 						</div>';
 

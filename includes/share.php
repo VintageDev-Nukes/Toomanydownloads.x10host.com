@@ -8,7 +8,7 @@ echo '<div class="union" style="margin-left:10%;width:80%;margin-top:20px;">
 								<div class="inside">
 									<h1 style="color:#fff!important;">Gana rango colaborador 2000 puntos y 5$.</h1>';
 
-		echo '<form method="post" action="http://'.$_SERVER['SERVER_NAME'].'/forms/ItemManager.php">';
+		echo '<form method="post" action="forms/ItemManager.php">';
 
 		if(isset($errors['empty_name'])) 
 		{
@@ -56,7 +56,7 @@ echo '<div class="union" style="margin-left:10%;width:80%;margin-top:20px;">
 		}
 
 		echo '<b>Captcha:</b><br>
-		<img src="http://'.$_SERVER['SERVER_NAME'].'/captcha/captcha.php"/><br>
+		<img src="captcha/captcha.php"/><br>
 		<input type="text" name="vercode" style="margin-left: 0px;width: 80px;" /><br><br>';
 
 		echo '<input type="hidden" name="sended_by" value="'.$id.'" />

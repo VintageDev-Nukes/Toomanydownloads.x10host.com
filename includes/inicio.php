@@ -185,7 +185,7 @@ Buscador
 
 	//Añadir opción de busqueda avanzada
 
-		echo '<form method="post" action="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=search">
+		echo '<form method="post" action="index.php?action=search">
 			<input type="text" name="search" size="10" maxlength="30" placeholder="Busqueda" />
 			<br>
 			<input type="hidden" name="cat" value="'.$cat. '">
@@ -271,10 +271,10 @@ Top usuarios
 
   				if($row['nickname'] == null) 
   				{
-  					$nick = '<a href="http://'.$_SERVER['SERVER_NAME'].'/?action=profile&id='.$cur_id.'" target="_blank"><u>Usuario #'.$cur_id.'</u></a>;';
+  					$nick = '<a href="index.php?action=profile&id='.$cur_id.'" target="_blank"><u>Usuario #'.$cur_id.'</u></a>;';
   				} else 
   				{
-  					$nick = '<a href="http://'.$_SERVER['SERVER_NAME'].'/?action=profile&id='.$cur_id.'" target="_blank"><u>'.$row['nickname'].'</u></a>:';
+  					$nick = '<a href="index.php?action=profile&id='.$cur_id.'" target="_blank"><u>'.$row['nickname'].'</u></a>:';
   				}
   				
   				$times++;

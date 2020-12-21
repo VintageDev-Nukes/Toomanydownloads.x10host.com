@@ -11,7 +11,7 @@ $get_user_query = mysqli_query($db, "SELECT * FROM users WHERE id='$uid'");
 
 if(!mysqli_num_rows($get_user_query))
 {
-	header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=404');
+	header('Location: index.php?action=404');
 }
 
 $row = mysqli_fetch_array($get_user_query);
@@ -45,7 +45,7 @@ $uuweb = $row['website_url'];
 
 if($uacc_prior == -3)
 {
-	header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=404');
+	header('Location: index.php?action=404');
 }
 
 $nick = "";
@@ -149,7 +149,7 @@ echo '<table style="margin-top:20px;width:80%;margin-left:10%;">
 										<span style="color:#acacac;">Última conexión hace '.strdate($ulastconn).'</span>
 									</td>
 									<td>
-									<form id="upt_ptxt" method="post" action="http://'.$_SERVER['SERVER_NAME'].'/forms/AccountManager.php" style="display:none;position: absolute;">
+									<form id="upt_ptxt" method="post" action="forms/AccountManager.php" style="display:none;position: absolute;">
 										<div class="personal_txt" style="position: absolute;min-width: 300px;max-width: 900px;width: 30%;margin-top: -38px;margin-left: 16px;z-index: 1;padding: 5px;font-size:12px;">
 											<div class="pointer"></div>
 											<div class="pointerBorder" style="display: none"></div>
@@ -419,7 +419,7 @@ if($acc_prior <= getprior("free")) {
 	$actstr = 'class="noact" title="(Sólo disponible en cuentas activadas)"';
 } else {
 	$link_close = '</a>';
-	$link[0] = '<a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=account&edit=info">';
+	$link[0] = '<a href="index.php?action=account&edit=info">';
 }
 
 echo '<table class="accounttable" style="margin-top:20px;width:80%;margin-left:10%;">
@@ -431,7 +431,7 @@ echo '<table class="accounttable" style="margin-top:20px;width:80%;margin-left:1
 				</div>
 				<div class="contenido">
 				  <div class="inside" style="text-align:center;">
-				  	<div class="profilebutton"><a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=account">Ver cuenta</a></div>
+				  	<div class="profilebutton"><a href="index.php?action=account">Ver cuenta</a></div>
 				  </div>
 				</div>
 			</div>
@@ -441,7 +441,7 @@ echo '<table class="accounttable" style="margin-top:20px;width:80%;margin-left:1
 				</div>
 				<div class="contenido">
 				  <div class="inside" style="text-align:center;">
-				  	<div class="profilebutton"><a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=account&edit=conf">Conf. de la cuenta</a></div>
+				  	<div class="profilebutton"><a href="index.php?action=account&edit=conf">Conf. de la cuenta</a></div>
 				  	<div '.$actstr.' style="display:block!important;">'.$link[0].'Info. de la cuenta'.$link_close.'</div>
 				  </div>
 				</div>
@@ -453,7 +453,7 @@ $edit = @$_GET['edit'];
 
 if($edit == 'conf') {
 
-	echo '<form id="form1" name="form1" method="post" action="http://'.$_SERVER['SERVER_NAME'].'/forms/AccountManager.php">
+	echo '<form id="form1" name="form1" method="post" action="forms/AccountManager.php">
 	<div class="union">
 				<div class="box_title">
 					Editar perfil
@@ -596,7 +596,7 @@ if($edit == 'conf') {
 
 } else if($edit == 'info') {
 
-echo '<form id="form1" name="form1" method="post" action="http://'.$_SERVER['SERVER_NAME'].'/forms/AccountManager.php">
+echo '<form id="form1" name="form1" method="post" action="forms/AccountManager.php">
 	<div class="union">
 				<div class="box_title">
 					Editar perfil
@@ -857,7 +857,7 @@ echo '<form id="form1" name="form1" method="post" action="http://'.$_SERVER['SER
 				            </td>
 				            <td align="center" class="tbl">
 				              <h3>
-				                http://'.$_SERVER['SERVER_NAME'].'/?ref='.$id.'
+				                ?ref='.$id.'
 				              </h3>
 				            </td>
 				          </tr>

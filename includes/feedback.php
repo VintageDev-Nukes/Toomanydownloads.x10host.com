@@ -36,10 +36,10 @@ echo '<div class="contenido">
 
 			  		if($row['nickname'] == null) 
 			  		{
-			  		  	$nick = '<a href="http://'.$_SERVER['SERVER_NAME'].'/?action=profile&id='.$user_id.'" target="_blank"><i>#user'.$user_id.'</i></a>';
+			  		  	$nick = '<a href="index.php?action=profile&id='.$user_id.'" target="_blank"><i>#user'.$user_id.'</i></a>';
 			  		} else 
 			  		{
-			  		  	$nick = '<a href="http://'.$_SERVER['SERVER_NAME'].'/?action=profile&id='.$cur_id.'" target="_blank"><i>'.$row['nickname'].'</i></a>';
+			  		  	$nick = '<a href="index.php?action=profile&id='.$cur_id.'" target="_blank"><i>'.$row['nickname'].'</i></a>';
 			  		}
 
 		    		echo '<tr><td>'.$rs['mensaje'].'</td><td>Hace '.strdate($rs['creation']).'</td><td>'.$nick.'</td></tr>';
@@ -64,7 +64,7 @@ echo '<div class="contenido">
 			echo '<div class="error" style="width:100%;margin:5px 0 5px 0;">'.$errors['empty_mensaje'].'</div>';
 		}
 
-		echo '<form method="post" action="http://'.$_SERVER['SERVER_NAME'].'/forms/FeedBackManager.php">
+		echo '<form method="post" action="forms/FeedBackManager.php">
 			<table class="admintable" cellspacing="0" style="margin-top:20px;">
 		        <tr>
 		          <td>Añadir comentario</td>

@@ -19,6 +19,6 @@ mysqli_query($db, "UPDATE users SET points='$newpoints' WHERE id='$id'");
 
 mysqli_query($db, "UPDATE items SET downloads = downloads + 1 WHERE id='$game_id'");
 
-header('Location: http://'.$_SERVER['SERVER_NAME'].'/');
+header('Location: ');
 
 ?>

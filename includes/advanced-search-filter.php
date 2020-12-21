@@ -16,7 +16,7 @@ echo '<div class="contenido">
 			}
 		}
 
-		echo '<form method="post" action="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=search">
+		echo '<form method="post" action="index.php?action=search">
 			<h2 style="display:inline;padding-right:10px;">Buscar por:</h2>
 			<input type="text" name="advtext" size="20" placeholder="Busqueda" />
 			<div class="advsearchdiv" style="display:inline;width:120px;position: relative;top: -2px;">

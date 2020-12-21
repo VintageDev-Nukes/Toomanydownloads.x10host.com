@@ -101,7 +101,7 @@ if (isset($_POST['newemail'])) {
     }
 
     /*$titulo = 'Verificación de email';
-    $mensaje = 'Hola,<br><br>gracias por registrarte en nuestra página web, haz click en el siguiente enlace para activar tu cuenta:<br>http://'.$_SERVER['SERVER_NAME'].'/index.php?action=confirm&time='.md5(time()).'&key='.$activation.'<br><br>'.(200/$multiplier).' puntos serán añadidos a su cuenta después de la activación.<br><br>Saludos,<br>el administrador de TooManyDownloads!<br>http://'.$_SERVER['SERVER_NAME'].'/';
+    $mensaje = 'Hola,<br><br>gracias por registrarte en nuestra página web, haz click en el siguiente enlace para activar tu cuenta:<br>index.php?action=confirm&time='.md5(time()).'&key='.$activation.'<br><br>'.(200/$multiplier).' puntos serán añadidos a su cuenta después de la activación.<br><br>Saludos,<br>el administrador de TooManyDownloads!<br>';
     $cabeceras = 'From: noreply@toomanydownloads.com';
 
     mail($email, $titulo, $mensaje, $cabeceras);
@@ -336,7 +336,7 @@ if (isset($_POST['newavatar'])) {
     }*/
 
     //Finally, go to the last position.
-    //header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=account&edit=info');
+    //header('Location: index.php?action=account&edit=info');
     header('Location: index.php?action=profile&id=' . $id);
 
 }

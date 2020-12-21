@@ -72,7 +72,7 @@ echo '<style>
 //<!--- Iframes -->
 
 /*echo '<div id="content" style="background: url(imgs/fondot.png) 0 0 repeat fixed; width:100%; height:100%; position:fixed; left:0; top:0; z-index:20; display:none;" onclick=\'hide("content")+restart(\'http://'.$_SERVER['SERVER_NAME'].'>/admin/itemAdder.php\')">
-  <img style="position:absolute; right: 50%; top: 50%; margin-right: -424px; margin-top: -324px; z-index:30;" src="imgs/RedCross.png" onclick="hide(\'content\')+restart(\'http://'.$_SERVER['SERVER_NAME'].'/admin/itemAdder.php\')" />
+  <img style="position:absolute; right: 50%; top: 50%; margin-right: -424px; margin-top: -324px; z-index:30;" src="imgs/RedCross.png" onclick="hide(\'content\')+restart(\'admin/itemAdder.php\')" />
   <div id="boxt" class="transbox" style="z-index:25; position: absolute; left: 50%; top: 50%; width: 800px; height: 600px; margin-top: -300px; margin-left: -400px; overflow: auto; background: #fff; border: 1px #000 solid;">
     <iframe id="frame" style="width:100%;height:100%;border:none;"></iframe>
   </div>
@@ -189,7 +189,7 @@ $result = mysqli_query($db, $query) or die(mysqli_error()); //Aquí se muestra e
 
 if(mysqli_num_rows($result)) {
 while($rs=mysqli_fetch_array($result))  {
-  echo $rs['id'].'.- '.$rs['name'].' [Editar] [<form id="delete" style="display:inline;" action="http://'.$_SERVER['SERVER_NAME'].'/forms/ItemManager.php"><a href="#" onclick="javascript:deleteConfirm();">Quitar</a><input type="hidden" name="delete_id" value="'.$rs['id'].'" /></form>]<br>';
+  echo $rs['id'].'.- '.$rs['name'].' [Editar] [<form id="delete" style="display:inline;" action="forms/ItemManager.php"><a href="#" onclick="javascript:deleteConfirm();">Quitar</a><input type="hidden" name="delete_id" value="'.$rs['id'].'" /></form>]<br>';
 }
 } else {
 echo 'No hay ningún resultado disponible, añade un nuevo item para que esta lista no esté vacía.';

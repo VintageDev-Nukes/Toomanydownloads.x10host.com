@@ -72,9 +72,9 @@ if (empty($rid)) {
             $row = mysqli_fetch_array(mysqli_query($db, "SELECT nickname FROM users WHERE id='$user_id'"));
 
             if ($row['nickname'] == null) {
-                $nick = '<a href="?action=profile&id=' . $user_id . '" target="_blank"><u>#user' . $user_id . '</u></a>';
+                $nick = '<a href="index.php?action=profile&id=' . $user_id . '" target="_blank"><u>#user' . $user_id . '</u></a>';
             } else {
-                $nick = '<a href="?action=profile&id=' . $cur_id . '" target="_blank"><u>' . $row['nickname'] . '</u></a>';
+                $nick = '<a href="index.php?action=profile&id=' . $cur_id . '" target="_blank"><u>' . $row['nickname'] . '</u></a>';
             }
 
             echo '<table class="admintable" cellspacing="0">

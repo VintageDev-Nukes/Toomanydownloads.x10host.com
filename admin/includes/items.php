@@ -106,7 +106,7 @@ if (empty($editid) && empty($editdata) && empty($newadd)) {
     }*/
 
     /*echo '<b>Captcha:</b><br>
-    <img src="http://'.$_SERVER['SERVER_NAME'].'/captcha/captcha.php"/><br>
+    <img src="captcha/captcha.php"/><br>
     <input type="text" name="vercode" style="margin-left: 0px;width: 80px;" /><br><br>';*/
 
     echo '<input type="hidden" name="edititem_id" id="' . $editid . '" />
