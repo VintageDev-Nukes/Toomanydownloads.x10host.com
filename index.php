@@ -292,44 +292,44 @@ switch ($action) {
 
     //Index (hecho)
     case 'index':
-        include_once('inicio.php');
+        include_once('includes/inicio.php');
         break;
 
     //See my account and edit it (hecho)
     case 'account':
-        include_once('profile.php');
+        include_once('includes/profile.php');
         break;
 
     //See my current stats (hecho: 70%) [Faltan links y algunos detalles]
     case 'stats':
-        include_once('stats.php');
+        include_once('includes/stats.php');
         break;
 
     //Search something (hecho: 50%)
     case 'search':
-        include_once('search.php');
+        include_once('includes/search.php');
         break;
 
     //Do an advanced search (hecho: 20%)
     case 'advsearch':
-        include_once('advanced-search-filter.php');
+        include_once('includes/advanced-search-filter.php');
         break;
 
     //Create a ticket or see the current ticket (hecho: 90%) [Falta: Administración]
     case 'ticket':
-        include_once('ticket.php');
+        include_once('includes/ticket.php');
         break;
 
     //[TICKET] To create a new ticket add a new parameter called 'go=create', to see my tickets add 'go=mytickets'
 
     //See the FAQ (Frequently asked question) (hecho)
     case 'faq':
-        include_once('faq.php');
+        include_once('includes/faq.php');
         break;
 
     //See other profile (hecho: 70%) [Amigos, MPs]
     case 'profile':
-        include_once('profile.php');
+        include_once('includes/profile.php');
         break;
 
     //Admin part (hecho: 15%) [Falta: Editar items, añadir IP baneada]
@@ -344,71 +344,71 @@ switch ($action) {
 
     //See the feedback page (hecho)
     case 'feedback':
-        include_once('feedback.php');
+        include_once('includes/feedback.php');
         break;
 
     //Report user (hecho)
     case 'report':
-        include_once('report.php');
+        include_once('includes/report.php');
         break;
 
     //[REPORT] Parametro 'go=user|bug' (no hace bug, porque ya existen tickets)
 
     //Share content (sin realizar)
     case 'share':
-        include_once('share.php');
+        include_once('includes/share.php');
         break;
 
     //Dialy bonus (hecho)
     case 'dbonus':
-        include_once('dbonus.php');
+        include_once('includes/dbonus.php');
         break;
 
     //User list (sin realizar)
     case 'ulist':
-        include_once('ulist.php');
+        include_once('includes/ulist.php');
         break;
 
     //Refer list (sin realizar)
     case 'rlist':
-        include_once('rlist.php');
+        include_once('includes/rlist.php');
         break;
 
     //Friend list (sin realizar)
     case 'flist':
-        include_once('flist.php');
+        include_once('includes/flist.php');
         break;
 
     //Sistema de objetivos (sin realizar)
     case 'quests':
-        include_once('quests.php');
+        include_once('includes/quests.php');
         break;
 
     //Buy or sell anything (sin realizar)
     case 'shop':
-        include_once('shop.php');
+        include_once('includes/shop.php');
         break;
 
     //There you can buy anything by using a new parameter called 'buy=points|money|vip|premium|coupon'
 
     //Activate your account (sin realizar)
     case 'activate':
-        include_once('activate.php');
+        include_once('includes/activate.php');
         break;
 
     //Login (algo así como reclamar puntos) (sin realizar)
     case 'login':
-        include_once('login.php');
+        include_once('includes/login.php');
         break;
 
     //Datasheet
     case 'itemdata':
-        include_once('itemdata.php');
+        include_once('includes/itemdata.php');
         break;
 
     //Getting started
     case 'getstarted':
-        include_once('getstarted.php');
+        include_once('includes/getstarted.php');
         break;
 
     //Not found (hecho: 10%)

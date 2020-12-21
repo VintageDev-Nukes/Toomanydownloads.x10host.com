@@ -188,9 +188,9 @@ Buscador
 		echo '<form method="post" action="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=search">
 			<input type="text" name="search" size="10" maxlength="30" placeholder="Busqueda" />
 			<br>
-			<input type="hidden" name="cat" value="'.$cat.'">
-			<input type="submit" value="Buscar" style="display: block;margin: auto;margin-top: 5px;background: url(imgs/search.png) 0px center no-repeat;padding-left:30px;" /><br>
-			O quizás desees... <a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=advsearch"><u>Hacer una búsqueda avanzada</u></a>.
+			<input type="hidden" name="cat" value="'.$cat. '">
+			<input type="submit" value="Buscar" style="display: block;margin: auto;margin-top: 5px;background: url(../imgs/search.png) 0px center no-repeat;padding-left:30px;" /><br>
+			O quizás desees... <a href="http://' .$_SERVER['SERVER_NAME'].'/index.php?action=advsearch"><u>Hacer una búsqueda avanzada</u></a>.
 		</form>
 	</div>
 </div>
@@ -281,13 +281,13 @@ Top usuarios
 
   				if($times == 3) 
   				{
-  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="imgs/medal-bronze.png" />';
+  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="../imgs/medal-bronze.png" />';
   				} else if($times == 2) 
   				{
-  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="imgs/medal-silver.png" />';
+  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="../imgs/medal-silver.png" />';
   				} else if($times == 1)
   				{
-  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="imgs/medal-gold.png" />';
+  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="../imgs/medal-gold.png" />';
   				}
 
   				echo $nick.' '.$string.'<br>';

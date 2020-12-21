@@ -120,18 +120,14 @@ echo '<table style="margin-top:20px;width:80%;margin-left:10%;">
 					  		<td>
 						  		<div style="position: relative;z-index: 2;top: 15px;margin-bottom: 25px;" onmouseover="javascript:show(\'chga\');" onmouseout="javascript:hide(\'chga\');">
 							  		<div style="width: 127px;height: 129px;border: 9px '.$statecolor.' solid;margin: 0 0 45px 23px;border-radius: 20px;position: relative;top: -20px;"></div>
-							  		<img src="'.$avatarstr.'" style="display: block;margin: -198px 0 0 32;width: 126px;height: 126px;position: relative;top: -4px;">
-							  		<img src="imgs/msn-frame.png" style="margin: -213px 0 0 0;position: relative;top: 51px;">';
+							  		<img src="'.$avatarstr. '" style="display: block;margin: -198px 0 0 32;width: 126px;height: 126px;position: relative;top: -4px;">
+							  		<img src="../imgs/msn-frame.png" style="margin: -213px 0 0 0;position: relative;top: 51px;">';
 
 							  		if($acc_prior > getprior("free") && $uid == $id) {
 							  			echo '<div class="changeavatar" id="chga" style="display:none;position: absolute;"><a href="#t" name="t" onclick="javascript:show(\'changeavatar\');">Cambiar</a></div>';
-								  		echo '<form id="changeavatar" method="post" action="http://'.$_SERVER['SERVER_NAME'].'/forms/AccountManager.php" style="display:none;position: absolute;">
-												<div class="new_avatar" style="position: absolute;min-width: 300px;max-width: 900px;width: 30%;margin-top: 15px;margin-left: -28px;z-index: 1;padding: 5px;font-size:12px;">
-													<div class="pointer"></div>
-													<div class="pointerBorder" style="display: none"></div>
-													<span style="display: block;theight: 100%;"><h2 style="margin: 0px;">Url de tu avatar:</h2><input type="text" name="newavatar" style="width:85%;" /><img src="imgs/valid.png" style="position: relative;top: 6px;margin-left: 10px;" onclick="javascript:submitformbyid(\'changeavatar\');" /></span>
+								  		echo '<form id="changeavatar" method="post" action="http://'.$_SERVER['SERVER_NAME']. ');" /></span>
 												</div>
-											  </form>';
+											  </form>\'';
 							  		}
 
 						  		echo '</div>
@@ -143,7 +139,7 @@ echo '<table style="margin-top:20px;width:80%;margin-left:10%;">
 						  	echo '<img src="'.$genderstr.'" style="position: absolute;left: -34px;top: 3px;" />';
 						  }
 
-					  echo '<img src="imgs/blank.gif" title="'.getLocationInfoByIp($uip)['country'].'" class="flag '.strtolower(getLocationInfoByIp($uip)['countryCode']).' fnone" style="position: absolute;left: -13px;bottom: 0px;"></div>
+					  echo '<img src="../imgs/blank.gif" title="' .getLocationInfoByIp($uip)['country'].'" class="flag '.strtolower(getLocationInfoByIp($uip)['countryCode']).' fnone" style="position: absolute;left: -13px;bottom: 0px;"></div>
 						</div>
 						<table style="font-size:10px;position: relative;top: 18px;">
 							<tr>
@@ -157,17 +153,14 @@ echo '<table style="margin-top:20px;width:80%;margin-left:10%;">
 										<div class="personal_txt" style="position: absolute;min-width: 300px;max-width: 900px;width: 30%;margin-top: -38px;margin-left: 16px;z-index: 1;padding: 5px;font-size:12px;">
 											<div class="pointer"></div>
 											<div class="pointerBorder" style="display: none"></div>
-											<span style="display: block;text-align: center;height: 100%;line-height: 57px;"><textarea name="new_ptxt" rows="3" style="font-size:12px;width:85%;">'.$up_txt.'</textarea><img src="imgs/valid.png" style="position: relative;top: -16px;margin-left: 10px;" onclick="javascript:submitformbyid(\'upt_ptxt\');" /></span>
+											<span style="display: block;text-align: center;height: 100%;line-height: 57px;"><textarea name="new_ptxt" rows="3" style="font-size:12px;width:85%;">'.$up_txt. ');" /></span>
 										</div>
 									</form>';
 
 
 									if($up_txt != null) {
-										echo '<div id="personal_txt" class="personal_txt" style="position: absolute;min-width: 300px;max-width: 900px;width: 30%;margin-top: -38px;margin-left: 16px;z-index: 1;padding: 5px;font-size:12px;">
-												<div class="pointer"></div>
-												<div class="pointerBorder" style="display: none"></div>
-												<div style="float:right;"><a href="#t" name="t" onclick="javascript:show(\'upt_ptxt\')+hide(\'personal_txt\');"><img title="Editar texto personal" src="imgs/page_edit.png"></a></div>
-												<div style="display: table;text-align: center;width: 100%;"><span style="display: table-cell;vertical-align: middle;">'.nl2br($up_txt).'</span></div>
+										echo ');"><img title="Editar texto personal" src="../imgs/page_edit.png"></a></div>
+												<div style="display: table;text-align: center;width: 100%;"><span style="display: table-cell;vertical-align: middle;">' .nl2br($up_txt).'</span></div>
 											</div>';
 									}
 								echo '</td></tr>
@@ -215,31 +208,27 @@ echo '<table style="margin-top:20px;width:80%;margin-left:10%;">
 
 							if($id == $uid) {
 
-								echo '<div class="profilebutton prof"><img src="imgs/user_edit.gif"><a href="http://'.$_SERVER['SERVER_NAME'].'/index.php?action=account">Editar perfil</a></div>';
+								echo '<div class="profilebutton prof"><img src="../imgs/user_edit.gif"><a href="http://' .$_SERVER['SERVER_NAME'].'/index.php?action=account">Editar perfil</a></div>';
 
 								if($up_txt == null) {
-									echo '<div '.$newclass.'><img src="imgs/page_white_add.png"><a href="#t" name="t" '.$onclick[0].' '.$title.'>Añadir texto personal</a></div>';
+									echo '<div '.$newclass. '><img src="../imgs/page_white_add.png"><a href="#t" name="t" ' .$onclick[0].' '.$title.'>Añadir texto personal</a></div>';
 								}
 								if($uheader_banner == null) {
-									echo '<div '.$newclass.'><img src="imgs/image_add.png"><a href="#t" name="t" '.$onclick[1].' '.$title.'>Añadir imagen al banner</a></div>';
+									echo '<div '.$newclass. '><img src="../imgs/image_add.png"><a href="#t" name="t" ' .$onclick[1].' '.$title.'>Añadir imagen al banner</a></div>';
 									
 								} else {
-									echo '<div '.$newclass.'><img src="imgs/image_edit.png"><a href="#t" name="t" '.$onclick[1].' '.$title.'>Editar banner</a></div>';
+									echo '<div '.$newclass. '><img src="../imgs/image_edit.png"><a href="#t" name="t" ' .$onclick[1].' '.$title.'>Editar banner</a></div>';
 								}
 
-								echo '<form id="change_banner" method="post" action="http://'.$_SERVER['SERVER_NAME'].'/forms/AccountManager.php" style="display:none;position: absolute;">
-									<div id="img-edit" style="position: absolute;width: 300px;margin-top: 21px;z-index: 1;padding: 5px;font-size: 12px;">
-												<div class="pointer"></div>
-												<div class="pointerBorder" style="display: none"></div>
-												<span style="display: block;height: 100%;"><h2 style="margin: 0px; height: 6px;">Url de tu banner:</h2><br><input type="text" name="new_banner" style="width:85%;" /><img src="imgs/valid.png" style="position: relative;top: 6px;margin-left: 10px;" onclick="javascript:submitformbyid(\'change_banner\');" /></span>
+								echo '<form id="change_banner" method="post" action="http://'.$_SERVER['SERVER_NAME']. ');" /></span>
 											</div>
-									</form>';
+									</form>\'';
 							} else {
 
 								echo '
-									<div '.$newclass.' '.$title.'><img src="imgs/user_add.gif"><span>Añadir como amigo</span></div>
-									<div '.$newclass.' '.$title.'><img src="imgs/mail-send.png"><span>Enviar mensaje</span></div>
-									<div class="profilebutton prof"><img src="imgs/report.png"><span><a href="http://toomanydownloads.x10host.com/index.php?action=report&id='.$uid.'">Reportar usuario</a></span></div>';
+									<div '.$newclass.' '.$title. '><img src="../imgs/user_add.gif"><span>Añadir como amigo</span></div>
+									<div ' .$newclass.' '.$title. '><img src="../imgs/mail-send.png"><span>Enviar mensaje</span></div>
+									<div class="profilebutton prof"><img src="../imgs/report.png"><span><a href="http://toomanydownloads.x10host.com/index.php?action=report&id=' .$uid.'">Reportar usuario</a></span></div>';
 
 							}
 

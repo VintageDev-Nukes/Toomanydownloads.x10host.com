@@ -47,8 +47,8 @@ if(isset($gdid))
 		$mv = (array)mb_unserialize($rs2['media_video']);
 
 		echo '        <link rel="stylesheet" type="text/css" href="resources/demo.css" />
-		<link rel="stylesheet" type="text/css" href="resources/style.css" />
-		<link rel="stylesheet" type="text/css" href="resources/elastislide.css" />
+		<link rel="stylesheet" type="text/css" href="../resources/style.css" />
+		<link rel="stylesheet" type="text/css" href="../resources/elastislide.css" />
 		<script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">	
 			<div class="rg-image-wrapper">
 				{{if itemsCount > 1}}
@@ -66,10 +66,10 @@ if(isset($gdid))
 				</div>
 			</div>
 		</script>
-		<script type="text/javascript" src="resources/jquery.tmpl.min.js"></script>
-		<script type="text/javascript" src="resources/jquery.easing.1.3.js"></script>
-		<script type="text/javascript" src="resources/jquery.elastislide.js"></script>
-		<script type="text/javascript" src="resources/gallery.js"></script>';
+		<script type="text/javascript" src="../resources/jquery.tmpl.min.js"></script>
+		<script type="text/javascript" src="../resources/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="../resources/jquery.elastislide.js"></script>
+		<script type="text/javascript" src="../resources/gallery.js"></script>';
 
 		echo '<div class="union" style="margin-left:10%;width:80%;margin-top:20px;">
 								<div class="box_title" style="text-align:left;padding-left:10px;">

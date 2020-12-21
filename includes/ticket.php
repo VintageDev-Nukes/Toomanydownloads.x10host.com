@@ -182,33 +182,33 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 
 								echo '<h3 style="color:#fff!important;">'.$nick.'</h3>';
 
-					echo '<img src="imgs/user.png" style="display:block;width: 96px;height: 96px;margin: 10px auto;box-shadow: 0px 0px 10px #fff;">
+					echo '<img src="../imgs/user.png" style="display:block;width: 96px;height: 96px;margin: 10px auto;box-shadow: 0px 0px 10px #fff;">
 
 			<div class="groupbutton" style="height:40px;margin: 0 5px 5px 0;">
-				<div class="iconbutton"><img src="imgs/lvl.gif" style="width:16px;height:16px;margin-top:12px;" /></div>
-				<div class="button"><a href="#" style="line-height:40px;text-decoration:none;font-size:23px;color:yellowgreen;" title="'.number_format($creator_exp, 0, ',', '.').' Exp"]">Nivel '.$creator_lvl.'</a></div>
+				<div class="iconbutton"><img src="../imgs/lvl.gif" style="width:16px;height:16px;margin-top:12px;" /></div>
+				<div class="button"><a href="#" style="line-height:40px;text-decoration:none;font-size:23px;color:yellowgreen;" title="' .number_format($creator_exp, 0, ',', '.').' Exp"]">Nivel '.$creator_lvl.'</a></div>
 			</div>
 
 			<div class="groupbutton" style="height:40px;margin: 0 5px 5px 0;">
 			<div class="iconbutton">';
 
 				if(getmypoints(false, false) >= 10000000) {
-					echo '<img title="Platino" src="imgs/point-platinum.png" style="margin-top:12px;" />';
+					echo '<img title="Platino" src="../imgs/point-platinum.png" style="margin-top:12px;" />';
 				} else if(getmypoints(false, false) >= 100000) {
-					echo '<img title="Oro" src="imgs/point-gold.png" style="margin-top:12px;" />';
+					echo '<img title="Oro" src="../imgs/point-gold.png" style="margin-top:12px;" />';
 				} else if(getmypoints(false, false) >= 1000) {
-					echo '<img title="Plata" src="imgs/point-silver.png" style="margin-top:12px;" />';
+					echo '<img title="Plata" src="../imgs/point-silver.png" style="margin-top:12px;" />';
 				} else {
-					echo '<img title="Cobre" src="imgs/point-bronze.png" style="margin-top:12px;" />';
+					echo '<img title="Cobre" src="../imgs/point-bronze.png" style="margin-top:12px;" />';
 				} 
 
 			echo '</div>
-			<div class="button"><a href="#" style="line-height:40px;text-decoration:none;font-size:23px;color:yellowgreen;" title="'.number_format($creator_points, 0, '.', ',').' [Media por día: '.round($creator_points/$reg_days, 1).' puntos]">'.specialnumformat($creator_points).' points</a></div>
+			<div class="button"><a href="#" style="line-height:40px;text-decoration:none;font-size:23px;color:yellowgreen;" title="'.number_format($creator_points, 0, '.', ',').' [Media por día: '.round($creator_points/$reg_days, 1).' puntos]">'.specialnumformat($creator_points). ' points</a></div>
 		</div>
 
 		<div class="groupbutton" style="height:40px;margin: 0 5px 5px 0;">
-			<div class="iconbutton"><img src="imgs/coins.png" style="width:16px;height:16px;margin-top:12px;" /></div>
-			<div class="button"><a href="#" style="line-height:40px;text-decoration:none;font-size:23px;color:yellowgreen;" title="Cantidad de dinero [Media por día: '.round($creator_money/$reg_days, 1).'$]">'.$money.'$</a></div>
+			<div class="iconbutton"><img src="../imgs/coins.png" style="width:16px;height:16px;margin-top:12px;" /></div>
+			<div class="button"><a href="#" style="line-height:40px;text-decoration:none;font-size:23px;color:yellowgreen;" title="Cantidad de dinero [Media por día: ' .round($creator_money/$reg_days, 1).'$]">'.$money.'$</a></div>
 		</div>
 
 					</div>
@@ -223,7 +223,7 @@ echo '<h1 style="text-align:center;color:#fff!important;">Crear ticket</h1><br>
 					echo '<span style="float:right;padding-right:10px;padding-top:7px;">';
 
 					if($acc_prior >= getprior('mod')) {
-						echo '<a href="#" onclick="javascript:setvalues(\'close_id\', \''.$ticket_id.'\')+submitformbyid(\'changeticket\');"><img src="imgs/close.png" style="width:16px;height:16px;" title="Cerrar este ticket" /></a>'; 
+						echo '<a href="#" onclick="javascript:setvalues(\'close_id\', \''.$ticket_id. '\""; 
 						echo '<a href="#" onclick="javascript:setvalues(\'delete_id\', \''.$ticket_id.'\')+submitformbyid(\'changeticket\');"><img src="imgs/trash.png" title="Borrar este ticket" /></a>'; 
 					}
 
