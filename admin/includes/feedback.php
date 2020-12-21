@@ -27,8 +27,8 @@ if (mysqli_num_rows($result)) {
     while ($rs = mysqli_fetch_array($result)) {
         if ($rs['approved'] == 0) {
             echo '<tr><td>' . $rs['id'] . '</td><td>' . $rs['mensaje'] . '</td><td>[<a href="#" onclick="javascript:submitformbyid(\'approve\');">Aprobar</a>] [<a href="#" onclick="javascript:submitformbyid(\'delete\');">Borrar</a>]</td></tr>';
-            echo '<form method="post" id="approve" action="http://' . $_SERVER['SERVER_NAME'] . '/forms/FeedBackManager.php"><input type="hidden" name="approve" value="' . $rs['id'] . '"></form>';
-            echo '<form method="post" id="delete" action="http://' . $_SERVER['SERVER_NAME'] . '/forms/FeedBackManager.php"><input type="hidden" name="delete" value="' . $rs['id'] . '"></form>';
+            echo '<form method="post" id="approve" action="forms/FeedBackManager.php"><input type="hidden" name="approve" value="' . $rs['id'] . '"></form>';
+            echo '<form method="post" id="delete" action="forms/FeedBackManager.php"><input type="hidden" name="delete" value="' . $rs['id'] . '"></form>';
             $times++;
         }
     }

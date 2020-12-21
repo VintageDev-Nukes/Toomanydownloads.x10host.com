@@ -146,12 +146,12 @@ $weirdway = 'style="margin-top:30px;"';
 
 //Claim daily points bonus
 if (!stilltoday($lastclaim) && $minvisits == 0) {
-    echo '<div class="success" style="margin-top:10px;"><a href="http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=dbonus"><u>Ya puedes reclamar tus puntos diarios.</u></a></div>';
+    echo '<div class="success" style="margin-top:10px;"><a href="index.php?action=dbonus"><u>Ya puedes reclamar tus puntos diarios.</u></a></div>';
     $weirdway = '';
 }
 
 if ((empty($email) || empty($code)) && $points > 10) {
-    echo '<div class="error" style="margin-top:10px;">Te recomendamos vigorosamente que <a href="http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=account" title="Se requiere que pongas un email y una contraseña."><u>protejas tu cuenta</u></a>, por que en caso de que tu IP se reseteé perderas tus <b title="' . getmypoints() . '">' . getmypoints(true) . '</b>.</div>';
+    echo '<div class="error" style="margin-top:10px;">Te recomendamos vigorosamente que <a href="index.php?action=account" title="Se requiere que pongas un email y una contraseña."><u>protejas tu cuenta</u></a>, por que en caso de que tu IP se reseteé perderas tus <b title="' . getmypoints() . '">' . getmypoints(true) . '</b>.</div>';
     $weirdway = '';
 }
 
@@ -207,7 +207,7 @@ echo '</div>
 				<div class="button"><a href="#" style="line-height:40px;text-decoration:none;font-size:23px;color:yellowgreen;" title="' . getmypoints() . '">' . getmypoints(true) . '</a></div>
 			</div>
 			<div style="float:right;height:40px;">
-				<input class="referlink" type="text" style="width:50%;height:40px;float:right;min-width:282px;" readonly="readonly" value="http://' . $_SERVER['SERVER_NAME'] . '/?ref=' . $id . '" />
+				<input class="referlink" type="text" style="width:50%;height:40px;float:right;min-width:282px;" readonly="readonly" value="?ref=' . $id . '" />
 				<span style="color:#999;font-size:23px;position: relative;left: -5px;top:6.5px;float:right;">Link de referido =></span>
 				<br class="clear">
 			</div>

@@ -10,7 +10,7 @@ require 'check.php';
 //continua en el siguiente bloque
 
 if ($_REQUEST['action'] != 'admin') {
-    header('location: http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=admin');
+    header('location: index.php?action=admin');
 }
 
 // CONEXIÓN A LA BASE DE DATOS

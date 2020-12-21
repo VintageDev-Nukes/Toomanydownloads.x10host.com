@@ -109,7 +109,7 @@ if (isset($_POST['newemail'])) {
     sleep(3);*/
 
     //Finally, go to the last position.
-    header('Location: http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=account&edit=conf');
+    header('Location: index.php?action=account&edit=conf');
 
 }
 
@@ -165,7 +165,7 @@ if (isset($_POST['newcode'])) {
     }
 
     //Finally, go to the last position.
-    header('Location: http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=account&edit=conf');
+    header('Location: index.php?action=account&edit=conf');
 
 }
 
@@ -304,7 +304,7 @@ if (isset($_POST['claimp'])) {
     }
 
     //Finally, go to the last position.
-    header('Location: http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=account&edit=conf');
+    header('Location: index.php?action=account&edit=conf');
 
 
 }
@@ -337,7 +337,7 @@ if (isset($_POST['newavatar'])) {
 
     //Finally, go to the last position.
     //header('Location: http://'.$_SERVER['SERVER_NAME'].'/index.php?action=account&edit=info');
-    header('Location: http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=profile&id=' . $id);
+    header('Location: index.php?action=profile&id=' . $id);
 
 }
 
@@ -395,7 +395,7 @@ if (isset($_POST['newpersinfo'])) {
     }
 
     //Finally, go to the last position.
-    header('Location: http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=account&edit=info');
+    header('Location: index.php?action=account&edit=info');
 
 }
 
@@ -412,7 +412,7 @@ if (isset($_POST['new_banner'])) {
     $_SESSION['success'] = $success;
 
     //Finally, go to the last position.
-    header('Location: http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=profile&id=' . $id);
+    header('Location: index.php?action=profile&id=' . $id);
 
 }
 
@@ -429,7 +429,7 @@ if (isset($_POST['new_ptxt'])) {
     $_SESSION['success'] = $success;
 
     //Finally, go to the last position.
-    header('Location: http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=profile&id=' . $id);
+    header('Location: index.php?action=profile&id=' . $id);
 
 }
 

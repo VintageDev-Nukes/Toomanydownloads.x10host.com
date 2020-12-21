@@ -2,7 +2,7 @@
 session_start(); //crea la cookie
 
 if ($acc_prior < getprior("admi")) {
-    header('Location: http://' . $_SERVER['SERVER_NAME'] . '/');
+    header('Location: ');
 }
 
 ?>
@@ -21,7 +21,7 @@ if ($acc_prior < getprior("admi")) {
                 if ($acc_prior >= getprior("admi")) {
                     $_SESSION['listo'] = true;
                     setcookie("TMDCookie", perenc(serialize(array('admin_login' => true))), time() + 365 * 86400);
-                    header('Location: http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=admin'); //redirige a la pagina despues de inicias sesion
+                    header('Location: index.php?action=admin'); //redirige a la pagina despues de inicias sesion
                     exit;
                 } else {
                     echo '<div class="error">Tu no eres un administrador, por tanto no puedes acceder a la administración.</div>';

@@ -38,9 +38,9 @@ if (empty($editid) && empty($editdata) && empty($newadd)) {
 
     if (mysqli_num_rows($result)) {
         while ($rs = mysqli_fetch_array($result)) {
-            echo '<tr><td>' . $rs['id'] . '</td><td>' . $rs['name'] . '</td><td>[<a href="http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=admin&go=items&edit=' . $rs['id'] . '">Editar</a>] [<a href="http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=admin&go=items&editdata=' . $rs['id'] . '">Añadir / Editar Ficha técnica</a>] [<a href="#" onclick="javascript:submitformbyid(\'approve\');">Aprobar</a>] [<a href="#" onclick="javascript:submitformbyid(\'delete\');">Borrar</a>]</td></tr>';
-            echo '<form method="post" id="approve" action="http://' . $_SERVER['SERVER_NAME'] . '/forms/ItemManager.php"><input type="hidden" name="approve" value="' . $rs['id'] . '"></form>';
-            echo '<form method="post" id="delete" action="http://' . $_SERVER['SERVER_NAME'] . '/forms/ItemManager.php"><input type="hidden" name="delete" value="' . $rs['id'] . '"></form>';
+            echo '<tr><td>' . $rs['id'] . '</td><td>' . $rs['name'] . '</td><td>[<a href="index.php?action=admin&go=items&edit=' . $rs['id'] . '">Editar</a>] [<a href="index.php?action=admin&go=items&editdata=' . $rs['id'] . '">Añadir / Editar Ficha técnica</a>] [<a href="#" onclick="javascript:submitformbyid(\'approve\');">Aprobar</a>] [<a href="#" onclick="javascript:submitformbyid(\'delete\');">Borrar</a>]</td></tr>';
+            echo '<form method="post" id="approve" action="forms/ItemManager.php"><input type="hidden" name="approve" value="' . $rs['id'] . '"></form>';
+            echo '<form method="post" id="delete" action="forms/ItemManager.php"><input type="hidden" name="delete" value="' . $rs['id'] . '"></form>';
         }
     } else {
         echo '<tr><td colspan="3">No hay ningún resultado.</td></tr>';
@@ -62,7 +62,7 @@ if (empty($editid) && empty($editdata) && empty($newadd)) {
     $cthumb = $row['thumb'];
     $cpts = $row['points'];
 
-    echo '<form method="post" action="http://' . $_SERVER['SERVER_NAME'] . '/forms/ItemManager.php">';
+    echo '<form method="post" action="forms/ItemManager.php">';
 
     if (isset($errors['empty_name'])) {
         echo '<div class="error" style="width:90%;margin:5px 0 5px 0;">' . $errors['empty_name'] . '</div>';
@@ -120,7 +120,7 @@ if (empty($editid) && empty($editdata) && empty($newadd)) {
     $cname = $row['name'];
     $ccat = $row['cat'];
 
-    echo '<form method="post" action="http://' . $_SERVER['SERVER_NAME'] . '/forms/ItemManager.php">';
+    echo '<form method="post" action="forms/ItemManager.php">';
 
     if ($ccat == "games") {
 
@@ -238,7 +238,7 @@ if (empty($editid) && empty($editdata) && empty($newadd)) {
 
 } else if (empty($editid) && empty($editdata) && isset($newadd)) {
 
-    echo '<form method="post" action="http://' . $_SERVER['SERVER_NAME'] . '/forms/ItemManager.php">';
+    echo '<form method="post" action="forms/ItemManager.php">';
 
     if (isset($errors['empty_name'])) {
         echo '<div class="error" style="width:90%;margin:5px 0 5px 0;">' . $errors['empty_name'] . '</div>';
@@ -282,7 +282,7 @@ if (empty($editid) && empty($editdata) && empty($newadd)) {
         }
 
         echo '<b>Captcha:</b><br>
-			<img src="http://' . $_SERVER['SERVER_NAME'] . '/captcha/captcha.php"/><br>
+			<img src="captcha/captcha.php"/><br>
 			<input type="text" name="vercode" style="margin-left: 0px;width: 80px;" /><br><br>';
     }
 

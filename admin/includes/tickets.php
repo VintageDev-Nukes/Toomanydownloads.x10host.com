@@ -15,7 +15,7 @@ $result = mysqli_query($db, $query) or die(mysqli_error()); //Aqu� se muestra 
 if (mysqli_num_rows($result)) {
     while ($rs = mysqli_fetch_array($result)) {
         if (isnew("ticket_" . $rs['id'])) {
-            echo '<tr><td>' . $rs['id'] . '</td><td>' . $rs['titulo'] . '</td><td>[<a href="http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=ticket&go=show&id=' . $rs['id'] . '" target="_blank">Ver</a>]<br></td></tr>';
+            echo '<tr><td>' . $rs['id'] . '</td><td>' . $rs['titulo'] . '</td><td>[<a href="index.php?action=ticket&go=show&id=' . $rs['id'] . '" target="_blank">Ver</a>]<br></td></tr>';
         }
     }
 } else {
@@ -40,7 +40,7 @@ $result = mysqli_query($db, $query) or die(mysqli_error()); //Aqu� se muestra 
 if (mysqli_num_rows($result)) {
     while ($rs = mysqli_fetch_array($result)) {
         if (!isnew("ticket_" . $rs['id'])) {
-            echo '<tr><td>' . $rs['id'] . '</td><td>' . $rs['titulo'] . '</td><td>[<a href="http://' . $_SERVER['SERVER_NAME'] . '/index.php?action=ticket&go=show&id=' . $rs['id'] . '" target="_blank">Ver</a>]<br></td></tr>';
+            echo '<tr><td>' . $rs['id'] . '</td><td>' . $rs['titulo'] . '</td><td>[<a href="index.php?action=ticket&go=show&id=' . $rs['id'] . '" target="_blank">Ver</a>]<br></td></tr>';
         }
     }
 } else {
