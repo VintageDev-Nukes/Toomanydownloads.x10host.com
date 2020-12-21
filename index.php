@@ -1,5 +1,7 @@
 <?php
 
+// $starttime = microtime(true); // Top of page
+
 if(session_status() == PHP_SESSION_NONE) session_start();
 
 require_once(__DIR__ . '/jdownloader.php');
@@ -425,7 +427,11 @@ echo '<div class="contenido" style="margin-bottom:30px;">
   </div>
 </div>';
 
+// $endtime = microtime(true); // Bottom of page
+
 timequery();
+/* echo '<br>';
+printf("Page loaded in %f seconds", $endtime - $starttime ); */
 
 echo '<form id="google" action="download.php" method="post"><input type="hidden" name="game_id" id="id"></form>';
 

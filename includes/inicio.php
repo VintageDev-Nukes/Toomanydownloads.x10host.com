@@ -281,13 +281,13 @@ Top usuarios
 
   				if($times == 3) 
   				{
-  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="../imgs/medal-bronze.png" />';
+  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="imgs/medal-bronze.png" />';
   				} else if($times == 2) 
   				{
-  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="../imgs/medal-silver.png" />';
+  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="imgs/medal-silver.png" />';
   				} else if($times == 1)
   				{
-  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="../imgs/medal-gold.png" />';
+  					echo '<img style="position:relative;top:3px;padding-right:3px;" src="imgs/medal-gold.png" />';
   				}
 
   				echo $nick.' '.$string.'<br>';
